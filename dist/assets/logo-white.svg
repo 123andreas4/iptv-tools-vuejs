@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="1280"
+   height="1024"
+   viewBox="0 0 1280 1024"
+   xml:space="preserve"
+   id="svg45"
+   sodipodi:docname="logo-white.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"><metadata
+   id="metadata49"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1918"
+   inkscape:window-height="993"
+   id="namedview47"
+   showgrid="false"
+   inkscape:zoom="0.37207031"
+   inkscape:cx="962.50149"
+   inkscape:cy="458.5352"
+   inkscape:window-x="1920"
+   inkscape:window-y="26"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg45"
+   inkscape:document-rotation="0" />
+<desc
+   id="desc2">Created with Fabric.js 3.6.3</desc>
+<defs
+   id="defs4">
+
+
+
+		
+		
+</defs>
+<g
+   transform="matrix(1.9692780337941629 0 0 1.9692780337941629 640.0153846153846 512.012312418764)"
+   id="background-logo">
+
+</g>
+<g
+   transform="matrix(0.7041798,0,0,-0.74013483,615.15998,496.1597)"
+   id="g37"
+   style="stroke-width:5.08674;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke">
+<linearGradient
+   id="SVGID_2_590408"
+   gradientUnits="userSpaceOnUse"
+   gradientTransform="matrix(0,1894.77,1894.77,0,2983.82,6697.74)"
+   x1="0"
+   y1="0"
+   x2="1"
+   y2="0">
+<stop
+   offset="0%"
+   style="stop-color:rgb(237,52,66);stop-opacity: 1"
+   id="stop22" />
+<stop
+   offset="4.268591%"
+   style="stop-color:rgb(237,52,66);stop-opacity: 1"
+   id="stop24" />
+<stop
+   offset="38.340999999999994%"
+   style="stop-color:rgb(194,21,44);stop-opacity: 1"
+   id="stop26" />
+<stop
+   offset="86.24770699999999%"
+   style="stop-color:rgb(101,9,18);stop-opacity: 1"
+   id="stop28" />
+<stop
+   offset="98.7504%"
+   style="stop-color:rgb(101,9,18);stop-opacity: 1"
+   id="stop30" />
+<stop
+   offset="100%"
+   style="stop-color:rgb(101,9,18);stop-opacity: 1"
+   id="stop32" />
+</linearGradient>
+<path
+   style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:6.01893;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+   paint-order="stroke"
+   d="M -12.922981,650.15874 C -119.77126,509.8834 -365.09632,453.1698 -597.84334,522.89925 c -24.23314,7.26521 -48.22963,-11.47761 -46.86888,-36.72836 14.2346,-263.8194 80.93491,-943.04549 538.34729,-1195.70675 v 416.76744 c 0,28.01957 -15.74918,53.03366 -39.94682,67.14994 -95.418,55.63683 -159.5388,159.077321 -159.5388,277.533365 0,121.059215 67.01979,226.463915 165.96389,281.154145 15.74918,8.69695 35.16646,-3.11198 35.16646,-21.10934 V 70.137072 c 0,-32.965592 17.595059,-63.4345077 46.147092,-79.9173026 l 27.664592,-15.9621624 c 28.5402035,-16.482796 63.706658,-16.482796 92.246857,0 l 27.65276,15.9621624 C 117.54314,6.7025643 135.1382,37.17148 135.1382,70.137072 V 311.95969 c 0,17.99736 19.41728,29.80629 35.15462,21.10934 98.95594,-54.69023 165.97573,-160.0831 165.97573,-281.154145 0,-118.456044 -64.10897,-221.896535 -159.52697,-277.533365 -24.20948,-14.11628 -39.95865,-39.13037 -39.95865,-67.14994 l -0.0118,-416.76744 C 594.19534,-456.8746 660.90748,222.35149 675.13025,486.17089 676.491,511.42164 652.49451,530.16446 628.26137,522.89925 395.52618,453.1698 150.18928,509.8834 43.364669,650.14691 c -13.950618,18.31684 -42.3488305,18.31684 -56.28762,0.0118"
+   stroke-linecap="round"
+   id="path35" />
+</g>
+<g
+   transform="matrix(2.9119266,0,0,2.8915567,647.79651,925.47507)"
+   id="text-logo-path">
+
+</g>
+</svg>
