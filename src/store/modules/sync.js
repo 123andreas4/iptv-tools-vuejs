@@ -5,6 +5,8 @@ const state = {
   appXmltvSync: false,
   syncTMDB: false,
   syncPlaylist: false,
+  movieSeriePlaylists: [],
+  movieSeriePlaylist: null,
 };
 
 const getters = {
@@ -50,6 +52,12 @@ const getters = {
   appXmltvSync(state) {
     return state.appXmltvSync;
   },
+  movieSeriePlaylists(state) {
+    return state.movieSeriePlaylists;
+  },
+  movieSeriePlaylist(state) {
+    return state.movieSeriePlaylist;
+  }
 };
 
 const mutations = {
@@ -65,6 +73,12 @@ const mutations = {
   setAppXmltvSync(state, payload) {
     state.appXmltvSync = payload;
   },
+  setMovieSeriePlaylists(state, payload) {
+    state.movieSeriePlaylists = payload;
+  },
+  setMovieSeriePlaylist(state, payload) {
+    state.movieSeriePlaylist = payload;
+  }
 };
 
 const actions = {
@@ -119,6 +133,19 @@ const actions = {
         commit("setAppXmltvSync", res.data);
       });
   },
+  loadMovieSeriePlaylists({ commit }, payload) {
+    httpService.get("playlist/simple").then((res) => {
+      commit("setMovieSeriePlaylists", res.data.map(playlist => {
+        return {
+          text: playlist.name,
+          value: playlist.id,
+        }
+      }));
+      if (payload && payload === true && res.data.length && res.data.length > 0) {
+        commit("setMovieSeriePlaylist", res.data[0].id);
+      }
+    });
+  }
 };
 
 export default {

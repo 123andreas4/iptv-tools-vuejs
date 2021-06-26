@@ -5,8 +5,9 @@
         class="mr-1 py-1 px-2"
         icon="las la-plus"
         @click="doAdd"
-        v-if="!editor && !shoutcast && !radioBrowser && !isXtreamEditor"
+        v-if="!editor && !isXtreamEditor"
         variant="success"
+        :disabled="!canAddPlaylist"
         >{{ addButtonText }}</erd-button
       >
       <erd-button
@@ -31,7 +32,7 @@
         class="mr-2 py-1 px-2"
         icon="las la-sync"
         @click="doRefresh"
-        v-if="!editor && !shoutcast && !radioBrowser && !isXtreamEditor"
+        v-if="!editor && !isXtreamEditor"
         >{{ $t("general.refresh") }}</erd-button
       >
       <span class="text-muted" v-if="!editor && !isXtreamEditor">{{
@@ -85,7 +86,7 @@
 /* eslint-disable no-unused-vars */
 import { EventBus } from "../../../services/ebus";
 import { httpService } from "../../../services/http";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -94,6 +95,8 @@ export default {
         this.$t("tabs.xtream-api"),
         this.$t("tabs.sync"),
         this.$t("tabs.security"),
+        this.$t("tabs.backup"),
+        this.$t("tabs.export")
       ],
       tabsMovies: [this.$t("tabs.stream"), this.$t("tabs.tmdb")],
       activeTab: 0,
@@ -106,9 +109,11 @@ export default {
       editorChanges: false,
       editorPlaylists: [],
       editorPlaylist: undefined,
+      canAddPlaylist: true,
     };
   },
   computed: {
+    ...mapGetters(["currentUser"]),
     breadcrumb() {
       let res = [];
       this.$route.matched.map((item) => {
@@ -167,12 +172,6 @@ export default {
       }
       return "Add";
     },
-    shoutcast() {
-      return /\/radio\/shoutcast/.test(this.$route.path);
-    },
-    radioBrowser() {
-      return /\/radio\/radiobrowser/.test(this.$route.path);
-    },
   },
   methods: {
     ...mapActions(["updateSoundcloudId"]),
@@ -196,6 +195,9 @@ export default {
     },
     updateEditorChanges(val) {
       this.editorChanges = val;
+    },
+    updateCanAddPlaylist(val) {
+      this.canAddPlaylist = val;
     },
     doRefresh() {
       EventBus.$emit("refresh");
@@ -238,17 +240,6 @@ export default {
         this.editor = false;
       }
     },
-    shoutCast: function (genre) {
-      EventBus.$emit("shoutcast-genre", genre);
-    },
-    shoutCastSub: function (genre) {
-      if (genre.length) {
-        EventBus.$emit("shoutcast-genre", genre);
-      }
-    },
-    radiobrowser: function (country) {
-      EventBus.$emit("radiobrowser-country", country);
-    },
     activeTab: function (tab) {
       EventBus.$emit("tab-change", tab);
     },
@@ -272,6 +263,7 @@ export default {
     EventBus.$on("update-editor", this.updateeditor);
     EventBus.$on("update-busy", this.updateIsBusy);
     EventBus.$on("editor-changes", this.updateEditorChanges);
+    EventBus.$on("can-add-playlist", this.updateCanAddPlaylist);
   },
   beforeDestroy() {
     EventBus.$off("update-from", this.updateFrom);
@@ -280,6 +272,7 @@ export default {
     EventBus.$off("update-editor", this.updateeditor);
     EventBus.$off("update-busy", this.updateIsBusy);
     EventBus.$off("editor-changes", this.updateEditorChanges);
+    EventBus.$off("can-add-playlist", this.updateCanAddPlaylist);
   },
 };
 </script>

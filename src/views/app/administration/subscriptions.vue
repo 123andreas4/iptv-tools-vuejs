@@ -101,6 +101,17 @@
         :items="enabledTypes"
         v-model="editorSubscription.enabled"
       ></erd-select>
+      <label for="custom">{{ $t("subscriptions.custom") }}</label>
+      <erd-select
+        id="custom"
+        class="mt-1 mb-2 w-100"
+        :items="enabledTypes"
+        v-model="editorSubscription.custom_plan"
+      ></erd-select>
+      <div v-if="editorSubscription && editorSubscription.custom_plan == 1">
+        <label for="custom">{{ $t("subscriptions.max-playlists") }}</label>
+        <erd-input class="mt-1 mb-2 w-100" type="number" v-model="editorSubscription.max_playlist"></erd-input>
+      </div>
       <label for="end-date" v-if="editorSubscription.end_date !== null">{{
         $t("subscriptions.end_date")
       }}</label>

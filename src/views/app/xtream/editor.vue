@@ -218,11 +218,11 @@
           class="mt-1 mb-2 w-100"
           v-model="groupEditor.group_name"
         ></erd-input>
-        <label class="w-100">{{ $t("editor.parent-code") }}</label>
+        <!--<label class="w-100">{{ $t("editor.parent-code") }}</label>
         <erd-input
           class="mt-1 mb-2 w-100"
           v-model="groupEditor.group_parent_code"
-        ></erd-input>
+        ></erd-input>-->
         <erd-checkbox class="mb-2" v-model="groupEditor.group_is_hidden">{{
           $t("editor.hidden")
         }}</erd-checkbox>
@@ -287,11 +287,11 @@
             class="mt-1 mb-2 w-100"
             v-model="streamEditor.source_stream_url"
           ></erd-input>
-          <label class="w-100">{{ $t("editor.parent-code") }}</label>
+          <!--<label class="w-100">{{ $t("editor.parent-code") }}</label>
           <erd-input
             class="mt-1 mb-3 w-100"
             v-model="streamEditor.stream_parent_code"
-          ></erd-input>
+          ></erd-input>-->
           <erd-checkbox
             class="mb-1"
             v-model="streamEditor.stream_radio"
@@ -454,6 +454,7 @@
           id="radiobrowser-search"
           class="mt-1 mb-2 w-100"
           v-model="radioBrowser.search"
+          autocomplete="off"
           :placeholder="$t('menu.search')"
         ></erd-input>
         <div class="radiobrowser-stations">
@@ -501,6 +502,9 @@
           icon="la-check"
           variant="success"
           @click="radioBrowserModal(false, true)"
+          :disabled="
+            radioBrowser.isLoading || radioBrowser.results.length === 0
+          "
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -530,6 +534,7 @@
           id="soundcloud-url"
           class="mt-1 mb-2 w-100"
           v-model="soundcloud.url"
+          autocomplete="off"
           :placeholder="$t('radio.soundcloud-url-placeholder')"
         ></erd-input>
         <div
@@ -566,6 +571,7 @@
           icon="la-check"
           variant="success"
           @click="soundcloudModal(false, true)"
+          :disabled="soundcloud.isLoading || soundcloud.track === null"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -595,6 +601,7 @@
           id="youtube-url"
           class="mt-1 mb-2 w-100"
           v-model="youtube.url"
+          autocomplete="off"
           :placeholder="$t('editor.youtube-url-placeholder')"
         ></erd-input>
         <div
@@ -627,6 +634,7 @@
           icon="la-check"
           variant="success"
           @click="youtubeModal(false, true)"
+          :disabled="youtube.isLoading || youtube.video === null"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -656,6 +664,7 @@
           id="vimeo-url"
           class="mt-1 mb-2 w-100"
           v-model="vimeo.url"
+          autocomplete="off"
           :placeholder="$t('editor.vimeo-url-placeholder')"
         ></erd-input>
         <div
@@ -683,6 +692,7 @@
           icon="la-check"
           variant="success"
           @click="vimeoModal(false, true)"
+          :disabled="vimeo.isLoading || vimeo.video === null"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -712,6 +722,7 @@
           id="dailymotion-url"
           class="mt-1 mb-2 w-100"
           v-model="dailymotion.url"
+          autocomplete="off"
           :placeholder="$t('editor.dailymotion-url-placeholder')"
         ></erd-input>
         <div
@@ -741,6 +752,7 @@
           icon="la-check"
           variant="success"
           @click="dailymotionModal(false, true)"
+          :disabled="dailymotion.isLoading || dailymotion.video === null"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -770,6 +782,7 @@
           id="tedTalks-url"
           class="mt-1 mb-2 w-100"
           v-model="tedTalks.url"
+          autocomplete="off"
           :placeholder="$t('editor.ted-talks-url-placeholder')"
         ></erd-input>
         <div
@@ -799,6 +812,7 @@
           icon="la-check"
           variant="success"
           @click="tedTalksModal(false, true)"
+          :disabled="tedTalks.isLoading || tedTalks.video === null"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -828,6 +842,7 @@
           id="xhamster-url"
           class="mt-1 mb-2 w-100"
           v-model="xhamster.url"
+          autocomplete="off"
           :placeholder="$t('editor.xhamster-url-placeholder')"
         ></erd-input>
         <div
@@ -855,6 +870,331 @@
           icon="la-check"
           variant="success"
           @click="xhamsterModal(false, true)"
+          :disabled="xhamster.isLoading || xhamster.video === null"
+          >{{ $t("general.ok") }}</erd-button
+        >
+      </template>
+    </erd-modal>
+    <!--  
+
+      FIND LOGO
+
+    -->
+    <erd-modal
+      v-show="findLogo.modal"
+      @close="findLogoModal(false)"
+      :title="`${$t('editor.find-logo')}: ${findLogo.title}`"
+      class="select-none"
+      small
+    >
+      <div class="px-2">
+        <erd-spinner
+          v-if="findLogo.isLoading"
+          size="lg"
+          overlay
+          absolute
+        ></erd-spinner>
+        <label class="w-100" for="logo-country">{{
+          $t("editor.logo-country")
+        }}</label>
+        <erd-select
+          key="logo-countries"
+          id="logo-country"
+          class="w-100 mt-1 mb-2"
+          :items="findLogo.countries"
+          v-model="findLogo.country"
+        ></erd-select>
+        <label class="w-100" for="find-logo-search">{{
+          $t("editor.find-logo-search")
+        }}</label>
+        <erd-input
+          id="find-logo-search"
+          class="mt-1 mb-2 w-100"
+          v-model="findLogo.search"
+          autocomplete="off"
+          :placeholder="$t('menu.search')"
+        ></erd-input>
+        <label class="w-100" for="logos">{{ $t("editor.logos") }}</label>
+        <erd-select
+          key="logo-logos"
+          id="logos"
+          class="w-100 mt-1 mb-2"
+          :items="filteredLogos"
+          v-model="findLogo.logo"
+        ></erd-select>
+        <div class="find-logo form-control mb-2 w-100 text-center">
+          <a
+            :href="`http://static.iptv-tools.com/${findLogo.country}/${findLogo.logo}`"
+            target="_blank"
+          >
+            <img
+              v-if="findLogo.logo.length"
+              :src="`http://static.iptv-tools.com/${findLogo.country}/${findLogo.logo}`"
+              class="stream-logo mt-2"
+          /></a>
+        </div>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="findLogoModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="danger"
+          >{{ $t("general.cancel") }}</erd-button
+        >
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="findLogoModal(false, true)"
+          :disabled="findLogo.isLoading || findLogo.logos.length === 0"
+          >{{ $t("general.ok") }}</erd-button
+        >
+      </template>
+    </erd-modal>
+    <!--  
+
+      ASSIGN LOGOS
+
+    -->
+    <erd-modal
+      v-show="assignLogo.modal"
+      @close="assignLogoModal(false)"
+      :title="$t('editor.assign-stream-logos')"
+      class="select-none"
+      small
+    >
+      <div class="px-2 assign-logo">
+        <erd-spinner
+          v-if="assignLogo.isLoading"
+          size="lg"
+          overlay
+          absolute
+        ></erd-spinner>
+        <label class="w-100" for="assign-logo-country">{{
+          $t("editor.logo-country")
+        }}</label>
+        <erd-select
+          key="assign-logo-countries"
+          id="assign-logo-country"
+          class="w-100 mt-1 mb-2"
+          :items="assignLogo.countries"
+          v-model="assignLogo.country"
+        ></erd-select>
+        <erd-radiobutton
+          class="mt-1"
+          :value="1"
+          v-model="assignLogo.assignAll"
+          >{{ $t("editor.assign-all-streams") }}</erd-radiobutton
+        >
+        <erd-radiobutton :value="0" v-model="assignLogo.assignAll">{{
+          $t("editor.assign-missing-only")
+        }}</erd-radiobutton>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="assignLogoModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="danger"
+          >{{ $t("general.cancel") }}</erd-button
+        >
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="assignLogoModal(false, true)"
+          :disabled="assignLogo.isLoading || assignLogo.country.length === 0"
+          >{{ $t("general.ok") }}</erd-button
+        >
+      </template>
+    </erd-modal>
+    <!--  
+
+      IMPORT M3U
+
+    -->
+    <erd-modal
+      v-show="importM3U.modal"
+      @close="importM3UModal(false)"
+      :title="$t('editor.import-m3u')"
+      class="select-none"
+      small
+    >
+      <div class="px-2 assign-logo">
+        <label class="d-block mb-1" for="title">{{
+          $t("m3u.file")
+        }}</label>
+        <erd-input
+          class="w-100"
+          type="file"
+          accept=".m3u8, .m3u"
+          v-model="importM3U.file"
+          @change="uploadM3U"
+        ></erd-input>
+        <div class="radiobrowser-stations">
+          <erd-spinner
+            v-if="importM3U.isLoading"
+            size="lg"
+            overlay
+            absolute
+          ></erd-spinner>
+          <p class="mb-1 pb-0" v-if="importM3U.groups.length">
+            {{ $t("editor.select-groups") }}
+          </p>
+          <perfect-scrollbar
+            :settings="{ suppressScrollX: true, wheelPropagation: false }"
+          >
+            <div
+              class="form-control radiobrowser-station"
+              :class="{ selected: importM3U.importGroups.includes(index) }"
+              v-for="(group, index) in importM3U.groups"
+              :key="`import-group-${index}-${group.name}`"
+              @click.ctrl="toggleImportM3USelection(index)"
+              @click.shift="selectImportM3URangeSelection(index)"
+              @click.exact="selectImportM3USelection(index)"
+            >
+              <span class="station-name">{{ group.name }}</span>
+              <span class="text-muted text-small ml-2">{{ $t(`category-type.${group.type}`) }}</span>
+              <span class="text-muted text-small float-right"
+                >{{ group.streams.length }}</span
+              >
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="importM3UModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="danger"
+          >{{ $t("general.cancel") }}</erd-button
+        >
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="importM3UModal(false, true)"
+          :disabled="importM3U.isLoading || importM3U.groups.length === 0 || importM3U.importGroups.length === 0"
+          >{{ $t("general.ok") }}</erd-button
+        >
+      </template>
+    </erd-modal>
+    <!--  
+
+      ASSIGN TVG-ID
+
+    -->
+    <erd-modal
+      v-show="assignTVGID.modal"
+      @close="assignTVGIDModal(false)"
+      :title="$t('editor.assign-tv-guide')"
+      class="select-none"
+      small
+    >
+      <div class="px-2 assign-logo">
+        <erd-spinner
+          v-if="assignTVGID.isLoading"
+          size="lg"
+          overlay
+          absolute
+        ></erd-spinner>
+        <label class="w-100" for="assign-tv-guide-country">{{
+          $t("editor.logo-country")
+        }}</label>
+        <erd-select
+          key="assign-tv-guide-countries"
+          id="assign-tv-guide-country"
+          class="w-100 mt-1 mb-2"
+          :items="assignTVGID.countries"
+          v-model="assignTVGID.country"
+        ></erd-select>
+        <erd-radiobutton
+          class="mt-1"
+          :value="1"
+          v-model="assignTVGID.assignAll"
+          >{{ $t("editor.assign-all-streams") }}</erd-radiobutton
+        >
+        <erd-radiobutton :value="0" v-model="assignTVGID.assignAll">{{
+          $t("editor.assign-epg-missing-only")
+        }}</erd-radiobutton>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="assignTVGIDModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="danger"
+          >{{ $t("general.cancel") }}</erd-button
+        >
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="assignTVGIDModal(false, true)"
+          :disabled="assignTVGID.isLoading || assignTVGID.country.length === 0"
+          >{{ $t("general.ok") }}</erd-button
+        >
+      </template>
+    </erd-modal>
+    <!--  
+
+      FIND TVG-ID
+
+    -->
+    <erd-modal
+      v-show="findTVGID.modal"
+      @close="findTVGIDModal(false)"
+      :title="`${$t('editor.find-tv-guide')}: ${findTVGID.title}`"
+      class="select-none"
+      small
+    >
+      <div class="px-2 find-channel-id">
+        <erd-spinner
+          v-if="findTVGID.isLoading"
+          size="lg"
+          overlay
+          absolute
+        ></erd-spinner>
+        <label class="w-100" for="logo-country">{{
+          $t("editor.logo-country")
+        }}</label>
+        <erd-select
+          key="logo-countries"
+          id="logo-country"
+          class="w-100 mt-1 mb-2"
+          :items="findTVGID.countries"
+          v-model="findTVGID.country"
+        ></erd-select>
+        <label class="w-100" for="find-tvguide-search">{{
+          $t("editor.find-logo-search")
+        }}</label>
+        <erd-input
+          id="find-tvguide-search"
+          class="mt-1 mb-2 w-100"
+          v-model="findTVGID.search"
+          autocomplete="off"
+          :placeholder="$t('menu.search')"
+        ></erd-input>
+        <label class="w-100" for="channels">{{ $t("editor.channel") }}</label>
+        <erd-select
+          key="tvguide-channels"
+          id="channels"
+          class="w-100 mt-1 mb-2"
+          :items="filteredTVGIDS"
+          v-model="findTVGID.channel"
+        ></erd-select>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="findTVGIDModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="danger"
+          >{{ $t("general.cancel") }}</erd-button
+        >
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="findTVGIDModal(false, true)"
+          :disabled="findTVGID.isLoading || findTVGID.channels.length === 0"
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -869,15 +1209,9 @@
         <erd-collapse :title="$t('editor.import-m3u')" key="import-m3u" small>
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
-              <a href="#" @click.prevent="youtubeModal(true)"
+              <a href="#" @click.prevent="importM3UModal(true)"
                 ><i class="las la-file-import mr-1"></i
                 >{{ $t("editor.import-file") }}</a
-              >
-            </li>
-            <li class="nav-item">
-              <a href="#" @click.prevent="vimeoModal(true)"
-                ><i class="las la-globe mr-1"></i
-                >{{ $t("editor.import-url") }}</a
               >
             </li>
           </ul>
@@ -1010,6 +1344,36 @@
             </li>
           </ul>
         </erd-collapse>
+        <erd-collapse
+          :title="$t('editor.assign-logos')"
+          key="assign-logos"
+          small
+          v-if="activeGroupType == 1"
+        >
+          <ul class="list-unstyled mb-0">
+            <li class="nav-item">
+              <a href="#" @click.prevent="assignLogoModal(true)"
+                ><i class="las la-photo-video mr-1"></i
+                >{{ $t("editor.assign-stream-logos") }}</a
+              >
+            </li>
+          </ul>
+        </erd-collapse>
+        <erd-collapse
+          :title="$t('editor.assign-tv-guide')"
+          key="assign-tv-guide"
+          small
+          v-if="activeGroupType == 1"
+        >
+          <ul class="list-unstyled mb-0">
+            <li class="nav-item">
+              <a href="#" @click.prevent="assignTVGIDModal(true)"
+                ><i class="las la-th-list mr-1"></i
+                >{{ $t("editor.assign-tvg-ids") }}</a
+              >
+            </li>
+          </ul>
+        </erd-collapse>
       </div>
     </erd-app-menu>
     <erd-row class="m-0 p-0" v-if="playlistSelected">
@@ -1065,6 +1429,7 @@
                 <a href="#" @click.prevent="activeGroup = group.id">{{
                   group.group_name
                 }}</a>
+                <span class="text-muted text-small ml-2">{{ $t(`category-type.${group.group_type}`) }}</span>
                 <span class="float-right">{{ group.streams }}</span>
               </div>
             </transition-group>
@@ -1253,6 +1618,8 @@ import { httpService } from "../../../services/http";
 import { mapGetters } from "vuex";
 import draggable from "vuedraggable";
 import { SubscriptionType } from "../../../constants/config";
+import { countries } from "../../../helpers";
+import { m3u } from "../../../plugins/m3u";
 
 export default {
   components: {
@@ -1260,6 +1627,7 @@ export default {
   },
   data() {
     return {
+      countries,
       activeTab: 0,
       activeGroup: -1,
       activeGroups: [],
@@ -1377,6 +1745,50 @@ export default {
         url: "",
         video: null,
       },
+      findLogo: {
+        isLoading: false,
+        modal: false,
+        countries: [],
+        country: "",
+        logos: [],
+        logo: "",
+        search: "",
+        title: "",
+      },
+      assignLogo: {
+        isLoading: false,
+        modal: false,
+        countries: [],
+        country: "",
+        logos: [],
+        assignAll: 0,
+      },
+      importM3U: {
+        isLoading: false,
+        modal: false,
+        groups: [],
+        importGroups: [],
+        m3u: null,
+        file: null,
+      },
+      findTVGID: {
+        isLoading: false,
+        modal: false,
+        countries: [],
+        country: "",
+        channels: [],
+        channel: "",
+        search: "",
+        title: "",
+      },
+      assignTVGID: {
+        isLoading: false,
+        modal: false,
+        countries: [],
+        country: "",
+        channels: [],
+        assignAll: 0,
+      },
       saveChanges: {
         modal: false,
       },
@@ -1452,6 +1864,26 @@ export default {
         (group) => group.id == this.activeGroup
       );
       return index > -1 ? this.playlistEditor.groups[index].group_type : 0;
+    },
+    filteredLogos() {
+      if (!this.findLogo.search.length) {
+        return this.findLogo.logos;
+      }
+      let selectedStream = this.getStreamWithId(this.activeStreams[0]);
+      let re = new RegExp(this.findLogo.search, "i");
+      return this.findLogo.logos.filter((logo) => {
+        return logo.text.match(re);
+      });
+    },
+    filteredTVGIDS() {
+      if (!this.findTVGID.search.length) {
+        return this.findTVGID.channels;
+      }
+      let selectedStream = this.getStreamWithId(this.activeStreams[0]);
+      let re = new RegExp(this.findTVGID.search, "i");
+      return this.findTVGID.channels.filter((channel) => {
+        return channel.text.match(re);
+      });
     },
     groupContextMenu() {
       let vm = this;
@@ -1606,6 +2038,25 @@ export default {
           text: vm.$t("editor.change-case"),
           onClick: function () {
             vm.convertCaseModal(true, 2);
+          },
+        },
+        {
+          divider: true,
+        },
+        {
+          disabled: vm.activeStreams.length !== 1 || vm.activeGroupType !== 1,
+          icon: "la-photo-video",
+          text: vm.$t("editor.find-logo"),
+          onClick: function () {
+            vm.findLogoModal(true);
+          },
+        },
+        {
+          disabled: vm.activeStreams.length !== 1 || vm.activeGroupType !== 1,
+          icon: "la-th-list",
+          text: vm.$t("editor.find-tv-guide"),
+          onClick: function () {
+            vm.findTVGIDModal(true);
           },
         },
         {
@@ -2075,6 +2526,14 @@ export default {
         this.radioBrowser.active.push(item);
       }
     },
+    toggleImportM3USelection(item) {
+      let idx = this.importM3U.importGroups.indexOf(item);
+      if (idx !== -1) {
+        this.importM3U.importGroups.splice(idx, 1);
+      } else {
+        this.importM3U.importGroups.push(item);
+      }
+    },
     indexOfGroup(group) {
       return this.playlistEditor.groups.map((g) => g.id).indexOf(group);
     },
@@ -2111,6 +2570,16 @@ export default {
         }
       }
     },
+    selectImportM3URangeSelection(index) {
+      const lastIndex =
+        this.importM3U.importGroups[this.importM3U.importGroups.length - 1];
+      const dir = index > lastIndex ? 1 : -1;
+      for (let i = lastIndex; i != index + dir; i += dir) {
+        if (!this.importM3U.importGroups.includes(i)) {
+          this.importM3U.importGroups.push(i);
+        }
+      }
+    },
     selectGroupSelection(item) {
       this.activeGroups.length = 0;
       this.activeGroups.push(item);
@@ -2122,6 +2591,10 @@ export default {
     selectRadiobrowserSelection(item) {
       this.radioBrowser.active.length = 0;
       this.radioBrowser.active.push(item);
+    },
+    selectImportM3USelection(item) {
+      this.importM3U.importGroups.length = 0;
+      this.importM3U.importGroups.push(item);
     },
     findAndReplaceModal(show, type = 1) {
       this.findReplace.type = type;
@@ -3179,6 +3652,324 @@ export default {
         this.editStreamModal(true);
       }
     },
+    loadLogoCountries() {
+      this.findLogo.isLoading = true;
+      httpService
+        .get("editor/logo-countries")
+        .then((res) => {
+          this.findLogo.isLoading = false;
+          this.findLogo.countries = res.data
+            .map((country) => {
+              let cn = this.countries.find(
+                (cnt) => cnt.code.toLowerCase() == country.toLowerCase()
+              );
+              return {
+                text: cn ? cn.name : country,
+                value: country,
+              };
+            })
+            .sort((a, b) => {
+              return a.text.toUpperCase() < b.text.toUpperCase()
+                ? -1
+                : a.text.toUpperCase() > b.text.toUpperCase()
+                ? 1
+                : 0;
+            });
+          this.assignLogo.countries = [...this.findLogo.countries];
+        })
+        .catch(() => {
+          this.findLogo.isLoading = false;
+        });
+    },
+    loadTVGIDCountries() {
+      this.assignTVGID.isLoading = true;
+      httpService
+        .get("editor/tv-guide-countries")
+        .then((res) => {
+          this.assignTVGID.isLoading = false;
+          this.assignTVGID.countries = res.data
+            .map((country) => {
+              let cn = this.countries.find(
+                (cnt) => cnt.code.toLowerCase() == country.toLowerCase()
+              );
+              return {
+                text: cn ? cn.name : country,
+                value: country,
+              };
+            })
+            .sort((a, b) => {
+              return a.text.toUpperCase() < b.text.toUpperCase()
+                ? -1
+                : a.text.toUpperCase() > b.text.toUpperCase()
+                ? 1
+                : 0;
+            });
+          this.assignTVGID.countries.unshift({ text: this.$t("general.all"), value: "all" });
+          this.findTVGID.countries = [...this.assignTVGID.countries];
+        })
+        .catch(() => {
+          this.assignTVGID.isLoading = false;
+        });
+    },
+    loadLogosFind(country) {
+      this.findLogo.isLoading = true;
+      httpService
+        .get(`editor/logos/${country}`)
+        .then((res) => {
+          this.findLogo.logo = "";
+          this.findLogo.isLoading = false;
+          this.findLogo.logos = res.data.map((logo) => {
+            return {
+              text: logo.label,
+              value: logo.filename,
+            };
+          });
+        })
+        .catch(() => {
+          this.findLogo.isLoading = false;
+        });
+    },
+    findLogoModal(show, save = false) {
+      let selected = this.getStreamWithId(this.activeStreams[0]);
+      if (show) {
+        this.findLogo.logo = "";
+        this.findLogo.title = selected.stream_tvg_name;
+      }
+      this.findLogo.search = "";
+      if (save) {
+        if (selected) {
+          selected.stream_tvg_logo = `http://static.iptv-tools.com/${this.findLogo.country}/${this.findLogo.logo}`;
+          selected.modified = true;
+          this.playlistEditor.changed = true;
+        }
+      }
+      this.findLogo.modal = show;
+    },
+    loadLogosAssign(country) {
+      this.assignLogo.isLoading = true;
+      httpService
+        .get(`editor/logos/${country}`)
+        .then((res) => {
+          this.assignLogo.logo = "";
+          this.assignLogo.isLoading = false;
+          this.assignLogo.logos = res.data.map((logo) => logo.filename);
+        })
+        .catch(() => {
+          this.assignLogo.isLoading = false;
+        });
+    },
+    assignLogoModal(show, save = false) {
+      if (show) {
+        this.assignLogo.logo = "";
+      }
+      if (save) {
+        var changed = false;
+        var stringSimilarity = require("string-similarity");
+        let streams = [];
+        if (this.assignLogo.assignAll == 1) {
+          streams = this.playlistEditor.streams;
+        } else {
+          streams = this.playlistEditor.streams.filter((stream) => !stream.stream_tvg_logo.length);
+        }
+        streams.map((stream) => {
+          let match1 = stringSimilarity.findBestMatch(
+            String(stream.stream_tvg_name).replace(/ hd$/i, ""),
+            this.assignLogo.logos
+          ).bestMatch;
+          let match2 = stringSimilarity.findBestMatch(
+            String(stream.stream_tvg_id),
+            this.assignLogo.logos
+          ).bestMatch;
+          if (match1.rating >= 0.3) {
+            changed = true;
+            stream.stream_tvg_logo = `http://static.iptv-tools.com/${this.assignLogo.country}/${match1.target}`;
+            stream.modified = true;
+          } else if (match2.rating >= 0.5) {
+            changed = true;
+            stream.stream_tvg_logo = `http://static.iptv-tools.com/${this.assignLogo.country}/${match2.target}`;
+            stream.modified = true;
+          }
+        });
+        this.playlistEditor.changed = changed;
+      }
+      this.assignLogo.modal = show;
+    },
+    loadTVGIDAssign(country) {
+      this.assignTVGID.isLoading = true;
+      httpService
+        .get(`editor/tv-guide/${country}`)
+        .then((res) => {
+          this.assignTVGID.isLoading = false;
+          this.assignTVGID.channels = res.data;
+        })
+        .catch(() => {
+          this.assignTVGID.isLoading = false;
+        });
+    },
+    assignTVGIDModal(show, save = false) {
+      if (save) {
+        var changed = false;
+        var stringSimilarity = require("string-similarity");
+        let streams = [];
+        if (this.assignTVGID.assignAll == 1) {
+          streams = this.playlistEditor.streams;
+        } else {
+          streams = this.playlistEditor.streams.filter((stream) => !stream.stream_tvg_id.length || stream.stream_tvg_id.length == 0);
+        }
+        let channelNames = this.assignTVGID.channels.map(channel => channel.tvg_name);
+        let channelIds = this.assignTVGID.channels.map(channel => channel.tvg_id);
+        streams.map((stream) => {
+          let match1 = stringSimilarity.findBestMatch(
+            String(stream.stream_tvg_name),
+            channelNames
+          ).bestMatch;
+          let match2 = stringSimilarity.findBestMatch(
+            String(stream.stream_tvg_id),
+            channelIds
+          ).bestMatch;
+          let match3 = stringSimilarity.findBestMatch(
+            String(stream.stream_tvg_name).replace(/ hd$| fhd$| hevc$| h265$|/i, ""),
+            channelNames
+          ).bestMatch;
+          if (match2.rating >= 0.75) {
+            changed = true;
+            stream.stream_tvg_id = match2.target;
+            stream.modified = true;
+          } else if (match1.rating >= 0.75) {
+            changed = true;
+            stream.stream_tvg_id = this.assignTVGID.channels.find(channel => channel.tvg_name === match1.target).tvg_id;
+            stream.modified = true;
+          } else if (match3.rating >= 0.75) {
+            changed = true;
+            stream.stream_tvg_id = this.assignTVGID.channels.find(channel => channel.tvg_name === match1.target).tvg_id;
+            stream.modified = true;
+          } else {
+            changed = true;
+            stream.stream_tvg_id = "";
+            stream.modified = true;
+          }
+        });
+        this.playlistEditor.changed = changed;
+      }
+      this.assignTVGID.modal = show;
+    },
+    loadTVGIDFind(country) {
+      this.findTVGID.isLoading = true;
+      httpService
+        .get(`editor/tv-guide/${country}`)
+        .then((res) => {
+          this.findTVGID.channel = "";
+          this.findTVGID.isLoading = false;
+          this.findTVGID.channels = res.data.map((channel) => {
+            return {
+              text: channel.tvg_name,
+              value: channel.tvg_id,
+            };
+          });
+        })
+        .catch(() => {
+          this.findTVGID.isLoading = false;
+        });
+    },
+    findTVGIDModal(show, save = false) {
+      let selected = this.getStreamWithId(this.activeStreams[0]);
+      if (show) {
+        this.findTVGID.channel = "";
+        this.findTVGID.title = selected.stream_tvg_name;
+      }
+      this.findTVGID.search = "";
+      if (save) {
+        if (selected) {
+          selected.stream_tvg_id = this.findTVGID.channel;
+          selected.modified = true;
+          this.playlistEditor.changed = true;
+        }
+      }
+      this.findTVGID.modal = show;
+    },
+    importM3UModal(show, save = false) {
+      if (show) {
+        this.importM3U.file = null;
+        this.importM3U.m3u = null;
+        this.importM3U.groups = [];
+        this.importM3U.importGroups = [];
+      }
+      if (save) {
+        this.isLoading = true;
+        let groupIndex = this.playlistEditor.groups.findIndex((group) => {
+          return group.id == this.activeGroup;
+        });
+        httpService
+          .post("editor/import", {
+            playlist_id: this.playlistEditor.id,
+            import: this.importM3U.groups.filter((group, index) => this.importM3U.importGroups.includes(index))
+          })
+          .then((res) => {
+            this.isLoading = false;
+            if (res.status) {
+              this.loadPlaylist(this.playlistEditor.id, groupIndex);
+            }
+          })
+          .catch(() => {
+            this.isLoading = false;
+          });
+      }
+      this.importM3U.modal = show;
+    },
+    uploadM3U(event) {
+      const input = event.target;
+      if ("files" in input && input.files.length > 0) {
+        this.importM3U.isLoading = true;
+        this.readFileContent(input.files[0])
+          .then((content) => {
+            this.importM3U.isLoading = false;
+            this.parseM3U(content);
+          })
+          .catch((error) => {
+            this.$notify(
+              "error",
+              this.$t("profile.failed"),
+              error,
+              "la-user-shield",
+              { duration: 5000, permanent: false }
+            );
+          });
+      }
+    },
+    parseM3U(content) {
+      let vm = this;
+      vm.importM3U.isLoading = true;
+      m3u
+        .parse(
+          content,
+          { tag: "name", type: ["Movie", "Series", "VOD", "Live"] },
+          true
+        )
+        .then((playlist) => {
+          this.importM3U.m3u = playlist;
+          this.importM3U.isLoading = false;
+          this.importM3U.groups = playlist.groups;
+          this.importM3U.importGroups = [];
+        })
+        .catch((error) => {
+          vm.isLoading = false;
+          vm.$notify(
+            "error",
+            vm.$t("profile.failed"),
+            error,
+            "la-user-shield",
+            { duration: 5000, permanent: false }
+          );
+        });
+    },
+    readFileContent(file) {
+      const reader = new FileReader();
+      return new Promise((resolve, reject) => {
+        reader.onload = (event) => resolve(event.target.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsText(file);
+      });
+    },
   },
   beforeMount() {
     document.body.classList.add("right-menu");
@@ -3188,6 +3979,8 @@ export default {
     EventBus.$on("save", this.doSave);
     EventBus.$on("cancel", this.doCancel);
     EventBus.$on("editor-playlist", this.loadPlaylist);
+    this.loadLogoCountries();
+    this.loadTVGIDCountries();
   },
   beforeDestroy() {
     document.body.classList.remove("right-menu");
@@ -3237,7 +4030,7 @@ export default {
       if (!val.length) {
         return;
       }
-      if (/youtu\.?be/.test(val)) {
+      if (/youtu\.?be/i.test(val)) {
         var i;
         var patterns = [
           /youtu\.be\/([^#&?]{11})/, // youtu.be/<id>
@@ -3285,7 +4078,7 @@ export default {
       }, 500);
     },
     "vimeo.url": function (val) {
-      if (/vimeo\.com/.test(val)) {
+      if (/vimeo\.com/i.test(val)) {
         let match = val.match(
           /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^/]*)\/videos\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:[a-zA-Z0-9_-]+)?/i
         );
@@ -3310,7 +4103,7 @@ export default {
       }, 500);
     },
     "dailymotion.url": function (val) {
-      if (/dailymotion\.com/.test(val)) {
+      if (/dailymotion\.com/i.test(val)) {
         let match = val.match(
           /^.+dailymotion.com\/(video|hub)\/([^_]+)[^#]*(#video=([^_&]+))?/i
         );
@@ -3337,7 +4130,7 @@ export default {
       }, 500);
     },
     "tedTalks.url": function (val) {
-      if (/ted\.com\/talks/.test(val)) {
+      if (/ted\.com\/talks/i.test(val)) {
         let vm = this;
         clearTimeout(this.tedTalks.bounce);
         this.tedTalks.bounce = setTimeout(function () {
@@ -3351,7 +4144,7 @@ export default {
     },
     "xhamster.url": function (val) {
       let vm = this;
-      if (/xhamster\.com\/videos/.test(val)) {
+      if (/xhamster\.com\/videos/i.test(val)) {
         clearTimeout(this.xhamsterBounce);
         this.xhamsterBounce = setTimeout(function () {
           if (val.length) {
@@ -3362,6 +4155,34 @@ export default {
         }, 500);
       }
     },
+    "findLogo.country": function (val) {
+      if (val.length) {
+        this.loadLogosFind(val);
+      } else {
+        this.findLogo.logo = "";
+      }
+    },
+    "assignLogo.country": function (val) {
+      if (val.length) {
+        this.loadLogosAssign(val);
+      } else {
+        this.assignLogo.logo = "";
+      }
+    },
+    "findTVGID.country": function (val) {
+      if (val.length) {
+        this.loadTVGIDFind(val);
+      } else {
+        this.findTVGID.channel = "";
+      }
+    },
+    "assignTVGID.country": function (val) {
+      if (val.length) {
+        this.loadTVGIDAssign(val);
+      } else {
+        this.assignTVGID.channels = [];
+      }
+    }
   },
 };
 </script>
@@ -3565,5 +4386,22 @@ export default {
   .cover {
     max-height: 300px;
   }
+}
+
+.find-logo {
+  min-height: 250px;
+
+  .stream-logo {
+    max-width: 250px;
+    height: auto;
+  }
+}
+
+.assign-logo {
+  min-height: 300px;
+}
+
+.find-channel-id {
+  min-height: 410px;
 }
 </style>

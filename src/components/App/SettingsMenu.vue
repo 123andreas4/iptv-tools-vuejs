@@ -8,21 +8,26 @@
     <div class="body">
       <label>{{ $t("general.language") }}</label>
       <erd-select
+        key="language"
         class="w-100 mt-1 mb-2"
         :items="languages"
         v-model="$i18n.locale"
       ></erd-select>
       <label>{{ $t("general.per-page") }}</label>
       <erd-select
+        key="per-page"
         class="w-100 mt-1 mb-2"
         :items="perPageItems"
         v-model="perPage"
       ></erd-select>
-      <label>{{ $t("general.expand-menu") }}</label>
+      <label>{{ $t("general.playlist") }}</label>
       <erd-select
+        v-if="movieSeriePlaylists.length && movieSeriePlaylists.length > 0"
+        key="movie-serie-playlist"
         class="w-100 mt-1 mb-2"
-        :items="collapseItems"
-        v-model="expandMenu"
+        :items="movieSeriePlaylists"
+        v-model="movieSeriePlaylist"
+        :disabled="!userHasMoviesSeries || !routeIsMoviesSeries"
       ></erd-select>
     </div>
     <a href="#" class="settings-menu-button" @click.prevent="toggle">
@@ -34,6 +39,7 @@
 <script>
 import { setCurrentLanguage } from "../../helpers";
 import { localeOptions } from "../../constants/config";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -51,13 +57,16 @@ export default {
         { text: "250", value: 250 },
         { text: "500", value: 500 },
       ],
-      collapseItems: [
-        { text: this.$t("general.yes"), value: true },
-        { text: this.$t("general.no"), value: false },
-      ],
     };
   },
   computed: {
+    ...mapGetters(["currentUser"]),
+    routeIsMoviesSeries() {
+      return /app\/movies\//.test(this.$route.path) || /app\/series\//.test(this.$route.path);
+    },
+    userHasMoviesSeries() {
+      return this.currentUser.subscription && this.currentUser.subscription.subscription_type > 0;
+    },
     perPage: {
       get: function () {
         return this.$store.state.user.settings.perPage;
@@ -70,16 +79,17 @@ export default {
         this.$store.commit("setSettings", settings);
       },
     },
-    expandMenu: {
+    movieSeriePlaylists: {
       get: function () {
-        return this.$store.state.user.settings.expandMenu;
+        return this.$store.state.sync.movieSeriePlaylists; 
+      }
+    },
+    movieSeriePlaylist: {
+      get: function () {
+        return this.$store.state.sync.movieSeriePlaylist;
       },
       set: function (val) {
-        let settings = {
-          perPage: this.$store.state.user.settings.perPage,
-          expandMenu: val,
-        };
-        this.$store.commit("setSettings", settings);
+        this.$store.commit("setMovieSeriePlaylist", val);
       },
     },
     languages() {
@@ -92,6 +102,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["loadMovieSeriePlaylists"]),
     addEvents() {
       document.addEventListener("click", this.handleDocumentClick);
       document.addEventListener("touchstart", this.handleDocumentClick);
@@ -108,6 +119,9 @@ export default {
     toggle() {
       this.isOpen = !this.isOpen;
     },
+  },
+  beforeMount() {
+    this.loadMovieSeriePlaylists(true);
   },
   watch: {
     isOpen(val) {

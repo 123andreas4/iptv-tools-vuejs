@@ -33,6 +33,7 @@ export default {
       "synchronizePlaylist",
       "addAlert",
       "getAppXmltvSync",
+      "loadMovieSeriePlaylists"
     ]),
     tmdbSyncStartNotify() {
       this.$notify(
@@ -100,6 +101,9 @@ export default {
       clearInterval(this.xmltv);
       this.xmltv = setInterval(this.getAppXmltvSync, interval * 1000);
     },
+  },
+  beforeCreate() {
+    this.loadMovieSeriePlaylists(true);
   },
   beforeMount() {
     if ([3, 4, 5].includes(this.currentUser.user.role)) {

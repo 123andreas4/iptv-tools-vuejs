@@ -51,6 +51,42 @@ export const httpService = {
       method: "GET",
     }).then(handleResponse);
   },
+  download(url) {
+    const requestOptions = {
+      method: "GET",
+      headers: formatHeader(authHeader()),
+    };
+
+    return fetch(`${activeAPI()}/${url}`, requestOptions)
+      .then(response => response.blob())
+  },
+  postFile(url, formData) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", `${activeAPI()}/${url}`);
+      xhr.onload = function () {
+        if (this.status >= 200 && this.status < 300) {
+          resolve(JSON.parse(xhr.response));
+        } else {
+          reject({
+            status: this.status,
+            statusText: xhr.statusText
+          });
+        }
+      };
+      xhr.onerror = function () {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      };
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (user && user.token) {
+        xhr.setRequestHeader("x-api-key", "Bearer " + user.token);
+      }
+      xhr.send(formData);
+    });
+  }
 };
 
 export const userService = {
@@ -168,3 +204,9 @@ function handleYoutube(response) {
     return info && info.length ? JSON.parse(info[0]) : null;
   });
 }
+
+/*function handleRaw(response) {
+  return response.text().then((text) => {
+    return text;
+  });
+}*/

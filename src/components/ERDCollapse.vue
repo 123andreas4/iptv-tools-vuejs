@@ -6,7 +6,7 @@
       </h5>
     </template>
     <template v-else>
-      <p :class="{ header: true, open: isOpen }" @click="isOpen = !isOpen">
+      <p :class="{ header: true, open: isOpen, gray: gray }" @click="isOpen = !isOpen">
         {{ title }} <i class="las la-angle-down"></i>
       </p>
     </template>
@@ -38,6 +38,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    gray: {
+      type: Boolean,
+      default: true,
+    },
     small: {
       type: Boolean,
       default: false,
@@ -66,7 +70,6 @@ export default {
   margin-bottom: 1rem;
 
   p.header {
-    color: $muted-color;
     font-size: 0.8rem;
     transition: color 0.3s;
     cursor: pointer;
@@ -74,6 +77,10 @@ export default {
     margin-bottom: 0;
     border-bottom: 1px solid $separator-color-light;
     padding-bottom: 4px;
+
+    &.gray {
+      color: $muted-color;
+    }
 
     i {
       margin-right: 0.25rem;

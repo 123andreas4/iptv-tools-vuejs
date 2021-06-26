@@ -72,7 +72,7 @@
           <i class="las la-angle-double-right" />
         </template>
       </b-pagination>
-    </erd-col>
+    </erd-col> 
     <!-- SOURCE -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 0">
       <label class="d-block" for="source-title">{{ $t("xtream.title") }}</label>
@@ -215,6 +215,7 @@
       <erd-select
         id="sync-interval"
         ref="sync-interval"
+        key="sync-interval"
         class="mt-1 mb-2 w-100"
         v-model="playlist.sync_interval"
         :items="syncIntervals"
@@ -226,6 +227,7 @@
       <erd-select
         id="sync-tmdb-language"
         ref="sync-tmdb-language"
+        key="sync-tmdb-language"
         class="mt-1 mb-2 w-100"
         v-model="playlist.tmdb_language"
         :items="tmdbLanguages"
@@ -335,6 +337,35 @@
         >{{ $t("xtream.get-ip") }}</erd-button
       >
     </erd-col>
+    <!-- BACK-UP -->
+    <erd-col xl="12" sm="12" v-if="editor && activeTab === 4">
+      <p class="mt-0 mb-2">{{ $t("backup.streams") }}</p>
+      <!-- LIVE STREAMS BACKUP -->
+      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('live')">{{ $t("backup.back-up-live") }}</erd-button>
+      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('movies')">{{ $t("backup.back-up-movies") }}</erd-button>
+      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('series')">{{ $t("backup.back-up-series") }}</erd-button>
+      <!-- PLAYLIST BACKUP -->
+      <p class="mt-3 mb-2">{{ $t("backup.playlist") }}</p>
+      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('playlist')">{{ $t("backup.back-up-playlist") }}</erd-button>
+      <erd-button icon="la-file-import" variant="info" class="backup-button" :disabled="playlistIsEmpty" @click="$refs['restore-playlist'].click()">{{ $t("backup.restore-playlist") }}</erd-button>
+      <input type="file" ref="restore-playlist" style="display: none" accept=".zip" @change="restorePlaylist">
+      <p class="mt-3 mb-2">{{ $t("backup.tv-guide") }}</p>
+      <!-- EPG CODES BACKUP -->
+      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupEPGCodes">{{ $t("backup.back-up-epg-channel-ids") }}</erd-button>
+      <erd-button icon="la-file-import" variant="info" class="backup-button" :disabled="playlistIsEmpty" @click="$refs['restore-epg-codes'].click()">{{ $t("backup.restore-epg-channel-ids") }}</erd-button>
+      <input type="file" ref="restore-epg-codes" style="display: none" accept=".zip" @change="restoreEPGCodes">
+    </erd-col>
+    <!-- EXPORT -->
+    <erd-col xl="12" sm="12" v-if="editor && activeTab === 5">
+      <p class="mt-0 mb-2">{{ $t("export.playlist") }}</p>
+      <erd-button icon="la-file-export" variant="primary" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportM3U">{{ $t("export.m3u") }}</erd-button>
+      <erd-button icon="la-file-export" variant="primary" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportSIPTV">{{ $t("export.siptv") }}</erd-button>
+      <erd-button icon="la-file-export" variant="primary" class="export-button" :disabled="playlistIsEmpty" @click="exportBouquet">{{ $t("export.bouquet") }}</erd-button>
+      <p class="mt-3 mb-2">{{ $t("export.other") }}</p>
+      <erd-button icon="la-file-csv" variant="info" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportCSV">{{ $t("export.csv") }}</erd-button>
+      <!--<erd-button icon="la-file-code" variant="info" class="export-button mb-1" :disabled="playlistIsEmpty">{{ $t("export.html") }}</erd-button>-->
+      <erd-button icon="la-file-code" variant="info" class="export-button" :disabled="playlistIsEmpty" @click="exportJSON">{{ $t("export.json") }}</erd-button>
+    </erd-col>
   </erd-row>
 </template>
 
@@ -441,7 +472,7 @@ export default {
     },
     paged() {
       this.total = this.searchFiltered.length;
-      this.from = (this.currentPage - 1) * this.perPage;
+      this.from = (this.currentPage - 1) * this.perPage || 0;
       this.to =
         this.from + this.perPage > this.total
           ? this.total
@@ -450,7 +481,7 @@ export default {
     },
     allowedIps: {
       get: function () {
-        return this.playlist.ip_allowed.join(",");
+        return this.playlist.ip_allowed ? this.playlist.ip_allowed.join(",") : "";
       },
       set: function (val) {
         this.playlist.ip_allowed = val.split(",").map((ip) => {
@@ -543,6 +574,32 @@ export default {
         SubscriptionType.Manager,
       ].includes(this.currentUser.subscription.subscription_type);
     },
+    playlistIsEmpty() {
+      return this.playlist && this.playlist.groups == 0 || this.playlist.streams == 0;
+    },
+    canAddPlaylist () {
+      if (this.currentUser.subscription) {
+        let subscription = this.currentUser.subscription;
+        if (new Date(subscription.end_date).getTime() < new Date().getTime()) {
+          return false;
+        }
+        if (subscription.custom_plan == 1) {
+          return this.playlists.length < subscription.max_playlist;
+        }
+        if (subscription.enabled != 1) {
+          return false;
+        }
+        switch (subscription.subscription_type) {
+          case 0:
+          case 1: return this.playlists.length < 2;
+          case 2: return this.playlists.length < 5;
+          case 3: return this.playlists.length < 5;
+          case 4: return this.playlists.length < 10;
+          case 5: return this.playlists.length < 25;
+        }
+      }
+      return false;
+    }
   },
   methods: {
     ...mapActions(["synchronizeTMDB", "synchronizePlaylist"]),
@@ -587,6 +644,9 @@ export default {
         });
     },
     addPlaylist() {
+      if (this.canAddPlaylist !== true) {
+        return;
+      }
       httpService
         .post("playlist/add")
         .then((res) => {
@@ -610,7 +670,7 @@ export default {
               ip_allowed: [],
               api_username: this.currentUser.user.username,
               api_password: "",
-              api_message: "",
+              api_message: "Welcome to IPTV-Tools.com",
               api_output_format: 1,
               name: "",
               tmdb_language: this.$i18n.locale,
@@ -636,6 +696,7 @@ export default {
     },
     editPlaylist(playlist) {
       this.playlist = Object.assign({}, playlist);
+      this.playlistAuth();
       this.editor = true;
     },
     cancelEditor() {
@@ -766,9 +827,8 @@ export default {
             this.playlist.source_max_connections = res.data.max_connections;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.isLoading = false;
-          console.log(error);
         });
     },
     getIPAddress() {
@@ -814,9 +874,177 @@ export default {
           console.log(error);
         });
     },
+    exportM3U() {
+      this.isLoading = true;
+      httpService.download(`playlist/export/m3u/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "export.m3u";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    exportSIPTV() {
+      this.isLoading = true;
+      httpService.download(`playlist/export/siptv/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "export.txt";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    exportBouquet() {
+      this.isLoading = true;
+      httpService.download(`playlist/export/bouquet/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "export.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    exportCSV() {
+      this.isLoading = true;
+      httpService.download(`playlist/export/csv/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "export.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    exportJSON() {
+      this.isLoading = true;
+      httpService.download(`playlist/export/json/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "export.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    backupPlaylist(path) {
+      this.isLoading = true;
+      httpService.download(`playlist/back-up/${path}/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "backup.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    backupEPGCodes() {
+      this.isLoading = true;
+      httpService.download(`playlist/back-up/epg-codes/${this.playlist.id}`).then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = "backup.zip";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        this.isLoading = false;
+      })
+    },
+    restoreEPGCodes(e) {
+      this.isLoading = true;
+      if (e && e.target.files.length == 1) {
+        var formData = new FormData();
+        formData.append("backup.zip", e.target.files[0]);
+        httpService.postFile(`playlist/restore/epg-codes/${this.playlist.id}`, formData)
+          .then((res) => {
+            this.isLoading = false;
+            if (res.status === true && res.data === true) {
+              this.$notify(
+                "primary",
+                this.$t("profile.success"),
+                this.$t("xtream.restore-epgcodes-success"),
+                "la-user-shield",
+                { duration: 5000, permanent: false }
+              );
+            } else {
+              this.$notify(
+                "error",
+                this.$t("profile.failed"),
+                this.$t("xtream.restore-epgcodes-error"),
+                "la-user-shield",
+                { duration: 5000, permanent: false }
+              );
+            }
+          })
+          .catch(() => {
+            this.isLoading = false;
+            this.$notify(
+              "error",
+              this.$t("profile.failed"),
+              this.$t("xtream.restore-epgcodes-error"),
+              "la-user-shield",
+              { duration: 5000, permanent: false }
+            );
+          })
+      }
+    },
+    restorePlaylist(e) {
+      this.isLoading = true;
+      if (e && e.target.files.length == 1) {
+        var formData = new FormData();
+        formData.append("backup.zip", e.target.files[0]);
+        httpService.postFile(`playlist/restore/playlist/${this.playlist.id}`, formData)
+          .then((res) => {
+            this.isLoading = false;
+            if (res.status === true && res.data === true) {
+              this.$notify(
+                "primary",
+                this.$t("profile.success"),
+                this.$t("xtream.restore-playlist-success"),
+                "la-user-shield",
+                { duration: 5000, permanent: false }
+              );
+            } else {
+              this.$notify(
+                "error",
+                this.$t("profile.failed"),
+                this.$t("xtream.restore-playlist-error"),
+                "la-user-shield",
+                { duration: 5000, permanent: false }
+              );
+            }
+          })
+          .catch(() => {
+            this.isLoading = false;
+            this.$notify(
+              "error",
+              this.$t("profile.failed"),
+              this.$t("xtream.restore-playlist-error"),
+              "la-user-shield",
+              { duration: 5000, permanent: false }
+            );
+          })
+      }
+    }
   },
   beforeMount() {
     this.loadPlaylists();
+    EventBus.$emit("can-add-playlist", this.canAddPlaylist);
     EventBus.$on("search", this.searchAccount);
     EventBus.$on("print", this.printAccounts);
     EventBus.$on("refresh", this.loadPlaylists);
@@ -852,10 +1080,16 @@ export default {
         this.loadPlaylists();
       }
     },
+    canAddPlaylist: function (val) {
+      EventBus.$emit("can-add-playlist", val);
+    },
     "playlist.source_host": function () {
       if (
+        this.playlist.source_host &&
         this.playlist.source_host.length &&
+        this.playlist.source_username &&
         this.playlist.source_username.length &&
+        this.playlist.source_password &&
         this.playlist.source_password.length &&
         this.editor
       ) {
@@ -911,5 +1145,11 @@ export default {
     padding: 0;
     display: block;
   }
+}
+
+.backup-button,
+.export-button {
+  display: block;
+  min-width: 250px;
 }
 </style>

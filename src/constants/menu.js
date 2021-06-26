@@ -223,5 +223,139 @@ const data = [
       },
     ],
   },
+  {
+    id: "movies",
+    icon: "las la-film",
+    label: "menu.movies",
+    to: `${AppRoot}/movies/now-playing`,
+    roles: [UserRole.User, UserRole.Guest, UserRole.External],
+    playlist: [
+      PlaylistType.All,
+      PlaylistType.Xtream,
+      PlaylistType.M3U,
+      PlaylistType.Portal,
+    ],
+    subscriptions: [
+      SubscriptionType.Professional,
+      SubscriptionType.Family,
+      SubscriptionType.BusinessSmall,
+      SubscriptionType.BusinessProfessional,
+      SubscriptionType.BusinessEnterprise,
+      SubscriptionType.Manager,
+    ],
+    subs: [
+      {
+        icon: "las la-theater-masks",
+        label: "menu.now-playing",
+        to: `${AppRoot}/movies/now-playing`,
+      },
+      {
+        icon: "las la-star",
+        label: "menu.top-rated",
+        to: `${AppRoot}/movies/top-rated`,
+      },
+      {
+        icon: "las la-fire",
+        label: "menu.popular",
+        to: `${AppRoot}/movies/popular`,
+      },
+      {
+        icon: "las la-folder-open",
+        label: "menu.browse",
+        to: `${AppRoot}/movies/browse`,
+      },
+      {
+        icon: "las la-search",
+        label: "menu.search",
+        to: `${AppRoot}/movies/search`,
+      },
+    ],
+  },
+  {
+    id: "series",
+    icon: "las la-video",
+    label: "menu.series",
+    to: `${AppRoot}/series/on-the-air`,
+    roles: [UserRole.User, UserRole.Guest, UserRole.External],
+    playlist: [
+      PlaylistType.All,
+      PlaylistType.Xtream,
+      PlaylistType.M3U,
+      PlaylistType.Portal,
+    ],
+    subscriptions: [
+      SubscriptionType.Professional,
+      SubscriptionType.Family,
+      SubscriptionType.BusinessSmall,
+      SubscriptionType.BusinessProfessional,
+      SubscriptionType.BusinessEnterprise,
+      SubscriptionType.Manager,
+    ],
+    subs: [
+      {
+        icon: "las la-tv",
+        label: "menu.on-the-air",
+        to: `${AppRoot}/series/on-the-air`,
+      },
+      {
+        icon: "las la-star",
+        label: "menu.top-rated",
+        to: `${AppRoot}/series/top-rated`,
+      },
+      {
+        icon: "las la-fire",
+        label: "menu.popular",
+        to: `${AppRoot}/series/popular`,
+      },
+      {
+        icon: "las la-folder-open",
+        label: "menu.browse",
+        to: `${AppRoot}/series/browse`,
+      },
+      {
+        icon: "las la-search",
+        label: "menu.search",
+        to: `${AppRoot}/series/search`,
+      },
+    ],
+  },
+  {
+    id: "applications",
+    icon: "las la-tools",
+    label: "menu.applications",
+    to: `${AppRoot}/applications/xdpro`,
+    roles: [UserRole.User, UserRole.Guest, UserRole.External],
+    playlist: [
+      PlaylistType.All,
+      PlaylistType.Xtream,
+      PlaylistType.M3U,
+      PlaylistType.Portal,
+    ],
+    subscriptions: [
+      SubscriptionType.Professional,
+      SubscriptionType.Family,
+      SubscriptionType.BusinessSmall,
+      SubscriptionType.BusinessProfessional,
+      SubscriptionType.BusinessEnterprise,
+      SubscriptionType.Manager,
+    ],
+    subs: [
+      {
+        icon: "las la-cloud-download-alt",
+        label: "menu.xd-pro",
+        to: `${AppRoot}/applications/xd-pro`,
+      },
+      /*{
+        icon: "las la-photo-video",
+        label: "menu.m3u-2-strm",
+        to: `${AppRoot}/applications/m3u-2-strm`,
+      },
+      {
+        icon: "las la-tv",
+        label: "menu.kodi",
+        to: `${AppRoot}/applications/kodi`,
+      },*/
+    ],
+  },
 ];
 export default data;

@@ -30,15 +30,15 @@ export const m3u = {
   },
   getStreamType(line) {
     if (/.*\/play\/vod\//i.test(line)) {
-      return "VOD";
+      return 2;
     }
     if (/.*\/movie\//i.test(line)) {
-      return "Movie";
+      return 2;
     }
     if (/.*\/series\//i.test(line)) {
-      return "Series";
+      return 3;
     }
-    return "Live";
+    return 1;
   },
   getYear(name) {
     let regex = new RegExp(/(19\d{2}|20(?:0\d|1[0-9]|2[0-9]))/, "i");
@@ -112,7 +112,7 @@ export const m3u = {
   },
   parse(
     content,
-    options = { tag: "name", type: ["Movie", "Series", "VOD", "Live"] },
+    options = { tag: "name", type: ["Movie", "Series", "VOD", "Live"], noName: "<No name>" },
     small = false
   ) {
     return new Promise((resolve, reject) => {
@@ -127,9 +127,10 @@ export const m3u = {
       var playlist = {
         title: "",
         xTvgUrl: this.getAttribute(firstLine, "x-tvg-url"),
-        streams: [],
         groups: [],
       };
+      var groups = [];
+      var streams = [];
 
       // Create new stream
       var stream = Object.create({});
@@ -149,9 +150,9 @@ export const m3u = {
           stream.group = this.getExtGrp(line).trim();
           if (
             stream.group !== "" &&
-            playlist.groups.indexOf(stream.group) === -1
+            groups.indexOf(stream.group) === -1
           ) {
-            playlist.groups.push(stream.group);
+            groups.push(stream.group);
           }
           continue;
         }
@@ -181,9 +182,9 @@ export const m3u = {
           }
           if (
             stream.group !== "" &&
-            playlist.groups.indexOf(stream.group) === -1
+            groups.indexOf(stream.group) === -1
           ) {
-            playlist.groups.push(stream.group);
+            groups.push(stream.group);
           }
 
           continue;
@@ -195,23 +196,35 @@ export const m3u = {
           stream.streamType = this.getStreamType(line);
           stream.extension = this.getFileExtension(line).trim();
 
-          if (stream.streamType === "Movie") {
+          if (stream.streamType === 2) {
             stream.movie = this.getMovieInfo(
               options && options.tag ? stream[options.tag] : stream.name
             );
           }
 
-          if (stream.streamType === "Series") {
+          if (stream.streamType === 3) {
             stream.series = this.getSeriesInfo(
               options && options.tag ? stream[options.tag] : stream.name
             );
           }
 
-          playlist.streams.push(Object.assign({}, stream));
+          streams.push(Object.assign({}, stream));
           stream = Object.create({});
           continue;
         }
       }
+
+      groups.map(group => {
+        playlist.groups.push({
+          name: group,
+          streams: streams.filter(stream => {
+            return stream.group == group;
+          })
+        });
+      });
+      playlist.groups.map(group => {
+        group.type = group.streams.length ? group.streams[0].streamType : "Live";
+      });
 
       resolve(playlist);
     });
@@ -232,7 +245,7 @@ export const m3u = {
 
         // Movie
         if (
-          stream.streamType === "Movie" &&
+          stream.streamType === 2 &&
           options.streamType.includes("Movie") &&
           options.groups.includes(stream.group)
         ) {
@@ -265,7 +278,7 @@ export const m3u = {
 
         // Series
         if (
-          stream.streamType === "Series" &&
+          stream.streamType === 3 &&
           options.streamType.includes("Series") &&
           options.groups.includes(stream.group)
         ) {

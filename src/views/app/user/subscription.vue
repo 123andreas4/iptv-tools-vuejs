@@ -155,6 +155,7 @@ export default {
             this.$t("subscriptions.daily-sync"),
             this.$t("subscriptions.epg-support"),
             "-",
+            "-",
           ],
           id: 0,
         },
@@ -168,6 +169,7 @@ export default {
             this.$t("subscriptions.live-movies-series"),
             this.$t("subscriptions.daily-sync"),
             this.$t("subscriptions.epg-support"),
+            this.$t("subscriptions.free-tools"),
             "-",
           ],
           id: 1,
@@ -182,6 +184,7 @@ export default {
             this.$t("subscriptions.live-movies-series"),
             this.$t("subscriptions.daily-sync"),
             this.$t("subscriptions.epg-support"),
+            this.$t("subscriptions.free-tools"),
             this.$t("subscriptions.5-7-contact"),
           ],
           id: 2,
@@ -252,11 +255,21 @@ export default {
           end_date.setDate(end_date.getDate() + 365);
           break; 
       }
+      let maxPlaylist = 1;
+      switch (this.newSubscription.id) {
+        case 0: maxPlaylist = 2; break;
+        case 1: maxPlaylist = 2; break;
+        case 2: maxPlaylist = 5; break;
+        case 3: maxPlaylist = 5; break;
+        case 4: maxPlaylist = 10; break;
+        case 5: maxPlaylist = 25; break;
+      }
       let subscription = {
         user_id: this.currentUser.user.id,
         subscription_type: this.newSubscription.id,
         note: details,
         end_date: end_date,
+        max_playlist: maxPlaylist,
       };
       let payment = {
         user_id: this.currentUser.user.id,

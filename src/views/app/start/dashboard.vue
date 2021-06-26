@@ -84,40 +84,111 @@
                 {{ $t("dashboard.no-xtream-accounts") }}
               </p>
               <perfect-scrollbar>
-                <router-link
+                <a
                   class="dashboard-list-item"
                   v-for="(xtream, index) in xtreamAccounts"
                   :key="`xtream-account-${index}`"
-                  to="/app/sources/xtream/accounts"
+                  href="#"
+                  @click.prevent="xtreamAccountModal(true, xtream)"
                 >
                   <i class="las la-globe la-3x"></i>
                   <div class="details">
                     <p class="mt-1 float-right text-small">
-                      {{ xtream.auth.active_cons }}/{{
-                        xtream.auth.max_connections
+                      {{ xtream.user_info.active_cons }}/{{
+                        xtream.user_info.max_connections
                       }}
                       <i class="las la-plug"></i>
                     </p>
                     <p class="m-0 p-0">
-                      <span>{{ xtream.title }}</span>
-                      <span class="text-muted ml-2">{{ xtream.auth.url }}</span>
+                      <span>{{ xtream.server_info.url }}</span>
+                      <span class="text-muted text-small ml-2">{{ xtream.user_info.message }}</span>
                     </p>
                     <span class="text-small text-muted"
                       >{{ $t("dashboard.created") }}
-                      {{ formatDate(xtream.auth.created_at * 1000) }} -
+                      {{ formatDate(xtream.user_info.created_at * 1000) }} -
                       {{ $t("dashboard.expiry") }}
                       {{
-                        xtream.auth.exp_date
-                          ? formatDate(xtream.auth.exp_date)
+                        xtream.user_info.exp_date
+                          ? formatDate(xtream.user_info.exp_date)
                           : $t("dashboard.no-expiry")
                       }}</span
                     >
                   </div>
-                </router-link>
+                </a>
               </perfect-scrollbar>
             </erd-card-body>
           </erd-card>
         </erd-col>
+        <!--  
+
+          XTREAM-ACCOUNT
+
+        -->
+        <erd-modal
+          v-show="xtreamAccount.modal"
+          @close="xtreamAccountModal(false)"
+          :title="$t('dashboard.xtream')"
+          class="select-none"
+          small
+        >
+          <div class="px-2" v-if="xtreamAccount.account">
+            <label class="w-100">{{ $t("xtream.url") }}</label>
+            <erd-input class="mt-1 mb-2 w-100" :value="`${xtreamAccount.account.server_info.server_protocol}://${xtreamAccount.account.server_info.url}:${xtreamAccount.account.server_info.port}/get.php?username=${xtreamAccount.account.user_info.username}&password=${xtreamAccount.account.user_info.password}&type=m3u_plus`" readonly></erd-input>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="8" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.host") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.server_info.url" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.port") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.server_info.port" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="6" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.username") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.username" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="6" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.password") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.password" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="6" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.max-connections") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.max_connections" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="6" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.active-connections") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.active_cons" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="6" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.created") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatDate(xtreamAccount.account.user_info.created_at * 1000)" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="6" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.expire") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.exp_date ? formatDate(xtreamAccount.account.user_info.exp_date) : $t('dashboard.no-expiry')" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <label class="w-100">{{ $t("users.status") }}</label>
+            <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.status" readonly></erd-input>
+            <label class="w-100">{{ $t("xtream.message") }}</label>
+            <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.message" readonly></erd-input>
+          </div>
+          <template v-slot:footer>
+            <erd-button
+              @click="xtreamAccountModal(false)"
+              icon="la-times"
+              class="mr-1"
+              variant="danger"
+              >{{ $t("general.close") }}</erd-button
+            >
+          </template>
+        </erd-modal>
         <erd-col xl="6" lg="12" xs="12">
           <erd-card class="list-card">
             <erd-button
@@ -148,175 +219,203 @@
                 {{ $t("dashboard.no-playlists") }}
               </p>
               <perfect-scrollbar>
-                <div
+                <a
+                  href="#"
                   class="dashboard-list-item"
                   v-for="(playlist, index) in playlists"
                   :key="`playlist-${index}`"
+                  @click.prevent="playlistModal(true, playlist)"
                 >
                   <i class="las la-file-video la-3x"></i>
                   <div class="details">
-                    <p class="mt-1 float-right text-small">
-                      {{ playlist.streams }}
-                      <i class="las la-tv"></i>
+                    <p class="mt-1 float-right text-small" v-if="userHasMoviesSeries">
+                      {{ formatNumber(playlist.live + playlist.movies + playlist.series) }}
+                      <i class="las la-stream"></i>
+                    </p>
+                    <p class="mt-1 float-right text-small" v-else>
+                      {{ formatNumber(playlist.live) }}
+                      <i class="las la-stream"></i>
                     </p>
                     <p class="m-0 p-0">
-                      <span>{{ playlist.title }}</span>
-                      <span class="text-muted text-small ml-2">{{
-                        formatDate(playlist.last_updated)
-                      }}</span>
+                      <span>{{ playlist.name }}</span>
+                      <span class="text-muted text-small ml-2">
+                        <i class="las la-sync"></i>
+                        {{ formatDate(playlist.synced_at) }}
+                      </span>
                     </p>
-                    <span class="text-small text-muted">
+                    <span class="text-small text-muted" v-if="userHasMoviesSeries">
                       {{
                         $t("dashboard.playlist-content").format(
-                          playlist.live,
-                          playlist.movies,
-                          playlist.series
+                          formatNumber(playlist.live),
+                          formatNumber(playlist.movies),
+                          formatNumber(playlist.series)
                         )
                       }}
                     </span>
+                    <span v-else>
+                      {{ $t("dashboard.playlist-content-live").format(formatNumber(playlist.live)) }}  
+                    </span>
                   </div>
-                </div>
+                </a>
               </perfect-scrollbar>
+            </erd-card-body>
+          </erd-card>
+        </erd-col>
+        <!--  
+
+          PLAYLIST
+
+        -->
+        <erd-modal
+          v-show="playlist.modal"
+          @close="playlistModal(false)"
+          :title="$t('dashboard.playlist')"
+          class="select-none"
+          small
+        >
+          <div class="px-2" v-if="playlist.playlist">
+            <label class="w-100">{{ $t("xtream.name") }}</label>
+            <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.name" readonly></erd-input>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="6" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.username") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.api_username" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="6" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.password") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.api_password" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <label class="w-100">{{ $t("xtream.synced-at") }}</label>
+            <erd-input class="mt-1 mb-2 w-100" :value="formatDate(playlist.playlist.synced_at)" readonly></erd-input>
+            <erd-row class="p-0 m-0">
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.total-live") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.live-new") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live-new'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.live-removed") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live-removed'])" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <erd-row class="p-0 m-0" v-if="userHasMoviesSeries">
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.total-movies") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movies'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.movies-new") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movie-new'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.movies-removed") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movie-removed'])" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+            <erd-row class="p-0 m-0" v-if="userHasMoviesSeries">
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.total-series") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 pl-0 pr-1">
+                <label class="w-100">{{ $t("xtream.series-new") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series-new'])" readonly></erd-input>
+              </erd-col>
+              <erd-col sm="4" class="m-0 px-0">
+                <label class="w-100">{{ $t("xtream.series-removed") }}</label>
+                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series-removed'])" readonly></erd-input>
+              </erd-col>
+            </erd-row>
+          </div>
+          <template v-slot:footer>
+            <erd-button
+              @click="playlistModal(false)"
+              icon="la-times"
+              class="mr-1"
+              variant="danger"
+              >{{ $t("general.close") }}</erd-button
+            >
+          </template>
+        </erd-modal>
+      </erd-row>
+    </erd-col>
+    <erd-col xl="12" xs="12" class="m-0 p-0" v-if="userHasMoviesSeries">
+      <erd-row class="m-0 p-0">
+        <erd-col xl="3" md="6">
+          <erd-card>
+            <erd-card-body class="dashboard-card">
+              <i class="las la-list la-5x color-theme-1"></i>
+              <div class="dashboard-card-title" style="">
+                <h5 class="m-0">{{ $t("dashboard.playlist") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.playlists) }}</p>
+              </div>
+            </erd-card-body>
+          </erd-card>
+        </erd-col>
+        <erd-col xl="3" md="6">
+          <erd-card>
+            <erd-card-body class="dashboard-card">
+              <i class="las la-tv la-5x color-theme-1"></i>
+              <div class="dashboard-card-title" style="">
+                <h5 class="m-0">{{ $t("dashboard.live-streams") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.live) }}</p>
+              </div>
+            </erd-card-body>
+          </erd-card>
+        </erd-col>
+        <erd-col xl="3" md="6">
+          <erd-card>
+            <erd-card-body class="dashboard-card">
+              <i class="las la-film la-5x color-theme-1"></i>
+              <div class="dashboard-card-title" style="">
+                <h5 class="m-0">{{ $t("dashboard.movies") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.movies) }}</p>
+              </div>
+            </erd-card-body>
+          </erd-card>
+        </erd-col>
+        <erd-col xl="3" md="6">
+          <erd-card>
+            <erd-card-body class="dashboard-card">
+              <i class="las la-video la-5x color-theme-1"></i>
+              <div class="dashboard-card-title" style="">
+                <h5 class="m-0">{{ $t("dashboard.series") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.series) }}</p>
+              </div>
             </erd-card-body>
           </erd-card>
         </erd-col>
       </erd-row>
     </erd-col>
-    <erd-col xl="12" xs="12" class="m-0 p-0 mt-3">
-      <glide-component :settings="glideNoControlsSettings">
-        <div class="pr-3 pl-3 mb-2 glide__slide">
+    <erd-col xl="12" xs="12" class="m-0 p-0" v-if="!userHasMoviesSeries">
+      <erd-row class="m-0 p-0">
+        <erd-col xl="6" md="6">
           <erd-card>
             <erd-card-body class="dashboard-card">
-              <i class="las la-globe la-5x color-theme-1"></i>
+              <i class="las la-list la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.xtream") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.xtream }}</h5>
+                <h5 class="m-0">{{ $t("dashboard.playlist") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.playlists) }}</p>
               </div>
             </erd-card-body>
           </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-file-video la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.m3u-url") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics["m3u-url"] }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-file-video la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.m3u-file") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics["m3u-file"] }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-file-excel la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.xmltv") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.xmltv }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
+        </erd-col>
+        <erd-col xl="6" md="6">
           <erd-card>
             <erd-card-body class="dashboard-card">
               <i class="las la-tv la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.live-streams") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.live }}</h5>
+                <h5 class="m-0">{{ $t("dashboard.live-streams") }}</h5>
+                <p class="m-0 color-theme-1">{{ formatNumber(statistics.live) }}</p>
               </div>
             </erd-card-body>
           </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-film la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.movies") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.movies }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-video la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("dashboard.series") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.series }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="lab la-youtube la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("menu.youtube") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.youtube }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="lab la-vimeo la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("menu.vimeo") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.vimeo }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-video la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("menu.dailymotion") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.dailymotion }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="las la-heart la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("menu.xhamster") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.xhamster }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-        <div class="pr-3 pl-3 mb-2 glide__slide">
-          <erd-card>
-            <erd-card-body class="dashboard-card">
-              <i class="lab la-soundcloud la-5x color-theme-1"></i>
-              <div class="dashboard-card-title" style="">
-                <p class="m-0">{{ $t("menu.soundcloud") }}</p>
-                <h5 class="m-0 color-theme-1">{{ statistics.soundcloud }}</h5>
-              </div>
-            </erd-card-body>
-          </erd-card>
-        </div>
-      </glide-component>
+        </erd-col>
+      </erd-row>
     </erd-col>
     <erd-col xl="12" xs="12" class="m-0 p-0">
       <erd-row class="m-0 p-0">
@@ -440,56 +539,38 @@
 
 <script>
 import { EventBus } from "../../../services/ebus";
-import GlideComponent from "../../../components/Carousel/GlideComponent";
 import { mapActions, mapGetters } from "vuex";
 import { httpService } from "../../../services/http";
 
 export default {
-  components: {
-    "glide-component": GlideComponent,
-  },
   data() {
     return {
       isLoading: false,
-      statistics: {
-        xtream: 0,
-        "m3u-url": 0,
-        "m3u-file": 0,
-        xmltv: 0,
-        live: 0,
-        movies: 0,
-        series: 0,
-        youtube: 0,
-        vimeo: 0,
-        dailymotion: 0,
-        xhamster: 0,
-        soundcloud: 0,
+      xtreamAccount: {
+        modal: false,
+        account: null,
       },
-      glideNoControlsSettings: {
-        gap: 5,
-        perView: 4,
-        type: "carousel",
-        breakpoints: {
-          480: {
-            perView: 1,
-          },
-          800: {
-            perView: 2,
-          },
-          1200: {
-            perView: 3,
-          },
-        },
-        hideNav: true,
+      playlist: {
+        modal: false,
+        playlist: null,
       },
       xtreamAccounts: [],
       playlists: [],
       tickets: [],
       invoices: [],
+      statistics: {
+        playlists: 0,
+        live: 0,
+        movies: 0,
+        series: 0,
+      }
     };
   },
   computed: {
     ...mapGetters(["currentUser"]),
+    userHasMoviesSeries() {
+      return this.currentUser.subscription && this.currentUser.subscription.subscription_type > 0;
+    },
     memberSince() {
       return new Date(this.currentUser.user.created).toLocaleDateString(
         this.$t("date.locale")
@@ -533,18 +614,31 @@ export default {
       );
     },
     loadDashboard() {
+      this.isLoading = true;
       this.playlists = [];
       this.xtreamAccounts = [];
-      httpService
-        .get("dashboard")
+      Promise.all([
+        httpService.get("dashboard/statistics"), 
+        httpService.get("dashboard/xtream-accounts"), 
+        httpService.get("dashboard/playlists")
+      ])
         .then((res) => {
-          if (res.status === true) {
-            this.xtreamAccounts = res.data.xtream;
-            this.playlists = res.data.playlists;
-            this.statistics = res.data.statistics;
+          if (res[0].status === true) {
+            this.statistics.playlists = res[0].data.playlist;
+            this.statistics.live = res[0].data.live;
+            this.statistics.movies = res[0].data.movies;
+            this.statistics.series = res[0].data.series;
           }
+          if (res[1].status === true) {
+            this.xtreamAccounts = res[1].data;
+          }
+          if (res[2].status === true) {
+            this.playlists = res[2].data;
+          }
+          this.isLoading = false;
         })
         .catch(() => {
+          this.isLoading = false;
           this.$notify(
             "error",
             this.$t("profile.failed"),
@@ -602,6 +696,9 @@ export default {
           return "la-user-lock";
       }
     },
+    formatNumber(num) {
+      return new Intl.NumberFormat(this.$t("date.locale")).format(num);
+    },
     formatCurrency(num) {
       return new Intl.NumberFormat(this.$t("date.locale"), {
         style: "currency",
@@ -623,6 +720,18 @@ export default {
         ? invoice.items[0].description
         : this.$t("general.not-available");
     },
+    xtreamAccountModal(show, account) {
+      if (account) {
+        this.xtreamAccount.account = account;
+      }
+      this.xtreamAccount.modal = show;
+    },
+    playlistModal(show, playlist) {
+      if (playlist) {
+        this.playlist.playlist = playlist;
+      }
+      this.playlist.modal = show;
+    }
   },
   beforeMount() {
     this.loadDashboard();

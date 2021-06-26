@@ -346,7 +346,7 @@ export default [
             name: "dashboard",
             component: () =>
               import(
-                /* webpackChunkName: "dashboard" */ "../views/app/start/dashboard"
+                /* webpackChunkName: "start" */ "../views/app/start/dashboard"
               ),
           },
         ],
@@ -435,6 +435,172 @@ export default [
                 /* webpackChunkName: "xtream" */ "../views/app/xtream/series"
               ),
           },
+        ],
+      },
+      /********************************
+       *                               *
+       *             MOVIES            *
+       *                               *
+       ********************************/
+       {
+        path: "movies",
+        name: "movies",
+        component: () =>
+          import(/* webpackChunkName: "movies" */ "../views/app/movies"),
+        redirect: `${AppRoot}/movies/now-playing`,
+        meta: {
+          roles: [UserRole.User, UserRole.External, UserRole.Guest],
+          subscriptions: [
+            SubscriptionType.Professional,
+            SubscriptionType.Family,
+            SubscriptionType.BusinessSmall,
+            SubscriptionType.BusinessProfessional,
+            SubscriptionType.BusinessEnterprise,
+            SubscriptionType.Manager,
+          ],
+        },
+        children: [
+          {
+            path: "now-playing",
+            name: "now-playing",
+            component: () =>
+              import(
+                /* webpackChunkName: "movies" */ "../views/app/movies/now-playing"
+              ),
+          },
+          {
+            path: "top-rated",
+            name: "top-rated",
+            component: () =>
+              import(
+                /* webpackChunkName: "movies" */ "../views/app/movies/top-rated"
+              ),
+          },
+          {
+            path: "popular",
+            name: "popular",
+            component: () =>
+              import(
+                /* webpackChunkName: "movies" */ "../views/app/movies/popular"
+              ),
+          },
+          {
+            path: "browse",
+            name: "browse",
+            component: () =>
+              import(
+                /* webpackChunkName: "movies" */ "../views/app/movies/browse"
+              ),
+          },
+          {
+            path: "search",
+            name: "search",
+            component: () =>
+              import(
+                /* webpackChunkName: "movies" */ "../views/app/movies/search"
+              ),
+          },
+        ],
+      },
+      /********************************
+       *                               *
+       *             SERIES            *
+       *                               *
+       ********************************/
+       {
+        path: "series",
+        name: "series",
+        component: () =>
+          import(/* webpackChunkName: "series" */ "../views/app/movies"),
+        redirect: `${AppRoot}/series/on-the-air`,
+        meta: {
+          roles: [UserRole.User, UserRole.External, UserRole.Guest],
+          subscriptions: [
+            SubscriptionType.Professional,
+            SubscriptionType.Family,
+            SubscriptionType.BusinessSmall,
+            SubscriptionType.BusinessProfessional,
+            SubscriptionType.BusinessEnterprise,
+            SubscriptionType.Manager,
+          ],
+        },
+        children: [
+          {
+            path: "on-the-air",
+            name: "on-the-air",
+            component: () =>
+              import(
+                /* webpackChunkName: "series" */ "../views/app/series/on-the-air"
+              ),
+          },
+          {
+            path: "popular",
+            name: "popular",
+            component: () =>
+              import(
+                /* webpackChunkName: "series" */ "../views/app/series/popular"
+              ),
+          },
+          {
+            path: "top-rated",
+            name: "top-rated",
+            component: () =>
+              import(
+                /* webpackChunkName: "series" */ "../views/app/series/top-rated"
+              ),
+          },
+          {
+            path: "browse",
+            name: "browse",
+            component: () =>
+              import(
+                /* webpackChunkName: "series" */ "../views/app/series/browse"
+              ),
+          },
+          {
+            path: "search",
+            name: "search",
+            component: () =>
+              import(
+                /* webpackChunkName: "series" */ "../views/app/series/search"
+              ),
+          },
+        ],
+      },
+      
+      
+      /********************************
+       *                               *
+       *         APPLICATIONS          *
+       *                               *
+       ********************************/
+       {
+        path: "applications",
+        name: "applications",
+        component: () =>
+          import(/* webpackChunkName: "applications" */ "../views/app/tools/applications"),
+        redirect: `${AppRoot}/applications/xdpro`,
+        meta: {
+          roles: [UserRole.User, UserRole.External, UserRole.Guest],
+          subscriptions: [
+            SubscriptionType.Professional,
+            SubscriptionType.Family,
+            SubscriptionType.BusinessSmall,
+            SubscriptionType.BusinessProfessional,
+            SubscriptionType.BusinessEnterprise,
+            SubscriptionType.Manager,
+          ],
+        },
+        children: [
+          {
+            path: "xd-pro",
+            name: "xd-pro",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/xdpro"
+              ),
+          },
+          
         ],
       },
       /********************************

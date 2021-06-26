@@ -6,6 +6,7 @@ import user from "./modules/user";
 import menu from "./modules/menu";
 import soundcloud from "./modules/soundcloud";
 import sync from "./modules/sync";
+import xdpro from "./modules/xdpro";
 
 import { setCurrentLanguage } from "../helpers";
 import { httpService } from "../services/http";
@@ -42,5 +43,6 @@ export default new Vuex.Store({
     menu,
     soundcloud,
     sync,
+    xdpro,
   },
 });
