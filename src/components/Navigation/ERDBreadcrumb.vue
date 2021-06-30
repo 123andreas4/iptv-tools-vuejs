@@ -2,7 +2,7 @@
   <span>
     <h1 v-if="heading.length > 0">{{ heading }}</h1>
     <ul class="breadcrumb-container pt-0 d-inline-block">
-      <ol class="breadcrumb ml-sm-2 ml-md-none">
+      <ol class="breadcrumb ml-2 ml-md-none">
         <li
           class="breadcrumb-item"
           v-for="(item, index) in items"

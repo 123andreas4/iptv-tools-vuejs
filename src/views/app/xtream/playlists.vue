@@ -72,7 +72,7 @@
           <i class="las la-angle-double-right" />
         </template>
       </b-pagination>
-    </erd-col> 
+    </erd-col>
     <!-- SOURCE -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 0">
       <label class="d-block" for="source-title">{{ $t("xtream.title") }}</label>
@@ -199,6 +199,15 @@
         :items="outputTypes"
         :placeholder="$t('xtream.output-format')"
       ></erd-select>
+      <label class="d-block" for="epg-timeshift">{{
+        $t("xtream.epg-timeshift")
+      }}</label>
+      <erd-input
+        id="epg-timeshift"
+        class="mt-1 mb-2 w-100"
+        v-model="playlist.epg_offset"
+        type="number"
+      ></erd-input>
     </erd-col>
     <!-- SYNC -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 2">
@@ -341,30 +350,126 @@
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 4">
       <p class="mt-0 mb-2">{{ $t("backup.streams") }}</p>
       <!-- LIVE STREAMS BACKUP -->
-      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('live')">{{ $t("backup.back-up-live") }}</erd-button>
-      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('movies')">{{ $t("backup.back-up-movies") }}</erd-button>
-      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('series')">{{ $t("backup.back-up-series") }}</erd-button>
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="backup-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="backupPlaylist('live')"
+        >{{ $t("backup.back-up-live") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="backup-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="backupPlaylist('movies')"
+        >{{ $t("backup.back-up-movies") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="backup-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="backupPlaylist('series')"
+        >{{ $t("backup.back-up-series") }}</erd-button
+      >
       <!-- PLAYLIST BACKUP -->
       <p class="mt-3 mb-2">{{ $t("backup.playlist") }}</p>
-      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupPlaylist('playlist')">{{ $t("backup.back-up-playlist") }}</erd-button>
-      <erd-button icon="la-file-import" variant="info" class="backup-button" :disabled="playlistIsEmpty" @click="$refs['restore-playlist'].click()">{{ $t("backup.restore-playlist") }}</erd-button>
-      <input type="file" ref="restore-playlist" style="display: none" accept=".zip" @change="restorePlaylist">
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="backup-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="backupPlaylist('playlist')"
+        >{{ $t("backup.back-up-playlist") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-import"
+        variant="info"
+        class="backup-button"
+        :disabled="playlistIsEmpty"
+        @click="$refs['restore-playlist'].click()"
+        >{{ $t("backup.restore-playlist") }}</erd-button
+      >
+      <input
+        type="file"
+        ref="restore-playlist"
+        style="display: none"
+        accept=".zip"
+        @change="restorePlaylist"
+      />
       <p class="mt-3 mb-2">{{ $t("backup.tv-guide") }}</p>
       <!-- EPG CODES BACKUP -->
-      <erd-button icon="la-file-export" variant="primary" class="backup-button mb-1" :disabled="playlistIsEmpty" @click="backupEPGCodes">{{ $t("backup.back-up-epg-channel-ids") }}</erd-button>
-      <erd-button icon="la-file-import" variant="info" class="backup-button" :disabled="playlistIsEmpty" @click="$refs['restore-epg-codes'].click()">{{ $t("backup.restore-epg-channel-ids") }}</erd-button>
-      <input type="file" ref="restore-epg-codes" style="display: none" accept=".zip" @change="restoreEPGCodes">
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="backup-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="backupEPGCodes"
+        >{{ $t("backup.back-up-epg-channel-ids") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-import"
+        variant="info"
+        class="backup-button"
+        :disabled="playlistIsEmpty"
+        @click="$refs['restore-epg-codes'].click()"
+        >{{ $t("backup.restore-epg-channel-ids") }}</erd-button
+      >
+      <input
+        type="file"
+        ref="restore-epg-codes"
+        style="display: none"
+        accept=".zip"
+        @change="restoreEPGCodes"
+      />
     </erd-col>
     <!-- EXPORT -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 5">
       <p class="mt-0 mb-2">{{ $t("export.playlist") }}</p>
-      <erd-button icon="la-file-export" variant="primary" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportM3U">{{ $t("export.m3u") }}</erd-button>
-      <erd-button icon="la-file-export" variant="primary" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportSIPTV">{{ $t("export.siptv") }}</erd-button>
-      <erd-button icon="la-file-export" variant="primary" class="export-button" :disabled="playlistIsEmpty" @click="exportBouquet">{{ $t("export.bouquet") }}</erd-button>
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="export-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="exportM3U"
+        >{{ $t("export.m3u") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="export-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="exportSIPTV"
+        >{{ $t("export.siptv") }}</erd-button
+      >
+      <erd-button
+        icon="la-file-export"
+        variant="primary"
+        class="export-button"
+        :disabled="playlistIsEmpty"
+        @click="exportBouquet"
+        >{{ $t("export.bouquet") }}</erd-button
+      >
       <p class="mt-3 mb-2">{{ $t("export.other") }}</p>
-      <erd-button icon="la-file-csv" variant="info" class="export-button mb-1" :disabled="playlistIsEmpty" @click="exportCSV">{{ $t("export.csv") }}</erd-button>
+      <erd-button
+        icon="la-file-csv"
+        variant="info"
+        class="export-button mb-1"
+        :disabled="playlistIsEmpty"
+        @click="exportCSV"
+        >{{ $t("export.csv") }}</erd-button
+      >
       <!--<erd-button icon="la-file-code" variant="info" class="export-button mb-1" :disabled="playlistIsEmpty">{{ $t("export.html") }}</erd-button>-->
-      <erd-button icon="la-file-code" variant="info" class="export-button" :disabled="playlistIsEmpty" @click="exportJSON">{{ $t("export.json") }}</erd-button>
+      <erd-button
+        icon="la-file-code"
+        variant="info"
+        class="export-button"
+        :disabled="playlistIsEmpty"
+        @click="exportJSON"
+        >{{ $t("export.json") }}</erd-button
+      >
     </erd-col>
   </erd-row>
 </template>
@@ -481,7 +586,9 @@ export default {
     },
     allowedIps: {
       get: function () {
-        return this.playlist.ip_allowed ? this.playlist.ip_allowed.join(",") : "";
+        return this.playlist.ip_allowed
+          ? this.playlist.ip_allowed.join(",")
+          : "";
       },
       set: function (val) {
         this.playlist.ip_allowed = val.split(",").map((ip) => {
@@ -575,9 +682,12 @@ export default {
       ].includes(this.currentUser.subscription.subscription_type);
     },
     playlistIsEmpty() {
-      return this.playlist && this.playlist.groups == 0 || this.playlist.streams == 0;
+      return (
+        (this.playlist && this.playlist.groups == 0) ||
+        this.playlist.streams == 0
+      );
     },
-    canAddPlaylist () {
+    canAddPlaylist() {
       if (this.currentUser.subscription) {
         let subscription = this.currentUser.subscription;
         if (new Date(subscription.end_date).getTime() < new Date().getTime()) {
@@ -591,15 +701,20 @@ export default {
         }
         switch (subscription.subscription_type) {
           case 0:
-          case 1: return this.playlists.length < 2;
-          case 2: return this.playlists.length < 5;
-          case 3: return this.playlists.length < 5;
-          case 4: return this.playlists.length < 10;
-          case 5: return this.playlists.length < 25;
+          case 1:
+            return this.playlists.length < 2;
+          case 2:
+            return this.playlists.length < 5;
+          case 3:
+            return this.playlists.length < 5;
+          case 4:
+            return this.playlists.length < 10;
+          case 5:
+            return this.playlists.length < 25;
         }
       }
       return false;
-    }
+    },
   },
   methods: {
     ...mapActions(["synchronizeTMDB", "synchronizePlaylist"]),
@@ -876,101 +991,116 @@ export default {
     },
     exportM3U() {
       this.isLoading = true;
-      httpService.download(`playlist/export/m3u/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "export.m3u";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/export/m3u/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "export.m3u";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     exportSIPTV() {
       this.isLoading = true;
-      httpService.download(`playlist/export/siptv/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "export.txt";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/export/siptv/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "export.txt";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     exportBouquet() {
       this.isLoading = true;
-      httpService.download(`playlist/export/bouquet/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "export.zip";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/export/bouquet/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "export.zip";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     exportCSV() {
       this.isLoading = true;
-      httpService.download(`playlist/export/csv/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "export.zip";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/export/csv/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "export.zip";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     exportJSON() {
       this.isLoading = true;
-      httpService.download(`playlist/export/json/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "export.zip";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/export/json/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "export.zip";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     backupPlaylist(path) {
       this.isLoading = true;
-      httpService.download(`playlist/back-up/${path}/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "backup.zip";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/back-up/${path}/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "backup.zip";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     backupEPGCodes() {
       this.isLoading = true;
-      httpService.download(`playlist/back-up/epg-codes/${this.playlist.id}`).then((blob) => {
-        var url = window.URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = "backup.zip";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        this.isLoading = false;
-      })
+      httpService
+        .download(`playlist/back-up/epg-codes/${this.playlist.id}`)
+        .then((blob) => {
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "backup.zip";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          this.isLoading = false;
+        });
     },
     restoreEPGCodes(e) {
       this.isLoading = true;
       if (e && e.target.files.length == 1) {
         var formData = new FormData();
         formData.append("backup.zip", e.target.files[0]);
-        httpService.postFile(`playlist/restore/epg-codes/${this.playlist.id}`, formData)
+        httpService
+          .postFile(`playlist/restore/epg-codes/${this.playlist.id}`, formData)
           .then((res) => {
             this.isLoading = false;
             if (res.status === true && res.data === true) {
@@ -1000,7 +1130,7 @@ export default {
               "la-user-shield",
               { duration: 5000, permanent: false }
             );
-          })
+          });
       }
     },
     restorePlaylist(e) {
@@ -1008,7 +1138,8 @@ export default {
       if (e && e.target.files.length == 1) {
         var formData = new FormData();
         formData.append("backup.zip", e.target.files[0]);
-        httpService.postFile(`playlist/restore/playlist/${this.playlist.id}`, formData)
+        httpService
+          .postFile(`playlist/restore/playlist/${this.playlist.id}`, formData)
           .then((res) => {
             this.isLoading = false;
             if (res.status === true && res.data === true) {
@@ -1038,9 +1169,9 @@ export default {
               "la-user-shield",
               { duration: 5000, permanent: false }
             );
-          })
+          });
       }
-    }
+    },
   },
   beforeMount() {
     this.loadPlaylists();

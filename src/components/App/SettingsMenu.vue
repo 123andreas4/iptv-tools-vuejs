@@ -62,10 +62,18 @@ export default {
   computed: {
     ...mapGetters(["currentUser"]),
     routeIsMoviesSeries() {
-      return /app\/movies\//.test(this.$route.path) || /app\/series\//.test(this.$route.path);
+      return (
+        /app\/movies\//i.test(this.$route.path) ||
+        /app\/series\//i.test(this.$route.path) ||
+        /app\/xtream\/editor/i.test(this.$route.path) ||
+        /app\/m3u\/editor/i.test(this.$route.path)
+      );
     },
     userHasMoviesSeries() {
-      return this.currentUser.subscription && this.currentUser.subscription.subscription_type > 0;
+      return (
+        this.currentUser.subscription &&
+        this.currentUser.subscription.subscription_type > 0
+      );
     },
     perPage: {
       get: function () {
@@ -81,8 +89,8 @@ export default {
     },
     movieSeriePlaylists: {
       get: function () {
-        return this.$store.state.sync.movieSeriePlaylists; 
-      }
+        return this.$store.state.sync.movieSeriePlaylists;
+      },
     },
     movieSeriePlaylist: {
       get: function () {

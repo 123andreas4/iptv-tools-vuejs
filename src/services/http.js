@@ -35,17 +35,6 @@ export const httpService = {
 
     return fetch(`${activeAPI()}/${url}`, requestOptions).then(handleResponse);
   },
-  youtube(videoId) {
-    const requestOptions = {
-      method: "POST",
-      headers: formatHeader(authHeader()),
-      body: JSON.stringify({ video_id: videoId }),
-    };
-
-    return fetch(`${activeAPI()}/editor/youtube-video`, requestOptions).then(
-      handleYoutube
-    );
-  },
   ipgeo() {
     return fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=${ipGeoAPIKey}`, {
       method: "GET",
@@ -57,8 +46,9 @@ export const httpService = {
       headers: formatHeader(authHeader()),
     };
 
-    return fetch(`${activeAPI()}/${url}`, requestOptions)
-      .then(response => response.blob())
+    return fetch(`${activeAPI()}/${url}`, requestOptions).then((response) =>
+      response.blob()
+    );
   },
   postFile(url, formData) {
     return new Promise(function (resolve, reject) {
@@ -70,23 +60,23 @@ export const httpService = {
         } else {
           reject({
             status: this.status,
-            statusText: xhr.statusText
+            statusText: xhr.statusText,
           });
         }
       };
       xhr.onerror = function () {
         reject({
           status: this.status,
-          statusText: xhr.statusText
+          statusText: xhr.statusText,
         });
       };
       let user = JSON.parse(localStorage.getItem("user"));
       if (user && user.token) {
-        xhr.setRequestHeader("x-api-key", "Bearer " + user.token);
+        xhr.setRequestHeader("Authorization", "Bearer " + user.token);
       }
       xhr.send(formData);
     });
-  }
+  },
 };
 
 export const userService = {
@@ -195,18 +185,3 @@ function handleResponse(response) {
     return data;
   });
 }
-
-function handleYoutube(response) {
-  return response.text().then((text) => {
-    let info = text.match(
-      /(?<=>var ytInitialPlayerResponse =)(.*)(?=;var meta)/i
-    );
-    return info && info.length ? JSON.parse(info[0]) : null;
-  });
-}
-
-/*function handleRaw(response) {
-  return response.text().then((text) => {
-    return text;
-  });
-}*/

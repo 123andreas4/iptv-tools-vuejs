@@ -141,7 +141,7 @@ export default {
       playlistTypes: [
         { value: "1", text: this.$t("subscriptions.xtream") },
         { value: "2", text: this.$t("subscriptions.m3u") },
-        { value: "3", text: this.$t("subscriptions.portal") },
+        /*{ value: "3", text: this.$t("subscriptions.portal") },*/
       ],
       personal: [
         {
@@ -253,16 +253,28 @@ export default {
           break;
         case 12:
           end_date.setDate(end_date.getDate() + 365);
-          break; 
+          break;
       }
       let maxPlaylist = 1;
       switch (this.newSubscription.id) {
-        case 0: maxPlaylist = 2; break;
-        case 1: maxPlaylist = 2; break;
-        case 2: maxPlaylist = 5; break;
-        case 3: maxPlaylist = 5; break;
-        case 4: maxPlaylist = 10; break;
-        case 5: maxPlaylist = 25; break;
+        case 0:
+          maxPlaylist = 2;
+          break;
+        case 1:
+          maxPlaylist = 2;
+          break;
+        case 2:
+          maxPlaylist = 5;
+          break;
+        case 3:
+          maxPlaylist = 5;
+          break;
+        case 4:
+          maxPlaylist = 10;
+          break;
+        case 5:
+          maxPlaylist = 25;
+          break;
       }
       let subscription = {
         user_id: this.currentUser.user.id,

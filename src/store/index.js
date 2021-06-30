@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import app from "../main";
+import app from "./../App.vue";
 
 import user from "./modules/user";
 import menu from "./modules/menu";

@@ -76,10 +76,20 @@ export default {
   z-index: 6;
   border-radius: 10px;
   min-width: 500px;
+  max-height: 80vh;
   @include depth(3);
+
+  @include respond-below(sm) {
+    min-width: 100px;
+    max-width: 75vw !important;
+  }
 
   &.small {
     max-width: 600px;
+
+    @include respond-below(md) {
+      max-width: 90vw !important;
+    }
   }
 }
 

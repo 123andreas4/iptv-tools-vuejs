@@ -224,6 +224,62 @@ const data = [
     ],
   },
   {
+    id: "m3u",
+    icon: "las la-file-video",
+    label: "menu.m3u",
+    to: `${AppRoot}/m3u/playlists`,
+    roles: [UserRole.User, UserRole.Guest, UserRole.External],
+    playlist: [PlaylistType.All, PlaylistType.M3U],
+    subs: [
+      {
+        icon: "las la-file-video",
+        label: "menu.playlists",
+        to: `${AppRoot}/m3u/playlists`,
+      },
+      {
+        icon: "las la-folder-open",
+        label: "menu.groups",
+        to: `${AppRoot}/m3u/groups`,
+      },
+      {
+        icon: "las la-tv",
+        label: "menu.live",
+        to: `${AppRoot}/m3u/live`,
+      },
+      {
+        icon: "las la-film",
+        label: "menu.movies",
+        subscriptions: [
+          SubscriptionType.Professional,
+          SubscriptionType.Family,
+          SubscriptionType.BusinessSmall,
+          SubscriptionType.BusinessProfessional,
+          SubscriptionType.BusinessEnterprise,
+          SubscriptionType.Manager,
+        ],
+        to: `${AppRoot}/m3u/movies`,
+      },
+      {
+        icon: "las la-video",
+        label: "menu.series",
+        subscriptions: [
+          SubscriptionType.Professional,
+          SubscriptionType.Family,
+          SubscriptionType.BusinessSmall,
+          SubscriptionType.BusinessProfessional,
+          SubscriptionType.BusinessEnterprise,
+          SubscriptionType.Manager,
+        ],
+        to: `${AppRoot}/m3u/series`,
+      },
+      {
+        icon: "las la-pen",
+        label: "menu.editor",
+        to: `${AppRoot}/m3u/editor`,
+      },
+    ],
+  },
+  {
     id: "movies",
     icon: "las la-film",
     label: "menu.movies",

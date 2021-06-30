@@ -1,4 +1,9 @@
-import { AppRoot, UserRole, SubscriptionType, PlaylistType } from "../constants/config";
+import {
+  AppRoot,
+  UserRole,
+  SubscriptionType,
+  PlaylistType,
+} from "../constants/config";
 import store from "../store";
 
 /*
@@ -439,10 +444,86 @@ export default [
       },
       /********************************
        *                               *
+       *              M3U              *
+       *                               *
+       ********************************/
+      {
+        path: "m3u",
+        name: "m3u",
+        component: () =>
+          import(/* webpackChunkName: "m3u" */ "../views/app/m3u/"),
+        redirect: `${AppRoot}/m3u/playlists`,
+        meta: {
+          roles: [UserRole.User, UserRole.External, UserRole.Guest],
+          playlistType: [PlaylistType.All, PlaylistType.M3U],
+        },
+        children: [
+          {
+            path: "playlists",
+            name: "playlists",
+            component: () =>
+              import(
+                /* webpackChunkName: "m3u" */ "../views/app/m3u/playlists"
+              ),
+          },
+          {
+            path: "editor",
+            name: "editor",
+            component: () =>
+              import(/* webpackChunkName: "m3u" */ "../views/app/m3u/editor"),
+          },
+          {
+            path: "groups",
+            name: "groups",
+            component: () =>
+              import(/* webpackChunkName: "m3u" */ "../views/app/m3u/groups"),
+          },
+          {
+            path: "live",
+            name: "live",
+            component: () =>
+              import(/* webpackChunkName: "m3u" */ "../views/app/m3u/live"),
+          },
+          {
+            path: "movies",
+            name: "movies",
+            meta: {
+              subscriptions: [
+                SubscriptionType.Professional,
+                SubscriptionType.Family,
+                SubscriptionType.BusinessSmall,
+                SubscriptionType.BusinessProfessional,
+                SubscriptionType.BusinessEnterprise,
+                SubscriptionType.Manager,
+              ],
+            },
+            component: () =>
+              import(/* webpackChunkName: "m3u" */ "../views/app/m3u/movies"),
+          },
+          {
+            path: "series",
+            name: "series",
+            meta: {
+              subscriptions: [
+                SubscriptionType.Professional,
+                SubscriptionType.Family,
+                SubscriptionType.BusinessSmall,
+                SubscriptionType.BusinessProfessional,
+                SubscriptionType.BusinessEnterprise,
+                SubscriptionType.Manager,
+              ],
+            },
+            component: () =>
+              import(/* webpackChunkName: "m3u" */ "../views/app/m3u/series"),
+          },
+        ],
+      },
+      /********************************
+       *                               *
        *             MOVIES            *
        *                               *
        ********************************/
-       {
+      {
         path: "movies",
         name: "movies",
         component: () =>
@@ -507,7 +588,7 @@ export default [
        *             SERIES            *
        *                               *
        ********************************/
-       {
+      {
         path: "series",
         name: "series",
         component: () =>
@@ -567,18 +648,19 @@ export default [
           },
         ],
       },
-      
-      
+
       /********************************
        *                               *
        *         APPLICATIONS          *
        *                               *
        ********************************/
-       {
+      {
         path: "applications",
         name: "applications",
         component: () =>
-          import(/* webpackChunkName: "applications" */ "../views/app/tools/applications"),
+          import(
+            /* webpackChunkName: "applications" */ "../views/app/tools/applications"
+          ),
         redirect: `${AppRoot}/applications/xdpro`,
         meta: {
           roles: [UserRole.User, UserRole.External, UserRole.Guest],
@@ -600,7 +682,6 @@ export default [
                 /* webpackChunkName: "applications" */ "../views/app/tools/applications/xdpro"
               ),
           },
-          
         ],
       },
       /********************************

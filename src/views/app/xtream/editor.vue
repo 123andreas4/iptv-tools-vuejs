@@ -1020,9 +1020,7 @@
       small
     >
       <div class="px-2 assign-logo">
-        <label class="d-block mb-1" for="title">{{
-          $t("m3u.file")
-        }}</label>
+        <label class="d-block mb-1" for="title">{{ $t("m3u.file") }}</label>
         <erd-input
           class="w-100"
           type="file"
@@ -1053,10 +1051,12 @@
               @click.exact="selectImportM3USelection(index)"
             >
               <span class="station-name">{{ group.name }}</span>
-              <span class="text-muted text-small ml-2">{{ $t(`category-type.${group.type}`) }}</span>
-              <span class="text-muted text-small float-right"
-                >{{ group.streams.length }}</span
-              >
+              <span class="text-muted text-small ml-2">{{
+                $t(`category-type.${group.type}`)
+              }}</span>
+              <span class="text-muted text-small float-right">{{
+                group.streams.length
+              }}</span>
             </div>
           </perfect-scrollbar>
         </div>
@@ -1073,7 +1073,11 @@
           icon="la-check"
           variant="success"
           @click="importM3UModal(false, true)"
-          :disabled="importM3U.isLoading || importM3U.groups.length === 0 || importM3U.importGroups.length === 0"
+          :disabled="
+            importM3U.isLoading ||
+            importM3U.groups.length === 0 ||
+            importM3U.importGroups.length === 0
+          "
           >{{ $t("general.ok") }}</erd-button
         >
       </template>
@@ -1429,7 +1433,9 @@
                 <a href="#" @click.prevent="activeGroup = group.id">{{
                   group.group_name
                 }}</a>
-                <span class="text-muted text-small ml-2">{{ $t(`category-type.${group.group_type}`) }}</span>
+                <span class="text-muted text-small ml-2">{{
+                  $t(`category-type.${group.group_type}`)
+                }}</span>
                 <span class="float-right">{{ group.streams }}</span>
               </div>
             </transition-group>
@@ -1800,7 +1806,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentUser", "settings", "soundcloudClientId"]),
+    ...mapGetters([
+      "currentUser",
+      "settings",
+      "soundcloudClientId",
+      "movieSeriePlaylist",
+    ]),
     searchFiltered() {
       if (this.search === null) {
         return this.accounts;
@@ -2210,6 +2221,7 @@ export default {
               .map((stream) => {
                 return {
                   id: stream.id,
+                  source_stream_url: stream.source_stream_url,
                   stream_tvg_name: stream.stream_tvg_name,
                   stream_tvg_id: stream.stream_tvg_id,
                   stream_tvg_logo: stream.stream_tvg_logo,
@@ -2229,6 +2241,7 @@ export default {
               .map((stream) => {
                 return {
                   id: stream.id,
+                  source_stream_url: stream.source_stream_url,
                   movie_name: stream.movie_name,
                   movie_year: stream.movie_year,
                   tmdb_id: stream.tmdb_id,
@@ -2247,6 +2260,7 @@ export default {
               .map((stream) => {
                 return {
                   id: stream.id,
+                  source_stream_url: stream.source_stream_url,
                   serie_name: stream.serie_name,
                   serie_season: stream.serie_season,
                   serie_episode: stream.serie_episode,
@@ -3441,10 +3455,20 @@ export default {
     },
     getYoutubePage(videoId) {
       this.youtube.isLoading = true;
-      httpService.youtube(videoId).then((res) => {
-        this.youtube.video = res;
-        this.youtube.isLoading = false;
-      });
+      httpService
+        .post("editor/youtube-video", { video_id: videoId })
+        .then((res) => {
+          if (res.status && Object.keys(res.data).length) {
+            this.youtube.video = res.data;
+          } else {
+            this.youtube.video = null;
+          }
+          this.youtube.isLoading = false;
+        })
+        .catch(() => {
+          this.youtube.video = null;
+          this.youtube.isLoading = false;
+        });
     },
     vimeoModal(show, save = false) {
       if (show) {
@@ -3704,7 +3728,10 @@ export default {
                 ? 1
                 : 0;
             });
-          this.assignTVGID.countries.unshift({ text: this.$t("general.all"), value: "all" });
+          this.assignTVGID.countries.unshift({
+            text: this.$t("general.all"),
+            value: "all",
+          });
           this.findTVGID.countries = [...this.assignTVGID.countries];
         })
         .catch(() => {
@@ -3769,7 +3796,9 @@ export default {
         if (this.assignLogo.assignAll == 1) {
           streams = this.playlistEditor.streams;
         } else {
-          streams = this.playlistEditor.streams.filter((stream) => !stream.stream_tvg_logo.length);
+          streams = this.playlistEditor.streams.filter(
+            (stream) => !stream.stream_tvg_logo.length
+          );
         }
         streams.map((stream) => {
           let match1 = stringSimilarity.findBestMatch(
@@ -3814,10 +3843,17 @@ export default {
         if (this.assignTVGID.assignAll == 1) {
           streams = this.playlistEditor.streams;
         } else {
-          streams = this.playlistEditor.streams.filter((stream) => !stream.stream_tvg_id.length || stream.stream_tvg_id.length == 0);
+          streams = this.playlistEditor.streams.filter(
+            (stream) =>
+              !stream.stream_tvg_id.length || stream.stream_tvg_id.length == 0
+          );
         }
-        let channelNames = this.assignTVGID.channels.map(channel => channel.tvg_name);
-        let channelIds = this.assignTVGID.channels.map(channel => channel.tvg_id);
+        let channelNames = this.assignTVGID.channels.map(
+          (channel) => channel.tvg_name
+        );
+        let channelIds = this.assignTVGID.channels.map(
+          (channel) => channel.tvg_id
+        );
         streams.map((stream) => {
           let match1 = stringSimilarity.findBestMatch(
             String(stream.stream_tvg_name),
@@ -3828,7 +3864,10 @@ export default {
             channelIds
           ).bestMatch;
           let match3 = stringSimilarity.findBestMatch(
-            String(stream.stream_tvg_name).replace(/ hd$| fhd$| hevc$| h265$|/i, ""),
+            String(stream.stream_tvg_name).replace(
+              / hd$| fhd$| hevc$| h265$|/i,
+              ""
+            ),
             channelNames
           ).bestMatch;
           if (match2.rating >= 0.75) {
@@ -3837,11 +3876,15 @@ export default {
             stream.modified = true;
           } else if (match1.rating >= 0.75) {
             changed = true;
-            stream.stream_tvg_id = this.assignTVGID.channels.find(channel => channel.tvg_name === match1.target).tvg_id;
+            stream.stream_tvg_id = this.assignTVGID.channels.find(
+              (channel) => channel.tvg_name === match1.target
+            ).tvg_id;
             stream.modified = true;
           } else if (match3.rating >= 0.75) {
             changed = true;
-            stream.stream_tvg_id = this.assignTVGID.channels.find(channel => channel.tvg_name === match1.target).tvg_id;
+            stream.stream_tvg_id = this.assignTVGID.channels.find(
+              (channel) => channel.tvg_name === match1.target
+            ).tvg_id;
             stream.modified = true;
           } else {
             changed = true;
@@ -3902,7 +3945,9 @@ export default {
         httpService
           .post("editor/import", {
             playlist_id: this.playlistEditor.id,
-            import: this.importM3U.groups.filter((group, index) => this.importM3U.importGroups.includes(index))
+            import: this.importM3U.groups.filter((group, index) =>
+              this.importM3U.importGroups.includes(index)
+            ),
           })
           .then((res) => {
             this.isLoading = false;
@@ -3978,7 +4023,9 @@ export default {
     EventBus.$on("tab-change", this.doTabChange);
     EventBus.$on("save", this.doSave);
     EventBus.$on("cancel", this.doCancel);
-    EventBus.$on("editor-playlist", this.loadPlaylist);
+    if (this.movieSeriePlaylist) {
+      this.loadPlaylist(this.movieSeriePlaylist);
+    }
     this.loadLogoCountries();
     this.loadTVGIDCountries();
   },
@@ -3989,7 +4036,6 @@ export default {
     EventBus.$off("tab-change", this.doTabChange);
     EventBus.$off("save", this.doSave);
     EventBus.$off("cancel", this.doCancel);
-    EventBus.$off("editor-playlist", this.loadPlaylist);
   },
   watch: {
     dragStream: function (val) {
@@ -4182,7 +4228,10 @@ export default {
       } else {
         this.assignTVGID.channels = [];
       }
-    }
+    },
+    movieSeriePlaylist: function (val) {
+      this.loadPlaylist(val);
+    },
   },
 };
 </script>

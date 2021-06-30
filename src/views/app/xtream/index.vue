@@ -60,12 +60,6 @@
         :disabled="isBusy"
         >{{ $t("general.cancel") }}</erd-button
       >
-      <erd-select
-        class="playlist-select"
-        v-if="isXtreamEditor"
-        :items="editorPlaylists"
-        v-model="editorPlaylist"
-      ></erd-select>
     </erd-breadcrumb>
     <erd-tab
       :tabs="tabsXtream"
@@ -96,7 +90,7 @@ export default {
         this.$t("tabs.sync"),
         this.$t("tabs.security"),
         this.$t("tabs.backup"),
-        this.$t("tabs.export")
+        this.$t("tabs.export"),
       ],
       tabsMovies: [this.$t("tabs.stream"), this.$t("tabs.tmdb")],
       activeTab: 0,
@@ -107,8 +101,6 @@ export default {
       isLoaded: false,
       isBusy: false,
       editorChanges: false,
-      editorPlaylists: [],
-      editorPlaylist: undefined,
       canAddPlaylist: true,
     };
   },
@@ -129,12 +121,12 @@ export default {
       return br[br.length - 1].text;
     },
     isXtreamPlaylists() {
-      return /\/xtream\/playlists/.test(this.$route.path);
+      return /\/xtream\/playlists/i.test(this.$route.path);
     },
     isXtreamMoviesSeries() {
       return (
-        /\/xtream\/movies/.test(this.$route.path) ||
-        /\/xtream\/series/.test(this.$route.path)
+        /\/xtream\/movies/i.test(this.$route.path) ||
+        /\/xtream\/series/i.test(this.$route.path)
       );
     },
     isXtreamEditor() {
@@ -151,23 +143,23 @@ export default {
     },
     addButtonText() {
       // Playlist
-      if (/\/xtream\/playlists/.test(this.$route.path)) {
+      if (/\/xtream\/playlists/i.test(this.$route.path)) {
         return this.$t("xtream.add-playlist");
       }
       // Group
-      if (/\/xtream\/groups/.test(this.$route.path)) {
+      if (/\/xtream\/groups/i.test(this.$route.path)) {
         return this.$t("xtream.add-group");
       }
       // Live
-      if (/\/xtream\/live/.test(this.$route.path)) {
+      if (/\/xtream\/live/i.test(this.$route.path)) {
         return this.$t("xtream.add-live-stream");
       }
       // Movie
-      if (/\/xtream\/movies/.test(this.$route.path)) {
+      if (/\/xtream\/movies/i.test(this.$route.path)) {
         return this.$t("xtream.add-movie");
       }
       // Series
-      if (/\/xtream\/series/.test(this.$route.path)) {
+      if (/\/xtream\/series/i.test(this.$route.path)) {
         return this.$t("xtream.add-series");
       }
       return "Add";
@@ -211,23 +203,6 @@ export default {
     doAdd() {
       EventBus.$emit("add");
     },
-    loadPlaylists() {
-      httpService
-        .get("playlist/simple")
-        .then((res) => {
-          if (res.status === true) {
-            this.editorPlaylists = res.data.map((playlist) => {
-              return {
-                text: playlist.name,
-                value: playlist.id,
-              };
-            });
-          }
-        })
-        .catch(() => {
-          this.editorPlaylists = [];
-        });
-    },
   },
   watch: {
     $route: function () {
@@ -235,7 +210,6 @@ export default {
       this.from = 0;
       this.total = 0;
       this.activeTab = 0;
-      this.editorPlaylist = undefined;
       if (this.$route.params.editor !== true) {
         this.editor = false;
       }
@@ -243,20 +217,9 @@ export default {
     activeTab: function (tab) {
       EventBus.$emit("tab-change", tab);
     },
-    isXtreamEditor: function (val) {
-      if (val) {
-        this.loadPlaylists();
-      }
-    },
-    editorPlaylist: function (val) {
-      EventBus.$emit("editor-playlist", val);
-    },
   },
   beforeMount() {
     this.updateSoundcloudId();
-    if (this.isXtreamEditor) {
-      this.loadPlaylists();
-    }
     EventBus.$on("update-from", this.updateFrom);
     EventBus.$on("update-to", this.updateTo);
     EventBus.$on("update-total", this.updateTotal);

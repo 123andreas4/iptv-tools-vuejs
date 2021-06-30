@@ -117,20 +117,22 @@
         v-model="stream.stream_order"
         type="number"
       ></erd-input>
-      <erd-checkbox
-        class="mb-2 w-100"
-        v-model="stream.stream_radio"
-        :true-value="1"
-        :false-value="0"
-        >{{ $t("xtream.radio") }}</erd-checkbox
-      >
-      <erd-checkbox
-        class="mb-2 w-100"
-        v-model="stream.stream_is_hidden"
-        :true-value="1"
-        :false-value="0"
-        >{{ $t("xtream.hidden") }}</erd-checkbox
-      >
+      <div class="form-control">
+        <erd-checkbox
+          class="mb-2 mt-3 w-100"
+          v-model="stream.stream_radio"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("xtream.radio") }}</erd-checkbox
+        >
+        <erd-checkbox
+          class="mb-2 w-100"
+          v-model="stream.stream_is_hidden"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("xtream.hidden") }}</erd-checkbox
+        >
+      </div>
     </erd-col>
   </erd-row>
 </template>

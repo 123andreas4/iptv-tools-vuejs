@@ -19,7 +19,10 @@
     "jszip": "^3.6.0",
     "sortablejs": "^1.9.0",
     "string-similarity": "^4.0.4",
+    "swiper": "^5.4.5",
+    "v-viewer": "^1.6.3",
     "vue": "^2.6.12",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-chartjs": "^3.5.1",
     "vue-headroom": "^0.10.1",
     "vue-i18n": "^8.24.3",
@@ -35,6 +38,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-arrow-functions": "^7.14.5",
     "@babel/preset-env": "^7.14.4",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",

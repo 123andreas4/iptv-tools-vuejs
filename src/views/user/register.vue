@@ -132,11 +132,7 @@ export default {
   methods: {
     ...mapActions(["checkUsername", "register"]),
     validateUsername() {
-      if (
-        this.username.match(
-          /^(?=.{6,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/
-        )
-      ) {
+      if (this.username.match(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)) {
         this.error.username.visible = false;
         this.error.username.message = "";
       } else {
