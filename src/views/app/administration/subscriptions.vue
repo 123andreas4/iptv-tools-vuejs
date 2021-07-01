@@ -110,7 +110,11 @@
       ></erd-select>
       <div v-if="editorSubscription && editorSubscription.custom_plan == 1">
         <label for="custom">{{ $t("subscriptions.max-playlists") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" type="number" v-model="editorSubscription.max_playlist"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          type="number"
+          v-model="editorSubscription.max_playlist"
+        ></erd-input>
       </div>
       <label for="end-date" v-if="editorSubscription.end_date !== null">{{
         $t("subscriptions.end_date")

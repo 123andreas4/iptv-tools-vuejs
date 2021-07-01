@@ -112,7 +112,11 @@ export const m3u = {
   },
   parse(
     content,
-    options = { tag: "name", type: ["Movie", "Series", "VOD", "Live"], noName: "<No name>" },
+    options = {
+      tag: "name",
+      type: ["Movie", "Series", "VOD", "Live"],
+      noName: "<No name>",
+    },
     small = false
   ) {
     return new Promise((resolve, reject) => {
@@ -148,10 +152,7 @@ export const m3u = {
         // Group
         if (this.isGrpLine(line)) {
           stream.group = this.getExtGrp(line).trim();
-          if (
-            stream.group !== "" &&
-            groups.indexOf(stream.group) === -1
-          ) {
+          if (stream.group !== "" && groups.indexOf(stream.group) === -1) {
             groups.push(stream.group);
           }
           continue;
@@ -180,10 +181,7 @@ export const m3u = {
           if (stream.group.trim().length === 0) {
             stream.group = "EMPTY";
           }
-          if (
-            stream.group !== "" &&
-            groups.indexOf(stream.group) === -1
-          ) {
+          if (stream.group !== "" && groups.indexOf(stream.group) === -1) {
             groups.push(stream.group);
           }
 
@@ -214,16 +212,18 @@ export const m3u = {
         }
       }
 
-      groups.map(group => {
+      groups.map((group) => {
         playlist.groups.push({
           name: group,
-          streams: streams.filter(stream => {
+          streams: streams.filter((stream) => {
             return stream.group == group;
-          })
+          }),
         });
       });
-      playlist.groups.map(group => {
-        group.type = group.streams.length ? group.streams[0].streamType : "Live";
+      playlist.groups.map((group) => {
+        group.type = group.streams.length
+          ? group.streams[0].streamType
+          : "Live";
       });
 
       resolve(playlist);

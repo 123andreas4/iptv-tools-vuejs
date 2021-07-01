@@ -18,18 +18,22 @@
           }}</erd-badge>
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-button
-            variant="info"
-            class="btn-table"
-            @click="editGroup(row.item)"
-            ><i class="las la-pen"></i
-          ></erd-button>
-          <erd-button
-            variant="danger"
-            class="btn-table"
-            @click="deleteGroup(row.item.id)"
-            ><i class="las la-trash"></i
-          ></erd-button>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-edit-group')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="editGroup(row.item)"
+              ><i class="las la-pen"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-delete-group')" :enabled="showTooltips">
+            <erd-button
+              variant="danger"
+              class="btn-table"
+              @click="deleteGroup(row.item.id)"
+              ><i class="las la-trash"></i
+            ></erd-button>
+          </erd-tooltip>
         </template>
       </b-table>
       <b-pagination
@@ -155,6 +159,9 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser", "settings"]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     perPage() {
       return this.settings.perPage;
     },

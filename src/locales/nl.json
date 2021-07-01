@@ -33,7 +33,8 @@
       "playlist": "Playlist",
       "one-moment": "Een moment geduld aub.",
       "no-name": "<Geen naam>",
-      "all": "Alles"
+      "all": "Alles",
+      "show-tooltips": "Tooltips weergeven"
     },
     "menu": {
       "app": "IPTV-Tools",
@@ -800,7 +801,25 @@
       "total-live": "Totaal live streams",
       "total-movies": "Totaal films",
       "total-series": "Totaal series",
-      "epg-timeshift": "EPG Timeshift (Uren)"
+      "epg-timeshift": "EPG Timeshift (Uren)",
+      "tooltip-sync-playlist": "Synchroniseer playlist",
+      "tooltip-sync-tmdb": "Synchroniseer TMDB",
+      "tooltip-edit-playlist": "Playlist aanpassen",
+      "tooltip-delete-playlist": "Verwijder playlist",
+      "tooltip-edit-group": "Groep aanpassen",
+      "tooltip-delete-group": "Verwijder groep",
+      "tooltip-edit-live": "Live stream aanpassen",
+      "tooltip-delete-live": "Verwijder live stream",
+      "tooltip-edit-movie": "Film aanpassen",
+      "tooltip-delete-movie": "Verwijder film",
+      "tooltip-edit-series": "Serie aanpassen",
+      "tooltip-delete-series": "Verwijder serie",
+      "tooltip-sync-enabled": "Synchronisatie in/uit-schakelen",
+      "tooltip-api-enabled": "Xtream-API toegang in/uit-schakelen",
+      "tooltip-security-enabled": "IP-Beveiliging in/uit-schakelen",
+      "tooltip-playlist-info": "Playlist gegevens",
+      "playlist-info": "Playlist gegevens",
+      "playlist-info-text": "Voer de volgende gegevens in in je IPTV player app."
     },
     "m3u": {
       "add-url": "M3U URL toevoegen",
@@ -842,14 +861,25 @@
       "stream-save-error": "Er is iets fout gegaan bij het opslaan van de stream! Probeer het nogmaals aub.",
       "stream-save-success": "De stream is opgeslagen.",
       "stream-delete-success": "De stream is verwijderd.",
-      "stream-delete-error": "Er is iets fout gegaan bij het verwijderen van de stream! Probeer het nogmaals aub."
+      "stream-delete-error": "Er is iets fout gegaan bij het verwijderen van de stream! Probeer het nogmaals aub.",
+      "tooltip-sync-enabled": "Synchronisatie in/uit-schakelen",
+      "tooltip-m3u-enabled": "M3U toegang in/uit-schakelen",
+      "tooltip-security-enabled": "IP-Beveiliging in/uit-schakelen",
+      "tooltip-playlist-info": "Playlist gegevens",
+      "playlist-info": "Playlist gegevens",
+      "playlist-info-text": "Voer de volgende gegevens in in je IPTV player app.",
+      "playlist-url": "Playlist URL",
+      "playlist-live-url": "Playlist URL <b><small>(Alleen live streams)</small></b>",
+      "playlist-movies-url": "Playlist URL <b><small>(Alleen films)</small></b>",
+      "playlist-series-url": "Playlist URL <b><small>(Alleen series)</small></b>",
+      "xmltv-url": "XMLTV URL"
     },
     "dashboard": {
       "xtream": "Xtream Accounts",
       "m3u-url": "M3U URLs",
       "m3u-file": "M3U Bestanden",
       "xmltv": "XMLTV EPGs",
-      "playlist": "playlists",
+      "playlist": "Playlists",
       "playlist-info": "Playlist gegevens",
       "live-streams": "Live Streams",
       "movies": "Films",
@@ -881,7 +911,8 @@
       "database-tables": "%d Tabellen",
       "database-rows": "%d Rijen",
       "database-columns": "%d Kolommen",
-      "database-size": "DB: %d"
+      "database-size": "DB: %d",
+      "tooltip-refresh": "Vernieuwen"
     },
     "movies": {
       "no-movies": "Er zijn geen films beschikbaar.",
@@ -896,7 +927,9 @@
       "source-playlist": "Bron Playlist",
       "find-movie": "Film Zoeken",
       "search-placeholder": "Zoek een film op naam, jaar, of tmdb id..",
-      "browse-loading": "%d% laden van films.."
+      "browse-loading": "%d% laden van films..",
+      "tooltip-show-more": "Meer weergeven..",
+      "tooltip-download": "Downloaden met XDPro"
     },
     "series": {
       "season": "Seizoen %d",
@@ -913,7 +946,9 @@
       "find-series": "Serie Zoeken",
       "search-placeholder": "Zoek een TV Serie op naam of tmdb id..",
       "browse-loading": "%d% laden van series..",
-      "episodes-seasons": "%d Seizoenen %d Afleveringen"
+      "episodes-seasons": "%d Seizoenen %d Afleveringen",
+      "tooltip-show-more": "Meer weergeven..",
+      "tooltip-download": "Downloaden met XDPro"
     },
     "video-player": {
       "restart": "Herstart",
@@ -1247,7 +1282,13 @@
       "select-episodes": "Selecteer de afleveringen die u wilt downloaden",
       "delete": "Verwijderen",
       "delete-disabled": "Verwijder uitgeschakelde downloads",
-      "delete-all": "Verwijder alle downloads"
+      "delete-all": "Verwijder alle downloads",
+      "tooltip-edit-instance": "Instantie aanpassen",
+      "tooltip-delete-instance": "Verwijder instantie",
+      "tooltip-edit-download": "Download aanpassen",
+      "tooltip-pause-download": "Download pauzeren",
+      "tooltip-resume-download": "Download hervatten",
+      "tooltip-delete-download": "Verwijder download"
     },
     "landing": {
       "login": "Login",

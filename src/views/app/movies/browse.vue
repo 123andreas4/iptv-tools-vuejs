@@ -110,14 +110,15 @@
                   `https://www.themoviedb.org/movie/${viewerMovie.tmdb_id}`
                 }}</a
               >
-              <erd-button
-                dense
-                class="my-3"
-                icon="la-download"
-                @click="downloadModal(true)"
-                v-if="canDownload"
-                >{{ $t("movies.download") }}</erd-button
-              >
+              <erd-tooltip :tooltip="$t('movies.tooltip-download')" :enabled="showTooltips" class="my-3">
+                <erd-button
+                  dense
+                  icon="la-download"
+                  @click="downloadModal(true)"
+                  v-if="canDownload"
+                  >{{ $t("movies.download") }}</erd-button
+                >
+              </erd-tooltip>
             </erd-card-body>
           </erd-card>
         </erd-col>
@@ -259,7 +260,9 @@
         <erd-card class="movie-card depth-2">
           <div class="poster">
             <button class="more-button" @click="viewDetails(movie)">
-              <i class="las la-ellipsis-h"></i>
+              <erd-tooltip :tooltip="$t('movies.tooltip-show-more')" :enabled="showTooltips">
+                <i class="las la-ellipsis-h"></i>
+              </erd-tooltip>
             </button>
             <img
               class="movie-poster"
@@ -269,9 +272,11 @@
           </div>
           <erd-card-body class="py-3">
             <h5 class="m-0">
-              <a href="#" @click.prevent="viewDetails(movie)">{{
-                movie.tmdb.title
-              }}</a>
+              <erd-tooltip :tooltip="$t('movies.tooltip-show-more')" :enabled="showTooltips">
+                <a href="#" @click.prevent="viewDetails(movie)">{{
+                  movie.tmdb.title
+                }}</a>
+              </erd-tooltip>
             </h5>
             <p class="m-0 text-muted text-small">
               {{ formatDate(movie.tmdb.release_date) }}
@@ -349,6 +354,9 @@ export default {
       "currentUser",
       "movieSeriePlaylist",
     ]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     canDownload() {
       return this.xdProInstances && this.xdProInstances.length > 0;
     },

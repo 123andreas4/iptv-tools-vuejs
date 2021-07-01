@@ -1,7 +1,5 @@
 <template>
-  <erd-row class="m-0 p-0">
-    
-  </erd-row>
+  <erd-row class="m-0 p-0"> </erd-row>
 </template>
 
 <script>
@@ -74,12 +72,8 @@ export default {
     EventBus.$off("print", this.printStreams);
     EventBus.$off("tab-change", this.doTabChange);
   },
-  watch: {
-    
-  },
+  watch: {},
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

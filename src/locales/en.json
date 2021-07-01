@@ -33,7 +33,8 @@
     "playlist": "Playlist",
     "one-moment": "One moment please",
     "no-name": "<No name>",
-    "all": "All"
+    "all": "All",
+    "show-tooltips": "Show tooltips"
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -863,7 +864,25 @@
     "total-live": "Total live streams",
     "total-movies": "Total movies",
     "total-series": "Total series",
-    "epg-timeshift": "EPG Timeshift (Hours)"
+    "epg-timeshift": "EPG Timeshift (Hours)",
+    "tooltip-sync-playlist": "Synchronize playlist",
+    "tooltip-sync-tmdb": "Synchronize TMDB",
+    "tooltip-edit-playlist": "Edit playlist",
+    "tooltip-delete-playlist": "Delete playlist",
+    "tooltip-edit-group": "Edit group",
+    "tooltip-delete-group": "Delete groep",
+    "tooltip-edit-live": "Edit live stream",
+    "tooltip-delete-live": "Delete live stream",
+    "tooltip-edit-movie": "Edit movie",
+    "tooltip-delete-movie": "Delete movie",
+    "tooltip-edit-series": "Edit series",
+    "tooltip-delete-series": "Delete series",
+    "tooltip-sync-enabled": "Enable/Disable Synchronization",
+    "tooltip-api-enabled": "Enable/Disable Xtream-API access",
+    "tooltip-security-enabled": "Enable/Disable IP-Security",
+    "tooltip-playlist-info": "Playlist information",
+    "playlist-info": "Playlist information",
+    "playlist-info-text": "Enter the following information in your IPTV player app."
   },
   "m3u": {
     "add-url": "Add M3U URL",
@@ -905,7 +924,18 @@
     "stream-save-error": "Failed saving stream! Please try again",
     "stream-save-success": "Succesfully saved stream.",
     "stream-delete-success": "Succesfully removed stream.",
-    "stream-delete-error": "Failed removing stream! Please try again"
+    "stream-delete-error": "Failed removing stream! Please try again",
+    "tooltip-sync-enabled": "Enable/Disable Synchronization",
+    "tooltip-api-enabled": "Enable/Disable M3U access",
+    "tooltip-security-enabled": "Enable/Disable IP-Security",
+    "tooltip-playlist-info": "Playlist information",
+    "playlist-info": "Playlist information",
+    "playlist-info-text": "Enter the following information in your IPTV player app.",
+    "playlist-url": "Playlist URL",
+    "playlist-live-url": "Playlist URL <b><small>(Live streams only)</small></b>",
+    "playlist-movies-url": "Playlist URL <b><small>(Movies only)</small></b>",
+    "playlist-series-url": "Playlist URL <b><small>(Series only)</small></b>",
+    "xmltv-url": "XMLTV URL"
   },
   "dashboard": {
     "xtream": "Xtream Accounts",
@@ -944,7 +974,8 @@
     "database-tables": "%d Tables",
     "database-rows": "%d Rows",
     "database-columns": "%d Columns",
-    "database-size": "DB: %d"
+    "database-size": "DB: %d",
+    "tooltip-refresh": "Refresh"
   },
   "movies": {
     "no-movies": "No movies available.",
@@ -959,7 +990,9 @@
     "source-playlist": "Source Playlist",
     "find-movie": "Find Movie",
     "search-placeholder": "Find movie by name, year or tmdb id..",
-    "browse-loading": "%d% loading movies..."
+    "browse-loading": "%d% loading movies...",
+    "tooltip-show-more": "Show more..",
+    "tooltip-download": "Download with XDPro"
   },
   "series": {
     "season": "Season %d",
@@ -976,7 +1009,9 @@
     "find-series": "Find Series",
     "search-placeholder": "Find series by name or tmdb id..",
     "browse-loading": "%d% loading series...",
-    "episodes-seasons": "%d Seasons %d Episodes"
+    "episodes-seasons": "%d Seasons %d Episodes",
+    "tooltip-show-more": "Show more..",
+    "tooltip-download": "Download with XDPro"
   },
   "video-player": {
     "restart": "Restart",
@@ -1314,7 +1349,13 @@
     "select-episodes": "Select the episodes you want to download",
     "delete": "Delete",
     "delete-disabled": "Delete disabled downloads",
-    "delete-all": "Delete all downloads"
+    "delete-all": "Delete all downloads",
+    "tooltip-edit-instance": "Edit instance",
+    "tooltip-delete-instance": "Delete instance",
+    "tooltip-edit-download": "Edit download",
+    "tooltip-pause-download": "Pause download",
+    "tooltip-resume-download": "Resume download",
+    "tooltip-delete-download": "Delete download"
   },
   "landing": {
     "login": "Login",

@@ -137,7 +137,7 @@ export default {
         { key: "id", label: this.$t("xmltv.id"), sortable: true },
         {
           key: "created",
-          label: this.$t("xmltv.created"), 
+          label: this.$t("xmltv.created"),
           sortable: true,
         },
         {

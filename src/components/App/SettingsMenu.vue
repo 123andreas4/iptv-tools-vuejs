@@ -29,6 +29,12 @@
         v-model="movieSeriePlaylist"
         :disabled="!userHasMoviesSeries || !routeIsMoviesSeries"
       ></erd-select>
+      <erd-checkbox
+        class="my-2"
+        v-model="showTooltips"
+        :true-value="true"
+        :false-value="false"
+        >{{ $t("general.show-tooltips") }}</erd-checkbox>
     </div>
     <a href="#" class="settings-menu-button" @click.prevent="toggle">
       <i class="las la-user-cog"></i>
@@ -98,6 +104,19 @@ export default {
       },
       set: function (val) {
         this.$store.commit("setMovieSeriePlaylist", val);
+      },
+    },
+    showTooltips: {
+      get: function () {
+        return this.$store.state.user.settings.showTooltips;
+      },
+      set: function (val) {
+        let settings = {
+          perPage: this.$store.state.user.settings.perPage,
+          expandMenu: this.$store.state.user.settings.expandMenu,
+          showTooltips: val,
+        };
+        this.$store.commit("setSettings", settings);
       },
     },
     languages() {

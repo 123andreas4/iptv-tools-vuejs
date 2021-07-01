@@ -12,11 +12,18 @@
       class="select-none"
       small
     >
-      <div class="px-2" style="min-height: 250px;">
+      <div class="px-2" style="min-height: 250px">
         <label class="w-100">{{ $t("xd-pro.xd-pro-instance") }}</label>
-        <erd-select class="mt-1 mb-2 w-100" v-model="xdPro.xdpro_id" :items="xdProInstanceItems"></erd-select>
+        <erd-select
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.xdpro_id"
+          :items="xdProInstanceItems"
+        ></erd-select>
         <label class="w-100">{{ $t("xd-pro.download-folder") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="xdPro.download_folder"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.download_folder"
+        ></erd-input>
       </div>
       <template v-slot:footer>
         <erd-button
@@ -26,12 +33,22 @@
           variant="danger"
           >{{ $t("general.cancel") }}</erd-button
         >
-        <erd-button icon="la-check" variant="success" :disabled="xdPro.xdpro_id == 0" @click="downloadModal(false, true)">{{
-          $t("general.ok")
-        }}</erd-button>
+        <erd-button
+          icon="la-check"
+          variant="success"
+          :disabled="xdPro.xdpro_id == 0"
+          @click="downloadModal(false, true)"
+          >{{ $t("general.ok") }}</erd-button
+        >
       </template>
     </erd-modal>
-    <erd-spinner v-if="isLoading" :text="loadingText" size="lg" overlay absolute></erd-spinner>
+    <erd-spinner
+      v-if="isLoading"
+      :text="loadingText"
+      size="lg"
+      overlay
+      absolute
+    ></erd-spinner>
     <erd-col xl="12" class="m-0 p-0" v-if="viewer" id="movies">
       <erd-row class="m-0 p-0">
         <erd-col xl="4" md="4">
@@ -39,7 +56,8 @@
             <img
               class="movie-poster"
               :src="
-                viewerMovie.tmdb.poster_path && viewerMovie.tmdb.poster_path.length
+                viewerMovie.tmdb.poster_path &&
+                viewerMovie.tmdb.poster_path.length
                   ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${viewerMovie.tmdb.poster_path}`
                   : viewerMovie.stream_icon
               "
@@ -92,14 +110,15 @@
                   `https://www.themoviedb.org/movie/${viewerMovie.tmdb_id}`
                 }}</a
               >
-              <erd-button
-                dense
-                class="my-3"
-                icon="la-download"
-                @click="downloadModal(true)"
-                v-if="canDownload"
-                >{{ $t("movies.download") }}</erd-button
-              >
+              <erd-tooltip :tooltip="$t('movies.tooltip-download')" :enabled="showTooltips" class="my-3">
+                <erd-button
+                  dense
+                  icon="la-download"
+                  @click="downloadModal(true)"
+                  v-if="canDownload"
+                  >{{ $t("movies.download") }}</erd-button
+                >
+              </erd-tooltip>
             </erd-card-body>
           </erd-card>
         </erd-col>
@@ -170,7 +189,11 @@
                 </erd-col>
               </erd-row>
             </erd-col>
-            <erd-col xl="12" class="p-0 m-0" v-if="viewerMovie.tmdb_similar.length">
+            <erd-col
+              xl="12"
+              class="p-0 m-0"
+              v-if="viewerMovie.tmdb_similar.length"
+            >
               <h5 class="mt-3 mb-0 ml-3">{{ $t("movies.similar-movies") }}</h5>
               <erd-row class="p-0 m-0">
                 <erd-col
@@ -185,8 +208,7 @@
                       <img
                         class="movie-poster"
                         :src="
-                          movie.poster_path &&
-                          movie.poster_path.length
+                          movie.poster_path && movie.poster_path.length
                             ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${movie.poster_path}`
                             : movie.stream_icon
                         "
@@ -232,7 +254,9 @@
         <erd-card class="movie-card depth-2">
           <div class="poster">
             <button class="more-button" @click="viewDetails(movie)">
-              <i class="las la-ellipsis-h"></i>
+              <erd-tooltip :tooltip="$t('movies.tooltip-show-more')" :enabled="showTooltips">
+                <i class="las la-ellipsis-h"></i>
+              </erd-tooltip>
             </button>
             <img
               class="movie-poster"
@@ -242,9 +266,11 @@
           </div>
           <erd-card-body class="py-3">
             <h5 class="m-0">
-              <a href="#" @click.prevent="viewDetails(movie)">{{
-                movie.tmdb.title
-              }}</a>
+              <erd-tooltip :tooltip="$t('movies.tooltip-show-more')" :enabled="showTooltips">
+                <a href="#" @click.prevent="viewDetails(movie)">{{
+                  movie.tmdb.title
+                }}</a>
+              </erd-tooltip>
             </h5>
             <p class="m-0 text-muted text-small">
               {{ formatDate(movie.tmdb.release_date) }}
@@ -309,11 +335,19 @@ export default {
         modal: false,
         xdpro_id: 0,
         download_folder: "",
-      }
+      },
     };
   },
   computed: {
-    ...mapGetters(["xdProInstances", "settings", "currentUser", "movieSeriePlaylist"]),
+    ...mapGetters([
+      "xdProInstances",
+      "settings",
+      "currentUser",
+      "movieSeriePlaylist",
+    ]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     canDownload() {
       return this.xdProInstances && this.xdProInstances.length > 0;
     },
@@ -349,7 +383,10 @@ export default {
       return this.viewerMovie.tmdb_videos.slice(0, 2);
     },
     movieURL() {
-      return this.viewerMovie.source_stream_url && this.viewerMovie.source_stream_url.length ? this.viewerMovie.source_stream_url : this.viewerMovie.xtream_url;
+      return this.viewerMovie.source_stream_url &&
+        this.viewerMovie.source_stream_url.length
+        ? this.viewerMovie.source_stream_url
+        : this.viewerMovie.xtream_url;
     },
     movieVideoType() {
       if (this.viewerMovie.source_container_extension.toLowerCase() == "mkv") {
@@ -371,13 +408,13 @@ export default {
       return this.filteredMovies.slice(this.from, this.to);
     },
     xdProInstanceItems() {
-      return this.xdProInstances.map(instance => {
+      return this.xdProInstances.map((instance) => {
         return {
           text: instance.name,
           value: instance.id,
-        }
-      })
-    }
+        };
+      });
+    },
   },
   methods: {
     ...mapActions(["updateTMDBGenres", "addxdProDownload"]),
@@ -394,9 +431,9 @@ export default {
       let d = 0;
       progress_cb(0);
       for (const p of proms) {
-        p.then(()=> {    
-          d ++;
-          progress_cb( (d * 100) / proms.length );
+        p.then(() => {
+          d++;
+          progress_cb((d * 100) / proms.length);
         });
       }
       return Promise.all(proms);
@@ -406,26 +443,36 @@ export default {
         return;
       }
       this.isLoading = true;
-      this.allProgress([
-        httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/0/50`),
-        httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/50/50`),
-        httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/100/50`),
-        httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/150/50`),
-        httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/200/50`),
-      ], (p) => {
-        this.loadingText = this.$t("movies.browse-loading").format(Math.round(p));
-      })
-      .then(res => {
+      this.allProgress(
+        [
+          httpService.get(`movies/now-playing/${this.movieSeriePlaylist}/0/50`),
+          httpService.get(
+            `movies/now-playing/${this.movieSeriePlaylist}/50/50`
+          ),
+          httpService.get(
+            `movies/now-playing/${this.movieSeriePlaylist}/100/50`
+          ),
+          httpService.get(
+            `movies/now-playing/${this.movieSeriePlaylist}/150/50`
+          ),
+          httpService.get(
+            `movies/now-playing/${this.movieSeriePlaylist}/200/50`
+          ),
+        ],
+        (p) => {
+          this.loadingText = this.$t("movies.browse-loading").format(
+            Math.round(p)
+          );
+        }
+      ).then((res) => {
         let movies = [];
-        res.forEach(result => {
+        res.forEach((result) => {
           if (result.status === true) {
             movies = [...movies, ...result.data];
           }
         });
         movies.sort((a, b) => {
-          return (
-            new Date(b.tmdb.release_date) - new Date(a.tmdb.release_date)
-          );
+          return new Date(b.tmdb.release_date) - new Date(a.tmdb.release_date);
         });
         this.topRatedMovies = movies;
         this.isLoading = false;
@@ -478,10 +525,13 @@ export default {
           file_extension: this.viewerMovie.source_container_extension,
           type: 1,
           enabled: 0,
-          download_folder: this.xdPro.download_folder
+          download_folder: this.xdPro.download_folder,
         };
-        if (this.viewerMovie.source_stream_url && this.viewerMovie.source_stream_url.length) {
-          download.download_url = this.viewerMovie.source_stream_url
+        if (
+          this.viewerMovie.source_stream_url &&
+          this.viewerMovie.source_stream_url.length
+        ) {
+          download.download_url = this.viewerMovie.source_stream_url;
           download.download_host = "";
           download.download_port = "";
           download.download_username = "";
@@ -496,7 +546,7 @@ export default {
           download.download_password = p[3];
         }
         this.addxdProDownload(download)
-          .then(res => {
+          .then((res) => {
             if (res.status === true) {
               this.$notify(
                 "primary",
@@ -515,7 +565,7 @@ export default {
               "la-user-shield",
               { duration: 5000, permanent: false }
             );
-          })
+          });
       }
       this.xdPro.modal = show;
     },
@@ -546,7 +596,7 @@ export default {
       EventBus.$emit("update-total", val);
     },
     "xdPro.xdpro_id": function (val) {
-      let instance = this.xdProInstances.find(instance => {
+      let instance = this.xdProInstances.find((instance) => {
         return instance.id == val;
       });
       if (instance) {
@@ -555,7 +605,7 @@ export default {
     },
     movieSeriePlaylist: function () {
       this.loadMovies();
-    }
+    },
   },
 };
 </script>

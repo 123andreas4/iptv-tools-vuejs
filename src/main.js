@@ -180,6 +180,14 @@ Vue.use(NoSleep);
 import Notifications from "./components/Notifications";
 Vue.use(Notifications);
 
+import VueAwesomeSwiper from "vue-awesome-swiper";
+Vue.use(VueAwesomeSwiper);
+import "swiper/css/swiper.css";
+
+import "viewerjs/dist/viewer.css";
+import VueViewer from "v-viewer";
+Vue.use(VueViewer);
+
 new Vue({
   i18n,
   router,

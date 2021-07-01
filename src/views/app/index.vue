@@ -33,7 +33,7 @@ export default {
       "synchronizePlaylist",
       "addAlert",
       "getAppXmltvSync",
-      "loadMovieSeriePlaylists"
+      "loadMovieSeriePlaylists",
     ]),
     tmdbSyncStartNotify() {
       this.$notify(

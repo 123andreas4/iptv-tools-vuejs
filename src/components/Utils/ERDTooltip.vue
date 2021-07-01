@@ -24,6 +24,10 @@
 /* eslint-disable */
 export default {
   props: {
+    enabled: {
+      type: Boolean,
+      default: true
+    },
     tooltip: {
       type: String,
       default: ''
@@ -56,7 +60,7 @@ export default {
   },
   methods: {
     mouseover () {
-      this.visible = true;
+      this.visible = this.enabled;
     },
     mouseleave () {
       this.visible = false;

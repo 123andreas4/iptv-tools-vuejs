@@ -1,7 +1,13 @@
 <template>
   <erd-row>
     <erd-breadcrumb :items="breadcrumb" :heading="heading">
-      <erd-button class="float-right" icon="la-angle-left" v-if="viewer" @click="doBack" >{{ $t("general.back") }}</erd-button>
+      <erd-button
+        class="float-right"
+        icon="la-angle-left"
+        v-if="viewer"
+        @click="doBack"
+        >{{ $t("general.back") }}</erd-button
+      >
       <span class="text-muted" v-if="!viewer">{{
         $t("general.from-to-total").format(
           this.total > 0 ? this.from + 1 : this.from,
@@ -25,7 +31,7 @@ export default {
       viewer: false,
       from: 0,
       to: 0,
-      total: 0,   
+      total: 0,
     };
   },
   computed: {
@@ -60,7 +66,7 @@ export default {
     },
     updateViewer(viewer) {
       this.viewer = viewer;
-    }
+    },
   },
   watch: {
     $route: function () {

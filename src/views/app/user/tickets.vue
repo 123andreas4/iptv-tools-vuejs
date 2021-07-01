@@ -174,7 +174,14 @@
                 <p>{{ $t("tickets.empty") }}</p>
               </div>
               <div
-                class="d-flex flex-row px-2 py-2 justify-content-between ticket-list-item"
+                class="
+                  d-flex
+                  flex-row
+                  px-2
+                  py-2
+                  justify-content-between
+                  ticket-list-item
+                "
                 v-for="ticket in ticketsInBox"
                 :key="`ticket-${ticket.id}`"
               >

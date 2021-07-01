@@ -694,7 +694,7 @@ export default [
         name: "user",
         component: () =>
           import(/* webpackChunkName: "user" */ "../views/app/user"),
-        redirect: `${AppRoot}/user/default`,
+        redirect: `${AppRoot}/user/profile`,
         meta: {
           roles: [
             UserRole.SuperAdmin,

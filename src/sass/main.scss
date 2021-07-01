@@ -6371,6 +6371,7 @@ div[data-notify="container"] {
     bottom: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%) translateY(-25%);
+    color: $default-color !important;
 
     @include depth(2);
     border-radius: .75rem !important;

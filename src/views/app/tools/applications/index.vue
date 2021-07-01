@@ -15,11 +15,7 @@
         )
       }}</span>
     </erd-breadcrumb>
-    <erd-tab
-      v-if="isXDPro"
-      :tabs="tabsXDPro"
-      v-model="activeTab"
-    ></erd-tab>
+    <erd-tab v-if="isXDPro" :tabs="tabsXDPro" v-model="activeTab"></erd-tab>
     <div class="seperator page" v-if="!isXDPro"></div>
     <router-view class="px-0 mt-0"></router-view>
   </erd-row>
@@ -33,14 +29,11 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      tabsXDPro: [
-        this.$t("tabs.xd-pro"),
-        this.$t("tabs.downloads")
-      ],
+      tabsXDPro: [this.$t("tabs.xd-pro"), this.$t("tabs.downloads")],
       activeTab: 0,
       from: 0,
       to: 0,
-      total: 0,   
+      total: 0,
     };
   },
   computed: {

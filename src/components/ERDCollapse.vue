@@ -6,7 +6,10 @@
       </h5>
     </template>
     <template v-else>
-      <p :class="{ header: true, open: isOpen, gray: gray }" @click="isOpen = !isOpen">
+      <p
+        :class="{ header: true, open: isOpen, gray: gray }"
+        @click="isOpen = !isOpen"
+      >
         {{ title }} <i class="las la-angle-down"></i>
       </p>
     </template>
@@ -45,7 +48,7 @@ export default {
     small: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   computed: {
     contentStyle() {
@@ -99,7 +102,7 @@ export default {
       }
     }
   }
-  
+
   h5.header {
     transition: color 0.3s;
     cursor: pointer;

@@ -4,7 +4,14 @@
       v-if="!noPicture"
       :src="picture"
       alt="thumbnail"
-      class="img-thumbnail border-0 rounded list-thumbnail align-self-center xsmall"
+      class="
+        img-thumbnail
+        border-0
+        rounded
+        list-thumbnail
+        align-self-center
+        xsmall
+      "
       :class="`thumb-${variant}`"
     />
     <div :class="{ 'pl-2': !noPicture }">

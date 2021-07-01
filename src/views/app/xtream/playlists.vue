@@ -1,5 +1,60 @@
 <template>
   <erd-row class="m-0 p-0" id="playlists">
+    <!--  
+
+      Playlist Info
+
+    -->
+    <erd-modal
+      v-show="playlistInfo.modal"
+      @close="playlistInfoModal(false)"
+      :title="$t('xtream.playlist-info')"
+      class="select-none"
+      small
+    >
+      <div class="px-2">
+        <p class="mt-0">{{ $t("xtream.playlist-info-text") }}</p>
+        <erd-row class="m-0 p-0">
+          <erd-col xxl="8" sm="8" class="my-0 p-0">
+            <label class="w-100">{{ $t("xtream.host") }}</label>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="iptvToolsHost"
+              readonly
+            ></erd-input>
+          </erd-col>
+          <erd-col xxl="4" sm="4" class="my-0 py-0 pr-0">
+            <label class="w-100">{{ $t("xtream.port") }}</label>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="iptvToolsPort"
+              readonly
+            ></erd-input>
+          </erd-col>
+        </erd-row>
+        <label class="w-100">{{ $t("xtream.username") }}</label>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          :value="playlistInfo.username"
+          readonly
+        ></erd-input>
+        <label class="w-100">{{ $t("xtream.password") }}</label>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          :value="playlistInfo.password"
+          readonly
+        ></erd-input>
+      </div>
+      <template v-slot:footer>
+        <erd-button
+          @click="playlistInfoModal(false)"
+          icon="la-times"
+          class="mr-1"
+          variant="primary"
+          >{{ $t("general.close") }}</erd-button
+        >
+      </template>
+    </erd-modal>
     <erd-spinner v-if="isLoading" size="lg" overlay absolute></erd-spinner>
     <erd-col xl="12" sm="12" v-if="!editor">
       <b-table :items="paged" :fields="fields" striped small>
@@ -17,38 +72,54 @@
           }}
         </template>
         <template v-slot:cell(source_exp_date)="row">
-          {{ formatDate(row.item.source_exp_date) }}
+          {{ formatDate(row.item.source_exp_date * 1000) }}
         </template>
         <template v-slot:cell(sync_interval)="row">
           {{ $t(`sync-interval.${row.item.sync_interval}`) }}
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-button
-            variant="info"
-            class="btn-table"
-            :disabled="syncPlaylist"
-            @click="synchronizePlaylist(row.item.id)"
-            ><i class="las la-sync"></i
-          ></erd-button>
-          <erd-button
-            variant="info"
-            class="btn-table"
-            :disabled="syncTMDB"
-            @click="synchronizeTMDB(row.item.id)"
-            ><i class="lab la-imdb"></i
-          ></erd-button>
-          <erd-button
-            variant="info"
-            class="btn-table"
-            @click="editPlaylist(row.item)"
-            ><i class="las la-pen"></i
-          ></erd-button>
-          <erd-button
-            variant="danger"
-            class="btn-table"
-            @click="deletePlaylist(row.item.id)"
-            ><i class="las la-trash"></i
-          ></erd-button>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-playlist-info')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="playlistInfoModal(true, row.item)"
+              ><i class="las la-info"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-sync-playlist')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              :disabled="syncPlaylist"
+              @click="synchronizePlaylist(row.item.id)"
+              ><i class="las la-sync"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-sync-tmdb')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              :disabled="syncTMDB"
+              @click="synchronizeTMDB(row.item.id)"
+              ><i class="lab la-imdb"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-edit-playlist')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="editPlaylist(row.item)"
+              ><i class="las la-pen"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-delete-playlist')" :enabled="showTooltips">
+            <erd-button
+              variant="danger"
+              class="btn-table"
+              @click="deletePlaylist(row.item.id)"
+              ><i class="las la-trash"></i
+            ></erd-button>
+          </erd-tooltip>
         </template>
       </b-table>
       <b-pagination
@@ -124,7 +195,7 @@
       <erd-input
         id="source-expiry"
         class="mt-1 mb-2 w-100"
-        :value="formatDate(playlist.source_exp_date)"
+        :value="formatDate(playlist.source_exp_date * 1000)"
         disabled
       ></erd-input>
       <label class="d-block" for="max-connections">{{
@@ -139,13 +210,15 @@
     </erd-col>
     <!-- API -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 1">
-      <erd-checkbox
-        class="mb-2 w-100"
-        v-model="playlist.enabled"
-        :true-value="1"
-        :false-value="0"
-        >{{ $t("xtream.enabled") }}</erd-checkbox
-      >
+      <erd-tooltip :tooltip="$t('xtream.tooltip-api-enabled')" :enabled="showTooltips">
+        <erd-checkbox
+          class="mb-2 w-100"
+          v-model="playlist.enabled"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("xtream.enabled") }}</erd-checkbox
+        >
+      </erd-tooltip>
       <label class="d-block" for="api-username">{{
         $t("xtream.username")
       }}</label>
@@ -211,13 +284,15 @@
     </erd-col>
     <!-- SYNC -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 2">
-      <erd-checkbox
-        class="mb-2 w-100"
-        v-model="playlist.sync_enabled"
-        :true-value="1"
-        :false-value="0"
-        >{{ $t("xtream.enabled") }}</erd-checkbox
-      >
+      <erd-tooltip :tooltip="$t('xtream.tooltip-sync-enabled')" :enabled="showTooltips">
+        <erd-checkbox
+          class="mb-2 w-100"
+          v-model="playlist.sync_enabled"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("xtream.enabled") }}</erd-checkbox
+        >
+      </erd-tooltip>
       <label class="d-block" for="sync-interval">{{
         $t("xtream.sync-interval")
       }}</label>
@@ -321,13 +396,15 @@
     </erd-col>
     <!-- SECURITY -->
     <erd-col xl="12" sm="12" v-if="editor && activeTab === 3">
-      <erd-checkbox
-        :true-value="1"
-        :false-value="0"
-        class="mb-2"
-        v-model="playlist.ip_protection"
-        >{{ $t("xtream.ip-security") }}</erd-checkbox
-      >
+      <erd-tooltip :tooltip="$t('xtream.tooltip-security-enabled')" :enabled="showTooltips">
+        <erd-checkbox
+          :true-value="1"
+          :false-value="0"
+          class="mb-2"
+          v-model="playlist.ip_protection"
+          >{{ $t("xtream.ip-security") }}</erd-checkbox
+        >
+      </erd-tooltip>
       <label class="d-block" for="allowed-ips">{{
         $t("xtream.allow-only-ips")
       }}</label>
@@ -492,6 +569,11 @@ export default {
         movies: [],
         series: [],
       },
+      playlistInfo: {
+        modal: false,
+        username: "",
+        password: "",
+      },
       playlists: [],
       playlist: null,
       editor: false,
@@ -550,10 +632,19 @@ export default {
         { text: this.$t("output.1"), value: 1 },
         { text: this.$t("output.2"), value: 2 },
       ],
+      iptvToolsHost: "http://tv.iptv-tools.com",
+      iptvToolsPort: 80,
     };
   },
   computed: {
     ...mapGetters(["currentUser", "settings", "syncTMDB", "syncPlaylist"]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
+    epgOffset() {
+      let dt = new Date();
+      return Math.abs(dt.getTimezoneOffset() / 60);
+    },
     perPage() {
       return this.settings.perPage;
     },
@@ -690,7 +781,7 @@ export default {
     canAddPlaylist() {
       if (this.currentUser.subscription) {
         let subscription = this.currentUser.subscription;
-        if (new Date(subscription.end_date).getTime() < new Date().getTime()) {
+        if (subscription.end_date != null && new Date(subscription.end_date).getTime() < new Date().getTime()) {
           return false;
         }
         if (subscription.custom_plan == 1) {
@@ -789,6 +880,7 @@ export default {
               api_output_format: 1,
               name: "",
               tmdb_language: this.$i18n.locale,
+              epg_offset: this.epgOffset,
             };
             this.playlistGroups = {
               live: [],
@@ -813,6 +905,13 @@ export default {
       this.playlist = Object.assign({}, playlist);
       this.playlistAuth();
       this.editor = true;
+    },
+    playlistInfoModal(show, playlist) {
+      if (playlist) {
+        this.playlistInfo.username = playlist.api_username;
+        this.playlistInfo.password = playlist.api_password;
+      }
+      this.playlistInfo.modal = show;
     },
     cancelEditor() {
       this.editor = false;

@@ -58,10 +58,13 @@
           <erd-card class="list-card">
             <erd-button
               class="refresh-button"
-              icon="la-sync"
               outline
               @click="loadDashboard"
-            ></erd-button>
+            >
+              <erd-tooltip :tooltip="$t('dashboard.tooltip-refresh')" :enabled="showTooltips">
+                <i class="las la-sync"></i>
+              </erd-tooltip>
+            </erd-button>
             <erd-card-body>
               <div class="float-left float-none-xs">
                 <div class="d-inline-block">
@@ -101,7 +104,9 @@
                     </p>
                     <p class="m-0 p-0">
                       <span>{{ xtream.server_info.url }}</span>
-                      <span class="text-muted text-small ml-2">{{ xtream.user_info.message }}</span>
+                      <span class="text-muted text-small ml-2">{{
+                        xtream.user_info.message
+                      }}</span>
                     </p>
                     <span class="text-small text-muted"
                       >{{ $t("dashboard.created") }}
@@ -109,7 +114,7 @@
                       {{ $t("dashboard.expiry") }}
                       {{
                         xtream.user_info.exp_date
-                          ? formatDate(xtream.user_info.exp_date)
+                          ? formatDate(xtream.user_info.exp_date * 1000)
                           : $t("dashboard.no-expiry")
                       }}</span
                     >
@@ -133,51 +138,105 @@
         >
           <div class="px-2" v-if="xtreamAccount.account">
             <label class="w-100">{{ $t("xtream.url") }}</label>
-            <erd-input class="mt-1 mb-2 w-100" :value="`${xtreamAccount.account.server_info.server_protocol}://${xtreamAccount.account.server_info.url}:${xtreamAccount.account.server_info.port}/get.php?username=${xtreamAccount.account.user_info.username}&password=${xtreamAccount.account.user_info.password}&type=m3u_plus`" readonly></erd-input>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="`${xtreamAccount.account.server_info.server_protocol}://${xtreamAccount.account.server_info.url}:${xtreamAccount.account.server_info.port}/get.php?username=${xtreamAccount.account.user_info.username}&password=${xtreamAccount.account.user_info.password}&type=m3u_plus`"
+              readonly
+            ></erd-input>
             <erd-row class="p-0 m-0">
               <erd-col sm="8" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.host") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.server_info.url" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.server_info.url"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.port") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.server_info.port" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.server_info.port"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <erd-row class="p-0 m-0">
               <erd-col sm="6" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.username") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.username" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.user_info.username"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="6" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.password") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.password" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.user_info.password"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <erd-row class="p-0 m-0">
               <erd-col sm="6" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.max-connections") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.max_connections" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.user_info.max_connections"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="6" class="m-0 px-0">
-                <label class="w-100">{{ $t("xtream.active-connections") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.active_cons" readonly></erd-input>
+                <label class="w-100">{{
+                  $t("xtream.active-connections")
+                }}</label>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="xtreamAccount.account.user_info.active_cons"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <erd-row class="p-0 m-0">
               <erd-col sm="6" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.created") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatDate(xtreamAccount.account.user_info.created_at * 1000)" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="
+                    formatDate(
+                      xtreamAccount.account.user_info.created_at * 1000
+                    )
+                  "
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="6" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.expire") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.exp_date ? formatDate(xtreamAccount.account.user_info.exp_date) : $t('dashboard.no-expiry')" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="
+                    xtreamAccount.account.user_info.exp_date
+                      ? formatDate(xtreamAccount.account.user_info.exp_date * 1000)
+                      : $t('dashboard.no-expiry')
+                  "
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <label class="w-100">{{ $t("users.status") }}</label>
-            <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.status" readonly></erd-input>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="xtreamAccount.account.user_info.status"
+              readonly
+            ></erd-input>
             <label class="w-100">{{ $t("xtream.message") }}</label>
-            <erd-input class="mt-1 mb-2 w-100" :value="xtreamAccount.account.user_info.message" readonly></erd-input>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="xtreamAccount.account.user_info.message"
+              readonly
+            ></erd-input>
           </div>
           <template v-slot:footer>
             <erd-button
@@ -193,10 +252,13 @@
           <erd-card class="list-card">
             <erd-button
               class="refresh-button"
-              icon="la-sync"
               outline
               @click="loadDashboard"
-            ></erd-button>
+            >
+              <erd-tooltip :tooltip="$t('dashboard.tooltip-refresh')" :enabled="showTooltips">
+                <i class="las la-sync"></i>
+              </erd-tooltip>
+            </erd-button>
             <erd-card-body>
               <div class="float-left float-none-xs">
                 <div class="d-inline-block">
@@ -228,8 +290,15 @@
                 >
                   <i class="las la-file-video la-3x"></i>
                   <div class="details">
-                    <p class="mt-1 float-right text-small" v-if="userHasMoviesSeries">
-                      {{ formatNumber(playlist.live + playlist.movies + playlist.series) }}
+                    <p
+                      class="mt-1 float-right text-small"
+                      v-if="userHasMoviesSeries"
+                    >
+                      {{
+                        formatNumber(
+                          playlist.live + playlist.movies + playlist.series
+                        )
+                      }}
                       <i class="las la-stream"></i>
                     </p>
                     <p class="mt-1 float-right text-small" v-else>
@@ -243,7 +312,10 @@
                         {{ formatDate(playlist.synced_at) }}
                       </span>
                     </p>
-                    <span class="text-small text-muted" v-if="userHasMoviesSeries">
+                    <span
+                      class="text-small text-muted"
+                      v-if="userHasMoviesSeries"
+                    >
                       {{
                         $t("dashboard.playlist-content").format(
                           formatNumber(playlist.live),
@@ -253,7 +325,11 @@
                       }}
                     </span>
                     <span v-else>
-                      {{ $t("dashboard.playlist-content-live").format(formatNumber(playlist.live)) }}  
+                      {{
+                        $t("dashboard.playlist-content-live").format(
+                          formatNumber(playlist.live)
+                        )
+                      }}
                     </span>
                   </div>
                 </a>
@@ -275,59 +351,111 @@
         >
           <div class="px-2" v-if="playlist.playlist">
             <label class="w-100">{{ $t("xtream.name") }}</label>
-            <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.name" readonly></erd-input>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="playlist.playlist.name"
+              readonly
+            ></erd-input>
             <erd-row class="p-0 m-0">
               <erd-col sm="6" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.username") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.api_username" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="playlist.playlist.api_username"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="6" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.password") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="playlist.playlist.api_password" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="playlist.playlist.api_password"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <label class="w-100">{{ $t("xtream.synced-at") }}</label>
-            <erd-input class="mt-1 mb-2 w-100" :value="formatDate(playlist.playlist.synced_at)" readonly></erd-input>
+            <erd-input
+              class="mt-1 mb-2 w-100"
+              :value="formatDate(playlist.playlist.synced_at)"
+              readonly
+            ></erd-input>
             <erd-row class="p-0 m-0">
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.total-live") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['live'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.live-new") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live-new'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['live-new'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.live-removed") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['live-removed'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['live-removed'])"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <erd-row class="p-0 m-0" v-if="userHasMoviesSeries">
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.total-movies") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movies'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['movies'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.movies-new") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movie-new'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['movie-new'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.movies-removed") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['movie-removed'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['movie-removed'])"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
             <erd-row class="p-0 m-0" v-if="userHasMoviesSeries">
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.total-series") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['series'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 pl-0 pr-1">
                 <label class="w-100">{{ $t("xtream.series-new") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series-new'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['series-new'])"
+                  readonly
+                ></erd-input>
               </erd-col>
               <erd-col sm="4" class="m-0 px-0">
                 <label class="w-100">{{ $t("xtream.series-removed") }}</label>
-                <erd-input class="mt-1 mb-2 w-100" :value="formatNumber(playlist.playlist['series-removed'])" readonly></erd-input>
+                <erd-input
+                  class="mt-1 mb-2 w-100"
+                  :value="formatNumber(playlist.playlist['series-removed'])"
+                  readonly
+                ></erd-input>
               </erd-col>
             </erd-row>
           </div>
@@ -351,7 +479,9 @@
               <i class="las la-list la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.playlist") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.playlists) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.playlists) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -362,7 +492,9 @@
               <i class="las la-tv la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.live-streams") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.live) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.live) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -373,7 +505,9 @@
               <i class="las la-film la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.movies") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.movies) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.movies) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -384,7 +518,9 @@
               <i class="las la-video la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.series") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.series) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.series) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -399,7 +535,9 @@
               <i class="las la-list la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.playlist") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.playlists) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.playlists) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -410,7 +548,9 @@
               <i class="las la-tv la-5x color-theme-1"></i>
               <div class="dashboard-card-title" style="">
                 <h5 class="m-0">{{ $t("dashboard.live-streams") }}</h5>
-                <p class="m-0 color-theme-1">{{ formatNumber(statistics.live) }}</p>
+                <p class="m-0 color-theme-1">
+                  {{ formatNumber(statistics.live) }}
+                </p>
               </div>
             </erd-card-body>
           </erd-card>
@@ -423,10 +563,13 @@
           <erd-card class="list-card">
             <erd-button
               class="refresh-button"
-              icon="la-sync"
               outline
               @click="loadTickets"
-            ></erd-button>
+            >
+              <erd-tooltip :tooltip="$t('dashboard.tooltip-refresh')" :enabled="showTooltips">
+                <i class="las la-sync"></i>
+              </erd-tooltip>
+            </erd-button>
             <erd-card-body>
               <div class="float-left float-none-xs">
                 <div class="d-inline-block">
@@ -484,10 +627,13 @@
           <erd-card class="list-card">
             <erd-button
               class="refresh-button"
-              icon="la-sync"
               outline
               @click="loadInvoices"
-            ></erd-button>
+            >
+              <erd-tooltip :tooltip="$t('dashboard.tooltip-refresh')" :enabled="showTooltips">
+                <i class="las la-sync"></i>
+              </erd-tooltip>
+            </erd-button>
             <erd-card-body>
               <div class="float-left float-none-xs">
                 <div class="d-inline-block">
@@ -563,13 +709,19 @@ export default {
         live: 0,
         movies: 0,
         series: 0,
-      }
+      },
     };
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters(["currentUser", "settings"]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     userHasMoviesSeries() {
-      return this.currentUser.subscription && this.currentUser.subscription.subscription_type > 0;
+      return (
+        this.currentUser.subscription &&
+        this.currentUser.subscription.subscription_type > 0
+      );
     },
     memberSince() {
       return new Date(this.currentUser.user.created).toLocaleDateString(
@@ -618,9 +770,9 @@ export default {
       this.playlists = [];
       this.xtreamAccounts = [];
       Promise.all([
-        httpService.get("dashboard/statistics"), 
-        httpService.get("dashboard/xtream-accounts"), 
-        httpService.get("dashboard/playlists")
+        httpService.get("dashboard/statistics"),
+        httpService.get("dashboard/xtream-accounts"),
+        httpService.get("dashboard/playlists"),
       ])
         .then((res) => {
           if (res[0].status === true) {
@@ -731,7 +883,7 @@ export default {
         this.playlist.playlist = playlist;
       }
       this.playlist.modal = show;
-    }
+    },
   },
   beforeMount() {
     this.loadDashboard();

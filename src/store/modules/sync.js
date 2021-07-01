@@ -16,30 +16,8 @@ const getters = {
   tmdbFilteredGenres(state) {
     return state.tmdbGenres.filter((genre) => {
       return [
-        12,
-        14,
-        16,
-        18,
-        27,
-        28,
-        35,
-        36,
-        37,
-        53,
-        99,
-        878,
-        10749,
-        10762,
-        10759,
-        80,
-        10751,
-        9648,
-        10763,
-        10765,
-        10767,
-        10768,
-        10752,
-        10402,
+        12, 14, 16, 18, 27, 28, 35, 36, 37, 53, 99, 878, 10749, 10762, 10759,
+        80, 10751, 9648, 10763, 10765, 10767, 10768, 10752, 10402,
       ].includes(genre.id);
     });
   },
@@ -57,7 +35,7 @@ const getters = {
   },
   movieSeriePlaylist(state) {
     return state.movieSeriePlaylist;
-  }
+  },
 };
 
 const mutations = {
@@ -78,7 +56,7 @@ const mutations = {
   },
   setMovieSeriePlaylist(state, payload) {
     state.movieSeriePlaylist = payload;
-  }
+  },
 };
 
 const actions = {
@@ -135,17 +113,25 @@ const actions = {
   },
   loadMovieSeriePlaylists({ commit }, payload) {
     httpService.get("playlist/simple").then((res) => {
-      commit("setMovieSeriePlaylists", res.data.map(playlist => {
-        return {
-          text: playlist.name,
-          value: playlist.id,
-        }
-      }));
-      if (payload && payload === true && res.data.length && res.data.length > 0) {
+      commit(
+        "setMovieSeriePlaylists",
+        res.data.map((playlist) => {
+          return {
+            text: playlist.name,
+            value: playlist.id,
+          };
+        })
+      );
+      if (
+        payload &&
+        payload === true &&
+        res.data.length &&
+        res.data.length > 0
+      ) {
         commit("setMovieSeriePlaylist", res.data[0].id);
       }
     });
-  }
+  },
 };
 
 export default {

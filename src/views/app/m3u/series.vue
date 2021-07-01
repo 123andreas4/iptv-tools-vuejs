@@ -38,18 +38,22 @@
           /></a>
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-button
-            variant="info"
-            class="btn-table"
-            @click="editStream(row.item)"
-            ><i class="las la-pen"></i
-          ></erd-button>
-          <erd-button
-            variant="danger"
-            class="btn-table"
-            @click="deleteStream(row.item.id)"
-            ><i class="las la-trash"></i
-          ></erd-button>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-edit-series')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="editStream(row.item)"
+              ><i class="las la-pen"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xtream.tooltip-delete-series')" :enabled="showTooltips">
+            <erd-button
+              variant="danger"
+              class="btn-table"
+              @click="deleteStream(row.item.id)"
+              ><i class="las la-trash"></i
+            ></erd-button>
+          </erd-tooltip>
         </template>
       </b-table>
       <b-pagination
@@ -276,6 +280,9 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser", "settings"]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     perPage() {
       return this.settings.perPage;
     },

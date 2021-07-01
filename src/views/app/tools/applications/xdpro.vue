@@ -15,7 +15,10 @@
     >
       <div class="px-2" v-if="xdPro.instance">
         <label class="w-100">{{ $t("xd-pro.name") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="xdPro.instance.name"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.instance.name"
+        ></erd-input>
         <label class="w-100">{{ $t("xd-pro.speed-limit") }}</label>
         <erd-select
           key="speed-limit"
@@ -31,8 +34,17 @@
           v-model="xdPro.instance.useragent"
         ></erd-select>
         <label class="w-100">{{ $t("xd-pro.download-folder") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="xdPro.instance.download_folder"></erd-input>
-        <erd-checkbox class="mb-3" v-model="xdPro.instance.check_connections" :true-value="1" :false-value="0">{{ $t("xd-pro.check-connections") }}</erd-checkbox>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.instance.download_folder"
+        ></erd-input>
+        <erd-checkbox
+          class="mb-3"
+          v-model="xdPro.instance.check_connections"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("xd-pro.check-connections") }}</erd-checkbox
+        >
         <div class="mb-5"></div>
       </div>
       <template v-slot:footer>
@@ -43,9 +55,12 @@
           variant="danger"
           >{{ $t("general.cancel") }}</erd-button
         >
-        <erd-button icon="la-check" variant="success" @click="xdProModal(false, true)">{{
-          $t("general.ok")
-        }}</erd-button>
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="xdProModal(false, true)"
+          >{{ $t("general.ok") }}</erd-button
+        >
       </template>
     </erd-modal>
     <!--  
@@ -69,13 +84,25 @@
           v-model="downloads.download.xdpro_id"
         ></erd-select>
         <label class="w-100">{{ $t("xd-pro.download-url") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="downloads.download.download_url"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="downloads.download.download_url"
+        ></erd-input>
         <label class="w-100">{{ $t("xd-pro.filename") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="downloads.download.filename"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="downloads.download.filename"
+        ></erd-input>
         <label class="w-100">{{ $t("xd-pro.file-extension") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="downloads.download.file_extension"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="downloads.download.file_extension"
+        ></erd-input>
         <label class="w-100">{{ $t("xd-pro.download-folder") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="downloads.download.download_folder"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="downloads.download.download_folder"
+        ></erd-input>
       </div>
       <template v-slot:footer>
         <erd-button
@@ -85,9 +112,12 @@
           variant="danger"
           >{{ $t("general.cancel") }}</erd-button
         >
-        <erd-button icon="la-check" variant="success" @click="downloadModal(false, true)">{{
-          $t("general.ok")
-        }}</erd-button>
+        <erd-button
+          icon="la-check"
+          variant="success"
+          @click="downloadModal(false, true)"
+          >{{ $t("general.ok") }}</erd-button
+        >
       </template>
     </erd-modal>
     <!--  
@@ -98,25 +128,34 @@
     <erd-col xl="12" sm="12" v-show="activeTab == 0">
       <b-table :items="pagedInstances" :fields="xdPro.fields" striped small>
         <template v-slot:cell(speed_limit)="row">
-          {{ speedLimits.find(limit => limit.value === row.item.speed_limit).text }}
+          {{
+            speedLimits.find((limit) => limit.value === row.item.speed_limit)
+              .text
+          }}
         </template>
         <template v-slot:cell(check_connections)="row">
-          <erd-badge variant="success" v-if="row.item.check_connections">{{ $t("general.yes") }}</erd-badge>
+          <erd-badge variant="success" v-if="row.item.check_connections">{{
+            $t("general.yes")
+          }}</erd-badge>
           <erd-badge variant="danger" v-else>{{ $t("general.no") }}</erd-badge>
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-button
-            variant="info"
-            class="btn-table"
-            @click="editInstance(row.item)"
-            ><i class="las la-pen"></i
-          ></erd-button>
-          <erd-button
-            variant="danger"
-            class="btn-table"
-            @click="deleteInstance(row.item.id)"
-            ><i class="las la-trash"></i
-          ></erd-button>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-edit-instance')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="editInstance(row.item)"
+              ><i class="las la-pen"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-delete-instance')" :enabled="showTooltips">
+            <erd-button
+              variant="danger"
+              class="btn-table"
+              @click="deleteInstance(row.item.id)"
+              ><i class="las la-trash"></i
+            ></erd-button>
+          </erd-tooltip>
         </template>
       </b-table>
       <b-pagination
@@ -150,50 +189,74 @@
     <erd-col xl="12" sm="12" v-show="activeTab == 1">
       <b-table :items="pagedDownloads" :fields="downloads.fields" striped small>
         <template v-slot:cell(type)="row">
-          <erd-badge variant="info" v-if="row.item.type == 1"><i class="las la-film mr-1"></i>{{ $t("xd-pro.movie") }}</erd-badge>
-          <erd-badge variant="primary" v-if="row.item.type == 2"><i class="las la-video mr-1"></i>{{ $t("xd-pro.series") }}</erd-badge>
-          <erd-badge variant="success" v-if="row.item.type == 3"><i class="las la-tv mr-1"></i>{{ $t("xd-pro.catch-up") }}</erd-badge>
+          <erd-badge variant="info" v-if="row.item.type == 1"
+            ><i class="las la-film mr-1"></i>{{ $t("xd-pro.movie") }}</erd-badge
+          >
+          <erd-badge variant="primary" v-if="row.item.type == 2"
+            ><i class="las la-video mr-1"></i
+            >{{ $t("xd-pro.series") }}</erd-badge
+          >
+          <erd-badge variant="success" v-if="row.item.type == 3"
+            ><i class="las la-tv mr-1"></i
+            >{{ $t("xd-pro.catch-up") }}</erd-badge
+          >
         </template>
         <template v-slot:cell(active)="row">
-          <erd-badge variant="success" v-if="row.item.active == 1">{{ $t("general.yes") }}</erd-badge>
+          <erd-badge variant="success" v-if="row.item.active == 1">{{
+            $t("general.yes")
+          }}</erd-badge>
           <erd-badge variant="danger" v-else>{{ $t("general.no") }}</erd-badge>
         </template>
         <template v-slot:cell(enabled)="row">
-          <erd-badge variant="success" v-if="row.item.enabled == 1">{{ $t("general.yes") }}</erd-badge>
+          <erd-badge variant="success" v-if="row.item.enabled == 1">{{
+            $t("general.yes")
+          }}</erd-badge>
           <erd-badge variant="danger" v-else>{{ $t("general.no") }}</erd-badge>
         </template>
         <template v-slot:cell(progress)="row">
-          <erd-progress-bar :variant="row.item.has_error ? 'danger' : 'info'" :value="row.item.progress" class="download-progress"></erd-progress-bar>
+          <erd-progress-bar
+            :variant="row.item.has_error ? 'danger' : 'info'"
+            :value="row.item.progress"
+            class="download-progress"
+          ></erd-progress-bar>
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-button
-            variant="info"
-            class="btn-table"
-            @click="editDownload(row.item)"
-            :disabled="row.item.active == 1"
-            ><i class="las la-pen"></i
-          ></erd-button>
-          <erd-button
-            variant="primary"
-            class="btn-table"
-            @click="pauseDownload(row.item)"
-            :disabled="row.item.active == 1 || row.item.enabled == 0"
-            ><i class="las la-pause"></i
-          ></erd-button>
-          <erd-button
-            variant="primary"
-            class="btn-table"
-            @click="resumeDownload(row.item)"
-            :disabled="row.item.active == 1 || row.item.enabled == 1"
-            ><i class="las la-play"></i
-          ></erd-button>
-          <erd-button
-            variant="danger"
-            class="btn-table"
-            @click="deleteDownload(row.item.id)"
-            :disabled="row.item.active == 1"
-            ><i class="las la-trash"></i
-          ></erd-button>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-edit-download')" :enabled="showTooltips">
+            <erd-button
+              variant="info"
+              class="btn-table"
+              @click="editDownload(row.item)"
+              :disabled="row.item.active == 1"
+              ><i class="las la-pen"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-pause-download')" :enabled="showTooltips">
+            <erd-button
+              variant="primary"
+              class="btn-table"
+              @click="pauseDownload(row.item)"
+              :disabled="row.item.active == 1 || row.item.enabled == 0"
+              ><i class="las la-pause"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-resume-download')" :enabled="showTooltips">
+            <erd-button
+              variant="primary"
+              class="btn-table"
+              @click="resumeDownload(row.item)"
+              :disabled="row.item.active == 1 || row.item.enabled == 1"
+              ><i class="las la-play"></i
+            ></erd-button>
+          </erd-tooltip>
+          <erd-tooltip :tooltip="$t('xd-pro.tooltip-delete-download')" :enabled="showTooltips">
+            <erd-button
+              variant="danger"
+              class="btn-table"
+              @click="deleteDownload(row.item.id)"
+              :disabled="row.item.active == 1"
+              ><i class="las la-trash"></i
+            ></erd-button>
+          </erd-tooltip>
         </template>
       </b-table>
       <b-pagination
@@ -218,7 +281,7 @@
           <i class="las la-angle-double-right" />
         </template>
       </b-pagination>
-    </erd-col> 
+    </erd-col>
     <!--  
 
       APP MENU
@@ -226,7 +289,12 @@
     -->
     <erd-app-menu icon="la-tools">
       <div class="pt-3 select-none xd-pro-menu">
-        <erd-collapse :title="$t('xd-pro.xd-pro')" key="xd-pro-instance" v-if="activeTab == 0" small>
+        <erd-collapse
+          :title="$t('xd-pro.xd-pro')"
+          key="xd-pro-instance"
+          v-if="activeTab == 0"
+          small
+        >
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
               <a href="#" @click.prevent="addInstance"
@@ -236,7 +304,12 @@
             </li>
           </ul>
         </erd-collapse>
-        <erd-collapse :title="$t('xd-pro.download-xd-pro')" key="xd-pro-download" v-if="activeTab == 0" small>
+        <erd-collapse
+          :title="$t('xd-pro.download-xd-pro')"
+          key="xd-pro-download"
+          v-if="activeTab == 0"
+          small
+        >
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
               <a href="#" @click.prevent
@@ -264,7 +337,12 @@
             </li>
           </ul>
         </erd-collapse>
-        <erd-collapse :title="$t('xd-pro.downloads')" key="xd-pro-downloads" v-if="activeTab == 1" small>
+        <erd-collapse
+          :title="$t('xd-pro.downloads')"
+          key="xd-pro-downloads"
+          v-if="activeTab == 1"
+          small
+        >
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
               <a href="#" @click.prevent="resumeDownloads"
@@ -280,7 +358,12 @@
             </li>
           </ul>
         </erd-collapse>
-        <erd-collapse :title="$t('xd-pro.delete')" key="xd-pro-delete" v-if="activeTab == 1" small>
+        <erd-collapse
+          :title="$t('xd-pro.delete')"
+          key="xd-pro-delete"
+          v-if="activeTab == 1"
+          small
+        >
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
               <a href="#" @click.prevent="deleteDownloads(true)"
@@ -316,7 +399,7 @@ export default {
     return {
       useragents: [
         { text: this.$t("xd-pro.iptv-tools"), value: "IPTV-Tools/1.0" },
-        { text: this.$t("xd-pro.browser-default"), value: navigator.userAgent },    
+        { text: this.$t("xd-pro.browser-default"), value: navigator.userAgent },
       ],
       speedLimits: [
         { text: this.$t("xd-pro.no-limit"), value: 0 },
@@ -335,10 +418,26 @@ export default {
         currentPage: 0,
         fields: [
           { key: "name", label: this.$t("xd-pro.name"), sortable: true },
-          { key: "download_folder", label: this.$t("xd-pro.download-folder"), sortable: true },
-          { key: "speed_limit", label: this.$t("xd-pro.speed-limit"), sortable: true },
-          { key: "check_connections", label: this.$t("xd-pro.check-connections"), sortable: true },
-          { key: "downloads", label: this.$t("xd-pro.downloads"), sortable: true },
+          {
+            key: "download_folder",
+            label: this.$t("xd-pro.download-folder"),
+            sortable: true,
+          },
+          {
+            key: "speed_limit",
+            label: this.$t("xd-pro.speed-limit"),
+            sortable: true,
+          },
+          {
+            key: "check_connections",
+            label: this.$t("xd-pro.check-connections"),
+            sortable: true,
+          },
+          {
+            key: "downloads",
+            label: this.$t("xd-pro.downloads"),
+            sortable: true,
+          },
           {
             key: "actions",
             label: this.$t("users.actions"),
@@ -346,7 +445,7 @@ export default {
             thClass: "text-right",
             tdClass: "text-right",
           },
-        ]
+        ],
       },
       downloads: {
         handle: null,
@@ -358,12 +457,24 @@ export default {
         total: 0,
         currentPage: 0,
         fields: [
-          { key: "filename", label: this.$t("xd-pro.filename"), sortable: true },
-          { key: "file_extension", label: this.$t("xd-pro.file-extension"), sortable: true },
+          {
+            key: "filename",
+            label: this.$t("xd-pro.filename"),
+            sortable: true,
+          },
+          {
+            key: "file_extension",
+            label: this.$t("xd-pro.file-extension"),
+            sortable: true,
+          },
           { key: "type", label: this.$t("xd-pro.type"), sortable: true },
           { key: "active", label: this.$t("xd-pro.active"), sortable: true },
           { key: "enabled", label: this.$t("xd-pro.enabled"), sortable: true },
-          { key: "progress", label: this.$t("xd-pro.progress"), sortable: true },
+          {
+            key: "progress",
+            label: this.$t("xd-pro.progress"),
+            sortable: true,
+          },
           {
             key: "actions",
             label: this.$t("users.actions"),
@@ -371,7 +482,7 @@ export default {
             thClass: "text-right",
             tdClass: "text-right",
           },
-        ]
+        ],
       },
       activeTab: 0,
       search: null,
@@ -380,6 +491,9 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser", "settings"]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     searchFilteredInstances() {
       if (this.search === null) {
         return this.xdPro.instances;
@@ -426,21 +540,25 @@ export default {
     },
     pagedDownloads() {
       this.downloads.total = this.searchFilteredDownloads.length;
-      this.downloads.from = (this.downloads.currentPage - 1) * this.perPage || 0;
+      this.downloads.from =
+        (this.downloads.currentPage - 1) * this.perPage || 0;
       this.downloads.to =
         this.downloads.from + this.perPage > this.downloads.total
           ? this.downloads.total
           : this.downloads.from + this.perPage;
-      return this.searchFilteredDownloads.slice(this.downloads.from, this.downloads.to);
+      return this.searchFilteredDownloads.slice(
+        this.downloads.from,
+        this.downloads.to
+      );
     },
     downloadInstances() {
-      return this.xdPro.instances.map(instance => {
+      return this.xdPro.instances.map((instance) => {
         return {
           text: instance.name,
           value: instance.id,
-        }
-      })
-    }
+        };
+      });
+    },
   },
   methods: {
     searchStream(search) {
@@ -486,22 +604,20 @@ export default {
     },
     addInstance() {
       this.isLoading = true;
-      httpService
-        .post("xd-pro/instance")
-        .then((res) => {
-          this.isLoading = false;
-          if (res.status === true) {
-            this.xdPro.instance = {
-              id: res.data,
-              name: "",
-              download_folder: "",
-              useragent: "IPTV-Tools/1.0",
-              speed_limit: 0,
-              check_connections: 1
-            };
-            this.xdPro.modal = true;
-          }
-        });
+      httpService.post("xd-pro/instance").then((res) => {
+        this.isLoading = false;
+        if (res.status === true) {
+          this.xdPro.instance = {
+            id: res.data,
+            name: "",
+            download_folder: "",
+            useragent: "IPTV-Tools/1.0",
+            speed_limit: 0,
+            check_connections: 1,
+          };
+          this.xdPro.modal = true;
+        }
+      });
     },
     editInstance(instance) {
       this.xdPro.instance = Object.assign({}, instance);
@@ -569,50 +685,53 @@ export default {
         });
     },
     editDownload(download) {
-      httpService.put(`xd-pro/download/${download.id}`, { enabled: 0 })
-      .then((res) => {
+      httpService
+        .put(`xd-pro/download/${download.id}`, { enabled: 0 })
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.downloads.download = Object.assign({}, download);
             this.downloads.modal = true;
           }
         })
-      .catch(() => {
-        //
-      })
+        .catch(() => {
+          //
+        });
     },
     pauseDownload(download) {
-      httpService.put(`xd-pro/download/${download.id}`, { enabled: 0 })
-      .then((res) => {
+      httpService
+        .put(`xd-pro/download/${download.id}`, { enabled: 0 })
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.loadDownloads();
           }
         })
-      .catch(() => {
-        this.$notify(
-          "error",
-          this.$t("profile.failed"),
-          this.$t("xd-pro.download-save-error"),
-          "la-user-shield",
-          { duration: 5000, permanent: false }
-        );
-      })
+        .catch(() => {
+          this.$notify(
+            "error",
+            this.$t("profile.failed"),
+            this.$t("xd-pro.download-save-error"),
+            "la-user-shield",
+            { duration: 5000, permanent: false }
+          );
+        });
     },
     resumeDownload(download) {
-      httpService.put(`xd-pro/download/${download.id}`, { enabled: 1 })
-      .then((res) => {
+      httpService
+        .put(`xd-pro/download/${download.id}`, { enabled: 1 })
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.loadDownloads();
           }
         })
-      .catch(() => {
-        this.$notify(
-          "error",
-          this.$t("profile.failed"),
-          this.$t("xd-pro.download-save-error"),
-          "la-user-shield",
-          { duration: 5000, permanent: false }
-        );
-      });
+        .catch(() => {
+          this.$notify(
+            "error",
+            this.$t("profile.failed"),
+            this.$t("xd-pro.download-save-error"),
+            "la-user-shield",
+            { duration: 5000, permanent: false }
+          );
+        });
     },
     saveDownload() {
       this.isLoading = true;
@@ -698,33 +817,36 @@ export default {
         })
         .catch(() => {
           //
-        })
+        });
     },
     pauseDownloads() {
-      httpService.put("xd-pro/pause")
-      .then((res) => {
+      httpService
+        .put("xd-pro/pause")
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.loadDownloads();
           }
         })
-      .catch(() => {
-        this.loadDownloads();
-      });
+        .catch(() => {
+          this.loadDownloads();
+        });
     },
     resumeDownloads() {
-      httpService.put("xd-pro/resume")
-      .then((res) => {
+      httpService
+        .put("xd-pro/resume")
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.loadDownloads();
           }
         })
-      .catch(() => {
-        this.loadDownloads();
-      });
+        .catch(() => {
+          this.loadDownloads();
+        });
     },
     deleteDownloads(disabled) {
-      httpService.put(`xd-pro/delete/${disabled ? "1" : "0"}`)
-      .then((res) => {
+      httpService
+        .put(`xd-pro/delete/${disabled ? "1" : "0"}`)
+        .then((res) => {
           if (res.status === true && res.data === true) {
             this.$notify(
               "primary",
@@ -736,16 +858,16 @@ export default {
             this.loadDownloads();
           }
         })
-      .catch(() => {
-        this.$notify(
-          "error",
-          this.$t("profile.failed"),
-          this.$t("xd-pro.download-delete-error"),
-          "la-user-shield",
-          { duration: 5000, permanent: false }
-        );
-        this.loadDownloads();
-      });
+        .catch(() => {
+          this.$notify(
+            "error",
+            this.$t("profile.failed"),
+            this.$t("xd-pro.download-delete-error"),
+            "la-user-shield",
+            { duration: 5000, permanent: false }
+          );
+          this.loadDownloads();
+        });
     },
   },
   beforeMount() {
@@ -766,24 +888,22 @@ export default {
     EventBus.$off("tab-change", this.doTabChange);
     EventBus.$off("refresh", this.doRefresh);
   },
-  watch: {
-    
-  },
+  watch: {},
 };
 </script>
 
 <style lang="scss">
-  .xd-pro-menu {
-    position: relative;
-    height: calc(100% - 50px);
-  }
+.xd-pro-menu {
+  position: relative;
+  height: calc(100% - 50px);
+}
 
-  .xd-pro-description {
-    position: absolute;
-    bottom: 0;
-  }
+.xd-pro-description {
+  position: absolute;
+  bottom: 0;
+}
 
-  .download-progress {
-    min-width: 200px;
-  }
+.download-progress {
+  min-width: 200px;
+}
 </style>

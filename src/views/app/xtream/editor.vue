@@ -1812,6 +1812,9 @@ export default {
       "soundcloudClientId",
       "movieSeriePlaylist",
     ]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     searchFiltered() {
       if (this.search === null) {
         return this.accounts;

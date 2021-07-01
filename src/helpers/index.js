@@ -12,7 +12,7 @@ export function authHeader() {
 
   if (user && user.token) {
     return {
-      "Authorization": "Bearer " + user.token,
+      Authorization: "Bearer " + user.token,
     };
   } else {
     return {};
@@ -68,6 +68,7 @@ export const getUserSettings = () => {
   let user = {
     perPage: 10,
     expandMenu: true,
+    showTooltips: true,
   };
   try {
     user =
@@ -218,13 +219,13 @@ export const monthName = (month, locale) => {
 };
 
 export const downloadFromURL = (url) => {
-  const a = document.createElement('a')
+  const a = document.createElement("a");
   a.href = url;
-  a.download = url.split('/').pop();
+  a.download = url.split("/").pop();
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-}
+};
 
 export const languages = {
   ab: {

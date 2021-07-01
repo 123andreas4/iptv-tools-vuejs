@@ -14,15 +14,22 @@
     >
       <div class="px-2">
         <label class="w-100">{{ $t("xd-pro.xd-pro-instance") }}</label>
-        <erd-select class="mt-1 mb-2 w-100" v-model="xdPro.xdpro_id" :items="xdProInstanceItems"></erd-select>
+        <erd-select
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.xdpro_id"
+          :items="xdProInstanceItems"
+        ></erd-select>
         <label class="w-100">{{ $t("xd-pro.download-folder") }}</label>
-        <erd-input class="mt-1 mb-2 w-100" v-model="xdPro.download_folder"></erd-input>
+        <erd-input
+          class="mt-1 mb-2 w-100"
+          v-model="xdPro.download_folder"
+        ></erd-input>
         <label class="w-100 mb-2">{{ $t("xd-pro.select-episodes") }}</label>
         <div class="radiobrowser-stations">
           <perfect-scrollbar
             :settings="{ suppressScrollX: true, wheelPropagation: false }"
           >
-            <div 
+            <div
               class="form-control radiobrowser-station"
               v-for="(episode, index) in viewerEpisodes"
               :key="`xdpro-episode-${index}`"
@@ -31,8 +38,15 @@
               @click.shift="selectDownloadsRangeSelection(index)"
               @click.exact="selectDownloadsSelection(index)"
             >
-              <span class="station-name mr-2">{{ $t("xd-pro.season-episode").format(episode.serie_season, episode.serie_episode) }}</span>
-              <span class="station-name text-muted">{{ episode.tmdb.name }}</span>
+              <span class="station-name mr-2">{{
+                $t("xd-pro.season-episode").format(
+                  episode.serie_season,
+                  episode.serie_episode
+                )
+              }}</span>
+              <span class="station-name text-muted">{{
+                episode.tmdb.name
+              }}</span>
             </div>
           </perfect-scrollbar>
         </div>
@@ -45,12 +59,22 @@
           variant="danger"
           >{{ $t("general.cancel") }}</erd-button
         >
-        <erd-button icon="la-check" variant="success" :disabled="xdPro.xdpro_id == 0 || xdPro.downloads.length == 0" @click="downloadModal(false, true)">{{
-          $t("general.ok")
-        }}</erd-button>
+        <erd-button
+          icon="la-check"
+          variant="success"
+          :disabled="xdPro.xdpro_id == 0 || xdPro.downloads.length == 0"
+          @click="downloadModal(false, true)"
+          >{{ $t("general.ok") }}</erd-button
+        >
       </template>
     </erd-modal>
-    <erd-spinner v-if="isLoading" :text="loadingText" size="lg" overlay absolute></erd-spinner>
+    <erd-spinner
+      v-if="isLoading"
+      :text="loadingText"
+      size="lg"
+      overlay
+      absolute
+    ></erd-spinner>
     <erd-col xl="12" class="m-0 p-0" v-if="viewer" id="series">
       <erd-row class="m-0 p-0">
         <erd-col xl="4" md="4">
@@ -136,7 +160,9 @@
               v-for="(season, index) in seasonsInSeries"
               :key="`season-${index}`"
             >
-              <h5 class="my-0 ml-3">{{ $t("series.season").format(season)}}</h5>
+              <h5 class="my-0 ml-3">
+                {{ $t("series.season").format(season) }}
+              </h5>
               <erd-row class="p-0 m-0">
                 <erd-col
                   xl="6"
@@ -170,7 +196,11 @@
                 </erd-col>
               </erd-row>
             </erd-col>
-            <erd-col xl="12" class="p-0 m-0" v-if="filteredCast && filteredCast.length">
+            <erd-col
+              xl="12"
+              class="p-0 m-0"
+              v-if="filteredCast && filteredCast.length"
+            >
               <h5 class="mt-2 mb-0 ml-3">{{ $t("series.main-characters") }}</h5>
               <erd-row class="p-0 m-0">
                 <erd-col
@@ -260,7 +290,9 @@
         <erd-card class="movie-card depth-2">
           <div class="poster">
             <button class="more-button" @click="viewDetails(series)">
-              <i class="las la-ellipsis-h"></i>
+              <erd-tooltip :tooltip="$t('series.tooltip-show-more')" :enabled="showTooltips">
+                <i class="las la-ellipsis-h"></i>
+              </erd-tooltip>
             </button>
             <img
               class="movie-poster"
@@ -274,9 +306,11 @@
           </div>
           <erd-card-body class="py-3">
             <h5 class="m-0">
-              <a href="#" @click.prevent="viewDetails(series)">{{
-                series.tmdb.name
-              }}</a>
+              <erd-tooltip :tooltip="$t('series.tooltip-show-more')" :enabled="showTooltips">
+                <a href="#" @click.prevent="viewDetails(series)">{{
+                  series.tmdb.name
+                }}</a>
+              </erd-tooltip>
             </h5>
             <p class="m-0 text-muted text-small">
               <span>{{
@@ -356,11 +390,21 @@ export default {
         xdpro_id: 0,
         download_folder: "",
         downloads: [],
-      }
+      },
     };
   },
   computed: {
-    ...mapGetters(["tmdbGenres", "tmdbFilteredGenres", "settings", "currentUser", "movieSeriePlaylist", "xdProInstances"]),
+    ...mapGetters([
+      "tmdbGenres",
+      "tmdbFilteredGenres",
+      "settings",
+      "currentUser",
+      "movieSeriePlaylist",
+      "xdProInstances",
+    ]),
+    showTooltips () {
+      return this.settings.showTooltips;
+    },
     canDownload() {
       return this.xdProInstances && this.xdProInstances.length > 0;
     },
@@ -410,11 +454,11 @@ export default {
     },
     seasonsInSeries() {
       let seasons = 0;
-      this.viewerEpisodes.map(e => {
+      this.viewerEpisodes.map((e) => {
         if (e.serie_season > seasons) {
           seasons = e.serie_season;
         }
-      })
+      });
       return seasons;
     },
     perPage() {
@@ -430,13 +474,13 @@ export default {
       return this.filteredSeries.slice(this.from, this.to);
     },
     xdProInstanceItems() {
-      return this.xdProInstances.map(instance => {
+      return this.xdProInstances.map((instance) => {
         return {
           text: instance.name,
           value: instance.id,
-        }
-      })
-    }
+        };
+      });
+    },
   },
   methods: {
     ...mapActions(["updateTMDBGenres", "addxdProDownload"]),
@@ -461,53 +505,53 @@ export default {
       let d = 0;
       progress_cb(0);
       for (const p of proms) {
-        p.then(()=> {    
-          d ++;
-          progress_cb( (d * 100) / proms.length );
+        p.then(() => {
+          d++;
+          progress_cb((d * 100) / proms.length);
         });
       }
       return Promise.all(proms);
     },
     loadSeries() {
       this.isLoading = true;
-      httpService.get(`serie/total/${this.movieSeriePlaylist}`)
-        .then(res => {
-          if (res.status === true) {
-            let requests = [];
-            for (var i = 0; i < res.data; i += 50) {
-              requests.push(
-                httpService.get(
-                  `serie/browse/${this.movieSeriePlaylist}/${i}/50`
-                )
-              );
-            } 
-            this.allProgress(requests, (p) => {
-              this.loadingText = this.$t("series.browse-loading").format(Math.round(p));
-            })
-            .then(res => {
-              let series = [];
-              res.forEach(result => {
-                if (result.status === true) {
-                  series = [...series, ...result.data];
-                }
-              });
-              series.sort((a, b) => {
-                return (
-                  new Date(b.tmdb.first_air_date) - new Date(a.tmdb.first_air_date)
-                );
-              });
-              this.series = series;
-              this.isLoading = false;
-            });
+      httpService.get(`serie/total/${this.movieSeriePlaylist}`).then((res) => {
+        if (res.status === true) {
+          let requests = [];
+          for (var i = 0; i < res.data; i += 50) {
+            requests.push(
+              httpService.get(`serie/browse/${this.movieSeriePlaylist}/${i}/50`)
+            );
           }
-        });
-
+          this.allProgress(requests, (p) => {
+            this.loadingText = this.$t("series.browse-loading").format(
+              Math.round(p)
+            );
+          }).then((res) => {
+            let series = [];
+            res.forEach((result) => {
+              if (result.status === true) {
+                series = [...series, ...result.data];
+              }
+            });
+            series.sort((a, b) => {
+              return (
+                new Date(b.tmdb.first_air_date) -
+                new Date(a.tmdb.first_air_date)
+              );
+            });
+            this.series = series;
+            this.isLoading = false;
+          });
+        }
+      });
     },
     loadSeriesDetails() {
       this.isLoading = true;
       this.loadingText = "";
       httpService
-        .get(`serie/details/${this.movieSeriePlaylist}/${this.viewerSeries.tmdb_id}`)
+        .get(
+          `serie/details/${this.movieSeriePlaylist}/${this.viewerSeries.tmdb_id}`
+        )
         .then((res) => {
           this.isLoading = false;
           if (res.status === true) {
@@ -571,7 +615,9 @@ export default {
       });
     },
     episodeURL(episode) {
-      return episode.source_stream_url && episode.source_stream_url.length ? episode.source_stream_url : episode.xtream_url;
+      return episode.source_stream_url && episode.source_stream_url.length
+        ? episode.source_stream_url
+        : episode.xtream_url;
     },
     episodeVideoType(episode) {
       if (episode.source_container_extension.toLowerCase() == "mkv") {
@@ -581,7 +627,9 @@ export default {
       }
     },
     formatDownloadFolder(folder) {
-      return this.xdPro.download_folder.slice(-1) == "/" ? `${this.xdPro.download_folder}${folder}` : `${this.xdPro.download_folder}/${folder}`;
+      return this.xdPro.download_folder.slice(-1) == "/"
+        ? `${this.xdPro.download_folder}${folder}`
+        : `${this.xdPro.download_folder}/${folder}`;
     },
     downloadModal(show, save = false) {
       if (show) {
@@ -589,17 +637,28 @@ export default {
       }
       if (save) {
         let downloads = [];
-        this.xdPro.downloads.map(index => {
+        this.xdPro.downloads.map((index) => {
           const episode = this.viewerEpisodes[index];
-          const year = new Date(this.viewerSeries.tmdb.first_air_date).getFullYear();
+          const year = new Date(
+            this.viewerSeries.tmdb.first_air_date
+          ).getFullYear();
           let download = {
             user_id: this.currentUser.user.id,
             xdpro_id: this.xdPro.xdpro_id,
-            filename: `${this.viewerSeries.tmdb.original_name} (${year}) S${String(episode.serie_season).padStart(2, "0")}E${String(episode.serie_episode).padStart(2, "0")}.${episode.source_container_extension}`,
+            filename: `${
+              this.viewerSeries.tmdb.original_name
+            } (${year}) S${String(episode.serie_season).padStart(
+              2,
+              "0"
+            )}E${String(episode.serie_episode).padStart(2, "0")}.${
+              episode.source_container_extension
+            }`,
             file_extension: episode.source_container_extension,
             type: 2,
             enabled: 0,
-            download_folder: this.formatDownloadFolder(`${this.viewerSeries.tmdb.original_name} (${year})/Season ${episode.serie_season}/`)
+            download_folder: this.formatDownloadFolder(
+              `${this.viewerSeries.tmdb.original_name} (${year})/Season ${episode.serie_season}/`
+            ),
           };
           if (episode.source_stream_url && episode.source_stream_url.length) {
             download.download_url = episode.source_stream_url;
@@ -619,7 +678,7 @@ export default {
           downloads.push(download);
         });
         this.addxdProDownload(downloads)
-          .then(res => {
+          .then((res) => {
             if (res.status === true) {
               this.$notify(
                 "primary",
@@ -651,8 +710,7 @@ export default {
       }
     },
     selectDownloadsRangeSelection(index) {
-      const lastIndex =
-        this.xdPro.downloads[this.xdPro.downloads.length - 1];
+      const lastIndex = this.xdPro.downloads[this.xdPro.downloads.length - 1];
       const dir = index > lastIndex ? 1 : -1;
       for (let i = lastIndex; i != index + dir; i += dir) {
         if (!this.xdPro.downloads.includes(i)) {
@@ -693,7 +751,7 @@ export default {
       EventBus.$emit("update-total", val);
     },
     "xdPro.xdpro_id": function (val) {
-      let instance = this.xdProInstances.find(instance => {
+      let instance = this.xdProInstances.find((instance) => {
         return instance.id == val;
       });
       if (instance) {
@@ -702,7 +760,7 @@ export default {
     },
     movieSeriePlaylist: function () {
       this.loadSeries();
-    }
+    },
   },
 };
 </script>
