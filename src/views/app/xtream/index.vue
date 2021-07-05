@@ -7,7 +7,7 @@
         @click="doAdd"
         v-if="!editor && !isXtreamEditor"
         variant="success"
-        :disabled="!canAddPlaylist"
+        :disabled="!canAddPlaylist && isXtreamPlaylists"
         >{{ addButtonText }}</erd-button
       >
       <erd-button
@@ -166,7 +166,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["updateSoundcloudId"]),
+    ...mapActions(["updateSoundcloudId", "loadMovieSeriePlaylists"]),
     updateFrom(from) {
       this.from = from;
     },
@@ -206,6 +206,7 @@ export default {
   },
   watch: {
     $route: function () {
+      this.loadMovieSeriePlaylists();
       this.to = 0;
       this.from = 0;
       this.total = 0;

@@ -29,11 +29,28 @@ import VueI18n from "vue-i18n";
 
 import en from "./locales/en.json";
 import nl from "./locales/nl.json";
+import de from "./locales/de.json";
+import fr from "./locales/fr.json";
+import es from "./locales/es.json";
+import it from "./locales/it.json";
+import ro from "./locales/ro.json";
+import ru from "./locales/ru.json";
+import cz from "./locales/cz.json";
 
 import { getCurrentLanguage } from "./helpers";
 import { localeDateTimeFormats } from "./constants/config";
 Vue.use(VueI18n);
-const messages = { en: en, nl: nl };
+const messages = { 
+  en: en, 
+  nl: nl, 
+  de: de, 
+  fr: fr, 
+  es: es,
+  it: it,
+  ro: ro,
+  ru: ru,
+  cz: cz
+};
 const locale = getCurrentLanguage();
 const i18n = new VueI18n({
   locale: locale,

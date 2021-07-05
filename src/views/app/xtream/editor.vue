@@ -3852,25 +3852,25 @@ export default {
           );
         }
         let channelNames = this.assignTVGID.channels.map(
-          (channel) => channel.tvg_name
+          (channel) => channel.tvg_name.toLowerCase()
         );
         let channelIds = this.assignTVGID.channels.map(
-          (channel) => channel.tvg_id
+          (channel) => channel.tvg_id.toLowerCase()
         );
         streams.map((stream) => {
           let match1 = stringSimilarity.findBestMatch(
-            String(stream.stream_tvg_name),
+            String(stream.stream_tvg_name).toLowerCase(),
             channelNames
           ).bestMatch;
           let match2 = stringSimilarity.findBestMatch(
-            String(stream.stream_tvg_id),
+            String(stream.stream_tvg_id).toLowerCase(),
             channelIds
           ).bestMatch;
           let match3 = stringSimilarity.findBestMatch(
             String(stream.stream_tvg_name).replace(
               / hd$| fhd$| hevc$| h265$|/i,
               ""
-            ),
+            ).toLowerCase(),
             channelNames
           ).bestMatch;
           if (match2.rating >= 0.75) {
@@ -3880,13 +3880,13 @@ export default {
           } else if (match1.rating >= 0.75) {
             changed = true;
             stream.stream_tvg_id = this.assignTVGID.channels.find(
-              (channel) => channel.tvg_name === match1.target
+              (channel) => channel.tvg_name.toLowerCase() === match1.target
             ).tvg_id;
             stream.modified = true;
           } else if (match3.rating >= 0.75) {
             changed = true;
             stream.stream_tvg_id = this.assignTVGID.channels.find(
-              (channel) => channel.tvg_name === match1.target
+              (channel) => channel.tvg_name.toLowerCase() === match1.target
             ).tvg_id;
             stream.modified = true;
           } else {

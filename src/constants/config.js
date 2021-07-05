@@ -118,6 +118,13 @@ export const defaultLocale = "en";
 export const localeOptions = [
   { id: "en", name: "English" },
   { id: "nl", name: "Nederlands" },
+  { id: "de", name: "Deutsch" },
+  { id: "fr", name: "Français" },
+  { id: "es", name: "Español" },
+  { id: "it", name: "Italiano" },
+  { id: "ro", name: "Română" },
+  { id: "ru", name: "Pусский" },
+  { id: "cz", name: "Čeština" }
 ];
 
 /* 
