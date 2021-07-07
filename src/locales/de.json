@@ -32,9 +32,10 @@
     "expand-menu": "Menü aufklappen",
     "playlist": "Wiedergabeliste",
     "one-moment": "Einen Moment bitte",
-    "no-name": "<no name=\"\"/>",
+    "no-name": "<no name>",
     "all": "Alle",
-    "show-tooltips": "Tooltips anzeigen"
+    "show-tooltips": "Tooltips anzeigen",
+    "no-subscription": "Sie haben kein aktives Abonnement. Holen Sie sich ein Abonnement, um loszulegen."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +119,8 @@
     "applications": "Anwendungen",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Kodi-Erweiterung"
+    "kodi": "Kodi-Erweiterung",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Profil",
@@ -1356,6 +1358,32 @@
     "tooltip-pause-download": "Download anhalten",
     "tooltip-resume-download": "Download fortsetzen",
     "tooltip-delete-download": "Download löschen"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Profile",
+    "profile": "Profil",
+    "message": "Nachricht",
+    "description": "SmartIPTV ist eine IPTV Player App für Smart TVs. Sie ist auf mehreren LG (WebOS), Samsung (Tizen) Smart TVs zu finden, aber auch auf Amazon FireTV und Android verfügbar.",
+    "add-profile": "Profil hinzufügen",
+    "upload-playlist": "Wiedergabeliste hochladen",
+    "delete-playlist": "Wiedergabeliste löschen",
+    "mac": "MAC-Adresse",
+    "pin": "PIN",
+    "save-online": "Online speichern",
+    "detect-epg": "EPG erkennen",
+    "disable-groups": "Gruppen deaktivieren",
+    "epg-land": "EPG-Land",
+    "logos": "Logos",
+    "tooltip-edit-profile": "Profil bearbeiten",
+    "tooltip-delete-profile": "Profil löschen",
+    "logos-1": "SmartIPTV- und Playlist-Logos",
+    "logos-2": "SmartIPTV-Logos",
+    "logos-3": "Playlist-Logos",
+    "save-success": "SmartIPTV-Profil erfolgreich gespeichert.",
+    "save-error": "Fehler beim Speichern des SmartIPTV-Profils! Bitte versuchen Sie es erneut.",
+    "delete-success": "SmartIPTV-Profil erfolgreich entfernt.",
+    "delete-error": "Fehler beim Entfernen des SmartIPTV-Profils! Bitte versuchen Sie es erneut."
   },
   "landing": {
     "login": "Anmeldung",

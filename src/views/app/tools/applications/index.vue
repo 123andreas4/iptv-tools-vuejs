@@ -1,5 +1,5 @@
 <template>
-  <erd-row :class="{ 'app-row': isXDPro }">
+  <erd-row :class="{ 'app-row': isXDPro || isSmartIPTV }">
     <erd-breadcrumb :items="breadcrumb" :heading="heading">
       <erd-button
         class="mr-2 py-1 px-2"
@@ -55,6 +55,9 @@ export default {
     isXDPro() {
       return /\/applications\/xd-pro/.test(this.$route.path);
     },
+    isSmartIPTV () {
+      return /\/applications\/smartiptv/.test(this.$route.path);
+    }
   },
   methods: {
     ...mapActions(["updateSoundcloudId"]),

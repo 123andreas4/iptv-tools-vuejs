@@ -34,7 +34,8 @@
       "one-moment": "Een moment geduld aub.",
       "no-name": "<Geen naam>",
       "all": "Alles",
-      "show-tooltips": "Tooltips weergeven"
+      "show-tooltips": "Tooltips weergeven",
+      "no-subscription": "U heeft geen actief abonnement. Sluit een abonnement af om te beginnen."
     },
     "menu": {
       "app": "IPTV-Tools",
@@ -108,7 +109,8 @@
       "applications": "Applicaties",
       "xd-pro": "XD-Pro",
       "m3u-2-strm": "M3U 2 STRM",
-      "kodi": "Kodi Addon"
+      "kodi": "Kodi Addon",
+      "smartiptv": "SmartIPTV"
     },
     "profile": {
       "profile": "Profiel",
@@ -1289,6 +1291,32 @@
       "tooltip-pause-download": "Download pauzeren",
       "tooltip-resume-download": "Download hervatten",
       "tooltip-delete-download": "Verwijder download"
+    },
+    "siptv": {
+      "siptv": "SmartIPTV",
+      "profiles": "Profielen",
+      "profile": "Profiel",
+      "message": "Bericht",
+      "description": "SmartIPTV is een IPTV Player app voor smart-tv's. Deze is te vinden op verschillende LG (WebOS), Samsung (Tizen) smart-tv's, maar is ook beschikbaar op Amazon FireTV en Android.",
+      "add-profile": "Profiel toevoegen",
+      "upload-playlist": "Playlist Uploaden",
+      "delete-playlist": "Playlist verwijderen",
+      "mac": "MAC-Adres", 
+      "pin": "PIN",
+      "save-online": "Online Opslaan",
+      "detect-epg": "Detecteer EPG",
+      "disable-groups": "Groepen Uitschakelen",
+      "epg-country": "EPG Land",
+      "logos": "Logo's",
+      "tooltip-edit-profile": "Profiel aanpassen",
+      "tooltip-delete-profile": "Verwijder profiel",
+      "logos-1": "SmartIPTV en Playlist logo's",
+      "logos-2": "SmartIPTV logo's",
+      "logos-3": "Playlist logo's",
+      "save-success": "Het SmartIPTV profiel is opgeslagen.",
+      "save-error": "Er is iets fout gegaan bij het opslaan van het SmartIPTV profiel! Probeer het nogmaals aub.",
+      "delete-success": "Het SmartIPTV profiel is verwijderd.",
+      "delete-error": "Er is iets fout gegaan bij het verwijderen van het SmartIPTV profiel! Probeer het nogmaals aub."
     },
     "landing": {
       "login": "Login",

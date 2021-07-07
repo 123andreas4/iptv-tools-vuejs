@@ -342,7 +342,7 @@ export default {
               (!x.playlist ||
                 (x.playlist &&
                   x.playlist.includes(
-                    this.currentUser.subscription.playlist_type
+                    this.currentUser.subscription !== null ? this.currentUser.subscription.playlist_type : 10
                   ))) &&
               (!x.subscriptions ||
                 x.subscriptions.includes(

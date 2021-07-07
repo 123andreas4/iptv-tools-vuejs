@@ -253,7 +253,7 @@
               variant="danger"
               class="btn-table"
               @click="deleteDownload(row.item.id)"
-              :disabled="row.item.active == 1"
+              :disabled="row.item.active == 1 && row.item.has_error == 0"
               ><i class="las la-trash"></i
             ></erd-button>
           </erd-tooltip>
@@ -312,19 +312,19 @@
         >
           <ul class="list-unstyled mb-0">
             <li class="nav-item">
-              <a href="#" @click.prevent
+              <a href="https://iptv-tools.com/downloads/xdpro-win.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-windows") }}</a
               >
             </li>
             <li class="nav-item">
-              <a href="#" @click.prevent
+              <a href="https://iptv-tools.com/downloads/xdpro-linux.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-linux") }}</a
               >
             </li>
             <li class="nav-item">
-              <a href="#" @click.prevent
+              <a href="https://iptv-tools.com/downloads/xdpro-macos.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-macos") }}</a
               >
@@ -873,7 +873,7 @@ export default {
   beforeMount() {
     this.loadInstances();
     this.loadDownloads();
-    this.downloads.handle = setInterval(this.loadDownloads, 10 * 1000);
+    this.downloads.handle = setInterval(this.loadDownloads, 1000);
     document.body.classList.add("right-menu");
     EventBus.$on("search", this.searchStream);
     EventBus.$on("print", this.printStreams);

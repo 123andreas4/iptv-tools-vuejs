@@ -682,6 +682,14 @@ export default [
                 /* webpackChunkName: "applications" */ "../views/app/tools/applications/xdpro"
               ),
           },
+          {
+            path: "smartiptv",
+            name: "smartiptv",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/smartiptv"
+              ),
+          },
         ],
       },
       /********************************

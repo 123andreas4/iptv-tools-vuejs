@@ -216,9 +216,9 @@ export default {
       this.selectNext(-1, this.filteredItems.length)
     },
   },
-  mounted () {
+  beforeMount () {
     this.selectedIndex = this.items.findIndex(item => {
-      return item.value === this.selected;
+      return item.value == this.selected;
     });
   },
   beforeDestroy () {

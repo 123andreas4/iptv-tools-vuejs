@@ -158,6 +158,7 @@ const data = [
       PlaylistType.Xtream,
       PlaylistType.M3U,
       PlaylistType.Portal,
+      PlaylistType.None,
     ],
     subs: [
       {
@@ -397,9 +398,18 @@ const data = [
     ],
     subs: [
       {
-        icon: "las la-cloud-download-alt",
+        icon: "las la-download",
         label: "menu.xd-pro",
         to: `${AppRoot}/applications/xd-pro`,
+      },
+      {
+        icon: "las la-upload",
+        label: "menu.smartiptv",
+        to: `${AppRoot}/applications/smartiptv`,
+        playlist: [
+          PlaylistType.All,
+          PlaylistType.M3U,
+        ],
       },
       /*{
         icon: "las la-photo-video",

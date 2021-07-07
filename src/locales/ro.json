@@ -32,9 +32,10 @@
     "expand-menu": "Extindeți meniul",
     "playlist": "Playlist",
     "one-moment": "Un moment vă rog",
-    "no-name": "<no name=\"\"/>",
+    "no-name": "<no name>",
     "all": "Toate",
-    "show-tooltips": "Afișați tooltips"
+    "show-tooltips": "Afișați tooltips",
+    "no-subscription": "Nu aveți un abonament activ. Obțineți un abonament pentru a începe."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +119,8 @@
     "applications": "Aplicații",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Addon Kodi"
+    "kodi": "Addon Kodi",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Profil",
@@ -1356,6 +1358,32 @@
     "tooltip-pause-download": "Pauză descărcare",
     "tooltip-resume-download": "Reluare descărcare",
     "tooltip-delete-download": "Ștergeți descărcarea"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Profiluri",
+    "profile": "Profil",
+    "message": "Mesaj",
+    "description": "SmartIPTV este o aplicație IPTV Player pentru televizoare inteligente. Poate fi găsită pe mai multe televizoare inteligente LG (WebOS), Samsung (Tizen), dar este disponibilă și pe Amazon FireTV și Android.",
+    "add-profile": "Adaugă profil",
+    "upload-playlist": "Încarcă lista de redare",
+    "delete-playlist": "Șterge lista de redare",
+    "mac": "Adresă MAC",
+    "pin": "PIN",
+    "save-online": "Salvați online",
+    "detect-epg": "Detectează EPG",
+    "disable-groups": "Dezactivează grupurile",
+    "epg-country": "EPG country",
+    "logos": "Logo-ul",
+    "tooltip-edit-profile": "Editați profilul",
+    "tooltip-delete-profile": "Șterge profilul",
+    "logos-1": "SmartIPTV și sigla Playlistului",
+    "logos-2": "Sigla SmartIPTV",
+    "logos-3": "Sigla listei de redare",
+    "save-success": "Profil SmartIPTV salvat cu succes.",
+    "save-error": "Salvarea profilului SmartIPTV nu a reușit! Încercați din nou.",
+    "delete-success": "Profilul SmartIPTV eliminat cu succes.",
+    "delete-error": "Eliminarea profilului SmartIPTV nu a reușit! Încercați din nou."
   },
   "landing": {
     "login": "Autentificare",

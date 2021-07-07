@@ -32,9 +32,10 @@
     "expand-menu": "Espandi il menu",
     "playlist": "Playlist",
     "one-moment": "Un momento per favore",
-    "no-name": "<no name=\"\"/>",
+    "no-name": "<no name>",
     "all": "Tutti",
-    "show-tooltips": "Mostra i tooltip"
+    "show-tooltips": "Mostra i tooltip",
+    "no-subscription": "Non hai un abbonamento attivo. Ottieni un abbonamento per iniziare."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +119,8 @@
     "applications": "Applicazioni",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Kodi Addon"
+    "kodi": "Kodi Addon",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Profilo",
@@ -1356,6 +1358,32 @@
     "tooltip-pause-download": "Metti in pausa il download",
     "tooltip-resume-download": "Riprendi download",
     "tooltip-delete-download": "Cancellare il download"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Profili",
+    "profile": "Profilo",
+    "message": "Messaggio",
+    "description": "SmartIPTV è un'app IPTV Player per smart TV. Può essere trovata su diverse smart TV LG (WebOS), Samsung (Tizen), ma è disponibile anche su Amazon FireTV e Android.",
+    "add-profile": "Aggiungi profilo",
+    "upload-playlist": "Carica playlist",
+    "delete-playlist": "Elimina playlist",
+    "mac": "Indirizzo MAC", 
+    "pin": "PIN",
+    "save-online": "Salva online",
+    "detect-epg": "Rileva EPG",
+    "disable-groups": "Disabilita gruppi",
+    "epg-country": "Paese EPG",
+    "logos": "Logo",
+    "tooltip-edit-profile": "Modifica profilo",
+    "tooltip-delete-profile": "Elimina profilo",
+    "logos-1": "Logo di SmartIPTV e playlist",
+    "logos-2": "Logo SmartIPTV",
+    "logos-3": "Loghi della playlist",
+    "save-success": "Profilo SmartIPTV salvato con successo.",
+    "save-error": "Salvataggio del profilo SmartIPTV non riuscito! Riprova.",
+    "delete-success": "Profilo SmartIPTV rimosso con successo.",
+    "delete-error": "Rimozione del profilo SmartIPTV non riuscita! Riprova."
   },
   "landing": {
     "login": "Accedi",

@@ -34,7 +34,9 @@
     "one-moment": "One moment please",
     "no-name": "<No name>",
     "all": "All",
-    "show-tooltips": "Show tooltips"
+    "show-tooltips": "Show tooltips",
+    "mac-placeholder": "0A:1B:3C:4D:5E:6F",
+    "no-subscription": "You do not have an active Subscription. Get a subscription to get started."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +120,8 @@
     "applications": "Applications",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Kodi Addon"
+    "kodi": "Kodi Addon",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Profile",
@@ -1356,6 +1359,32 @@
     "tooltip-pause-download": "Pause download",
     "tooltip-resume-download": "Resume download",
     "tooltip-delete-download": "Delete download"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Profiles",
+    "profile": "Profile",
+    "message": "Message",
+    "description": "SmartIPTV is an IPTV Player app for smart TVs. It can be found on several LG (WebOS), Samsung (Tizen) smart TVs, but is also available on Amazon FireTV and Android.",
+    "add-profile": "Add profile",
+    "upload-playlist": "Upload playlist",
+    "delete-playlist": "Delete playlist",
+    "mac": "MAC-Address", 
+    "pin": "PIN",
+    "save-online": "Save online",
+    "detect-epg": "Detect EPG",
+    "disable-groups": "Disable groups",
+    "epg-country": "EPG country",
+    "logos": "Logo's",
+    "tooltip-edit-profile": "Edit profile",
+    "tooltip-delete-profile": "Delete profile",
+    "logos-1": "SmartIPTV and Playlist logo's",
+    "logos-2": "SmartIPTV logo's",
+    "logos-3": "Playlist logo's",
+    "save-success": "Succesfully saved SmartIPTV profile.",
+    "save-error": "Failed saving SmartIPTV profile! Please try again.",
+    "delete-success": "Succesfully removed SmartIPTV profile.",
+    "delete-error": "Failed removing SmartIPTV profile! Please try again."
   },
   "landing": {
     "login": "Login",

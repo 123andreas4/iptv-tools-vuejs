@@ -32,9 +32,10 @@
     "expand-menu": "Rozbalit nabídku",
     "playlist": "Seznam přehrávání",
     "one-moment": "Jeden okamžik, prosím",
-    "no-name": "<no name=\"\"/>",
+    "no-name": "<no name>",
     "all": "Všechny",
-    "show-tooltips": "Zobrazit popisky nástrojů"
+    "show-tooltips": "Zobrazit popisky nástrojů",
+    "no-subscription": "Nemáte aktivní předplatné. Chcete-li začít, získejte předplatné."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +119,8 @@
     "applications": "Aplikace",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Doplněk Kodi"
+    "kodi": "Doplněk Kodi",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Profil",
@@ -1356,6 +1358,32 @@
     "tooltip-pause-download": "Pozastavit stahování",
     "tooltip-resume-download": "Obnovit stahování",
     "tooltip-delete-download": "Smazat stahování"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Profily",
+    "profile": "Profil",
+    "message": "Zpráva",
+    "description": "SmartIPTV je aplikace IPTV Player pro chytré televize. Naleznete ji na několika chytrých televizorech LG (WebOS), Samsung (Tizen), ale je k dispozici také na Amazon FireTV a Android.",
+    "add-profile": "Přidat profil",
+    "upload-playlist": "Nahrát seznam skladeb",
+    "delete-playlist": "Odstranit seznam skladeb",
+    "mac": "MAC-adresa",
+    "pin": "PIN",
+    "save-online": "Uložit online",
+    "detect-epg": "Detect EPG",
+    "disable-groups": "Zakázat skupiny",
+    "epg-country": "země EPG",
+    "logos": "Logo",
+    "tooltip-edit-profile": "Upravit profil",
+    "tooltip-delete-profile": "Smazat profil",
+    "logos-1": "Logo SmartIPTV a Playlist",
+    "logos-2": "Logo SmartIPTV",
+    "logos-3": "Logo seznamu skladeb",
+    "save-success": "Úspěšně uložen profil SmartIPTV.",
+    "save-error": "Uložení profilu SmartIPTV se nezdařilo! Zkuste to prosím znovu.",
+    "delete-success": "Úspěšně odstraněn profil SmartIPTV.",
+    "delete-error": "Odebrání profilu SmartIPTV se nezdařilo! Zkuste to prosím znovu."
   },
   "landing": {
     "login": "Přihlášení",

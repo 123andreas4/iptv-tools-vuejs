@@ -46,6 +46,7 @@ export const PlaylistType = {
   Xtream: 1,
   M3U: 2,
   Portal: 3,
+  None: 4
 };
 
 /* 

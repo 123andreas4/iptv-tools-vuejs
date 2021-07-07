@@ -32,9 +32,10 @@
     "expand-menu": "Развернуть меню",
     "playlist": "Плейлист",
     "one-moment": "Один момент, пожалуйста",
-    "no-name": "<no name=\"\"/>",
+    "no-name": "<no name>",
     "all": "Все",
-    "show-tooltips": "Показать всплывающие подсказки"
+    "show-tooltips": "Показать всплывающие подсказки",
+    "no-subscription": "У вас нет активной подписки. Оформите подписку, чтобы начать."
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -118,7 +119,8 @@
     "applications": "Приложения",
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
-    "kodi": "Аддон Kodi"
+    "kodi": "Аддон Kodi",
+    "smartiptv": "SmartIPTV"
   },
   "profile": {
     "profile": "Профиль",
@@ -1356,6 +1358,32 @@
     "tooltip-pause-download": "Приостановить загрузку",
     "tooltip-resume-download": "Возобновить загрузку",
     "tooltip-delete-download": "Удалить загрузку"
+  },
+  "siptv": {
+    "siptv": "SmartIPTV",
+    "profiles": "Профили",
+    "profile": "Профиль",
+    "message": "Сообщение",
+    "description": "SmartIPTV - это приложение IPTV Player для смарт-телевизоров. Его можно найти на нескольких смарт-телевизорах LG (WebOS), Samsung (Tizen), но также доступно на Amazon FireTV и Android.",
+    "add-profile": "Добавить профиль",
+    "upload-playlist": "Загрузить плейлист",
+    "delete-playlist": "Удалить список воспроизведения",
+    "mac": "MAC-адрес",
+    "pin": "PIN",
+    "save-online": "Сохранить в Интернете",
+    "detect-epg": "Обнаружить EPG",
+    "disable-groups": "Отключить группы",
+    "epg-country": "Страна EPG",
+    "logos": "Логотипы",
+    "tooltip-edit-profile": "Редактировать профиль",
+    "tooltip-delete-profile": "Удалить профиль",
+    "logos-1": "Логотипы SmartIPTV и плейлистов",
+    "logos-2": "Логотипы SmartIPTV",
+    "logos-3": "Логотипы плейлиста",
+    "save-success": "Успешно сохранен профиль SmartIPTV.",
+    "save-error": "Не удалось сохранить профиль SmartIPTV! Повторите попытку.",
+    "delete-success": "Профиль SmartIPTV удален успешно.",
+    "delete-error": "Не удалось удалить профиль SmartIPTV! Повторите попытку."
   },
   "landing": {
     "login": "Вход",

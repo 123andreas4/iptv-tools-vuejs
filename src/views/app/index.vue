@@ -24,11 +24,14 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser", "syncTMDB", "syncPlaylist", "appXmltvSync"]),
+    userHasValidSubscription() {
+      return this.currentUser.subscription !== null && (this.currentUser.subscription.end_date === null || new Date(this.currentUser.subscription.end_date).getTime() > new Date().getTime());
+    }
   },
   methods: {
     ...mapActions([
       "getSyncTMDB",
-      "getSyncPlaylist",
+      "getSyncPlaylist", 
       "synchronizeTMDB",
       "synchronizePlaylist",
       "addAlert",
@@ -102,8 +105,11 @@ export default {
       this.xmltv = setInterval(this.getAppXmltvSync, interval * 1000);
     },
   },
-  beforeCreate() {
+  created() {
     this.loadMovieSeriePlaylists(true);
+    if (!this.userHasValidSubscription) {
+      this.$router.replace({ name: "subscription" });
+    }
   },
   beforeMount() {
     if ([3, 4, 5].includes(this.currentUser.user.role)) {
@@ -125,6 +131,12 @@ export default {
     }
   },
   watch: {
+    $route: function (val) {
+      if (!this.userHasValidSubscription && !["subscription", "profile", "invoices", "tickets", "faq"].contains(val.name)) {
+        this.$router.replace({ name: "subscription" });
+      }
+      this.loadMovieSeriePlaylists(true);
+    },
     syncTMDB: function (val) {
       if (val) {
         this.resetTmdbInterval(10);
