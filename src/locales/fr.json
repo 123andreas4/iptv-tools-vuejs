@@ -173,6 +173,15 @@
     "profile-delete-success": "La suppression de votre compte a réussi !",
     "profile-delete-failed": "Échec de la suppression de votre compte !"
   },
+  "reset": {
+    "head": "Réinitialiser le mot de passe",
+    "title": "Réinitialiser votre mot de passe",
+    "subtitle": "Réinitialisez votre mot de passe au cas où vous l'auriez oublié.",
+    "text": "Si vous avez oublié votre mot de passe, vous pouvez réinitialiser votre mot de passe ici. Nous vous enverrons un e-mail avec un nouveau mot de passe temporaire. Nous vous recommandons de définir un nouveau mot de passe dans votre profil.",
+    "reset": "Réinitialiser mon mot de passe",
+    "thank-you": "Merci ! Nous vous avons envoyé un nouveau mot de passe temporaire à votre adresse e-mail.",
+    "error": "Oups ! Il semble que votre nom d'utilisateur ou votre adresse e-mail soit incorrect. Veuillez vérifier vos informations et réessayer."
+  },
   "status": {
     "0": "Enthousiaste",
     "1": "Professionnel",
@@ -352,7 +361,9 @@
     "username-taken": "Désolé, ce nom d'utilisateur est pris ! Veuillez en essayer un autre.",
     "success-message": "Votre compte a été créé ! Vous pouvez maintenant vous connecter.",
     "success-title": "Succès",
-    "error-message": "Désolé, quelque chose n'a pas fonctionné. Veuillez réessayer."
+    "error-message": "Désolé, quelque chose n'a pas fonctionné. Veuillez réessayer.",
+    "email": "Adresse e-mail",
+    "email-error": "S'il vous plaît, mettez une adresse email valide."
   },
   "tickets": {
     "new-ticket": "Nouveau billet",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Confirmer",
+    "title": "Confirmez votre adresse email",
+    "subtitle": "Veuillez vérifier votre adresse e-mail pour commencer à utiliser IPTV-Tools.",
+    "text": "Avant de pouvoir commencer à utiliser IPTV-Tools, nous avons besoin que vous confirmiez votre adresse e-mail. Nous n'utiliserons cette adresse e-mail que pour envoyer des e-mails de notification.",
+    "thank-you": "Merci! Vous pouvez maintenant vous connecter avec vos identifiants.",
+    "error": "Oops! On dirait que vous avez déjà confirmé, ou vous avez un mauvais code !",
+    "submit": "Confirmer",
     "code": "Code",
     "expiry": "Date d'expiration",
     "load-error": "Échec du chargement confirme ! Veuillez réessayer.",

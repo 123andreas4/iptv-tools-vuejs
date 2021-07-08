@@ -174,6 +174,15 @@
     "profile-delete-success": "Successfully removed your account!",
     "profile-delete-failed": "Failed removing your account!"
   },
+  "reset": {
+    "head": "Reset Password",
+    "title": "Reset your password",
+    "subtitle": "Reset your password in case you have forgotten it.",
+    "text": "In case you have forgotten your password, you can reset your password here. We will send you an email with a new temporary password. We recommend that you set a new password in your profile.",
+    "reset": "Reset my password",
+    "thank-you": "Thank you! We have sent you a new temporary password to your email address.",
+    "error": "Oops! It seems that your username or E-mail address is incorrect. Please check your details and try again."
+  },
   "status": {
     "0": "Enthousiast",
     "1": "Professional",
@@ -353,7 +362,9 @@
     "username-taken": "Sorry this username is taken! Please try another one.",
     "success-message": "Your account has been created! You can now login.",
     "success-title": "Success",
-    "error-message": "Sorry something went wrong. Please try again."
+    "error-message": "Sorry something went wrong. Please try again.",
+    "email": "Email-address",
+    "email-error": "Please enter a valid e-mail address."
   },
   "tickets": {
     "new-ticket": "New Ticket",
@@ -536,6 +547,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Confirm",
+    "title": "Confirm your E-mail address",
+    "subtitle": "Please verify your E-mail address to start using IPTV-Tools.",
+    "text": "Before you can start using IPTV-Tools, we need you to confirm your e-mailaddress. We will only use this e-mailaddress to send notification emails.",
+    "thank-you": "Thank you! You can now login with your credentials.",
+    "error": "Oops! Looks like you already confirmed, or you have a wrong code!",
+    "submit": "Confirm",
     "code": "Code",
     "expiry": "Expiry date",
     "load-error": "Failed loading confirms! Please try again.",

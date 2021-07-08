@@ -163,6 +163,15 @@
       "profile-delete-success": "Je account is succesvol verwijderd!",
       "profile-delete-failed": "Er is iets mis gegaan bij het verwijderen van je account!"
     },
+    "reset": {
+      "head": "Wachtwoord Reset",
+      "title": "Reset je wachtwoord",
+      "subtitle": "Reset je wachtwoord voor het geval je deze bent vergeten.",
+      "text": "Als je je wachtwoord bent vergeten, kan je je wachtwoord hier opnieuw instellen. We sturen je een e-mail met een nieuw tijdelijk wachtwoord. We raden je aan een nieuw wachtwoord in je profiel in te stellen.",
+      "reset": "Mijn wachtwoord resetten",
+      "thank-you": "Dank je! We hebben je een nieuw tijdelijk wachtwoord naar je e-mailadres gestuurd.",
+      "error": "Oeps! Het lijkt erop dat je gebruikersnaam of e-mailadres onjuist is. Controleer je gegevens en probeer het opnieuw."
+    },
     "status": {
       "0": "Enthousiast",
       "1": "Professional",
@@ -330,7 +339,9 @@
       "username-taken": "Sorry deze gebruikersnaam is al bezet. Probeer een andere.",
       "success-message": "Je account is aangemaakt. Je kan nu inloggen.",
       "success-title": "Voltooid!",
-      "error-message": "Sorry er is iets fout gegaan. Probeer het opnieuw."
+      "error-message": "Sorry er is iets fout gegaan. Probeer het opnieuw.",
+      "email": "Email-adres",
+      "email-error": "Voer een geldig e-mail adres in aub."
     },
     "tickets": {
       "new-ticket": "Nieuw Ticket",
@@ -508,6 +519,13 @@
       "1": "Ieder uur"
     },
     "confirm": {
+      "head": "Bevestigen",
+      "title": "Bevestig je e-mailadres",
+      "subtitle": "Bevestig je e-mailadres om IPTV-Tools te gaan gebruiken.",
+      "text": "Voordat je IPTV-Tools kunt gaan gebruiken, hebben we je e-mailadres nodig. We gebruiken dit e-mailadres alleen om e-mailmeldingen te verzenden.",
+      "thank-you": "Dank je! Je kan nu inloggen met je inloggegevens.",
+      "error": "Oeps! Het lijkt erop dat je al hebt bevestigd, of je hebt een verkeerde code!",
+      "submit": "Bevestigen",
       "code": "Code",
       "expiry": "Verloopdatum",
       "load-error": "Er is iets fout gegaan bij het laden van de bevestigingen! Probeer het nogmaals aub.",

@@ -809,10 +809,10 @@ export default [
           import(/* webpackChunkName: "user" */ "../views/user/register"),
       },
       {
-        path: "forgot-password",
+        path: "confirm-email",
         component: () =>
           import(
-            /* webpackChunkName: "user" */ "../views/user/forgot-password"
+            /* webpackChunkName: "user" */ "../views/user/confirm-email"
           ),
       },
       {

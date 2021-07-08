@@ -35,7 +35,7 @@
                 v-model="password"
               ></erd-input>
               <div class="pt-2 pb-2">
-                <a href="#" @click.prevent>{{ $t("login.forgot") }}</a>
+                <router-link to="/user/reset-password">{{ $t("login.forgot") }}</router-link>
               </div>
             </div>
             <div class="pb-1">

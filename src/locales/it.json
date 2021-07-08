@@ -173,6 +173,15 @@
     "profile-delete-success": "Rimosso con successo il tuo account!",
     "profile-delete-failed": "Rimozione dell'account fallita!"
   },
+  "reset": {
+    "head": "Reimposta password",
+    "title": "Reimposta la tua password",
+    "subtitle": "Reimposta la password nel caso l'avessi dimenticata.",
+    "text": "Se hai dimenticato la password, puoi reimpostare la password qui. Ti invieremo un'e-mail con una nuova password temporanea. Ti consigliamo di impostare una nuova password nel tuo profilo.",
+    "reset": "Reimposta la mia password",
+    "thank-you": "Grazie! Ti abbiamo inviato una nuova password temporanea al tuo indirizzo email.",
+    "error": "Spiacenti! Sembra che il tuo nome utente o indirizzo e-mail non sia corretto. Controlla i tuoi dati e riprova."
+  },
   "status": {
     "0": "Enthousiast",
     "1": "Professionista",
@@ -352,7 +361,9 @@
     "username-taken": "Spiacente, questo nome utente è occupato! Per favore provane un altro.",
     "success-message": "Il tuo account è stato creato! Ora puoi effettuare il login.",
     "success-title": "Successo",
-    "error-message": "Siamo spiacenti, qualcosa è andato storto. Per favore riprova."
+    "error-message": "Siamo spiacenti, qualcosa è andato storto. Per favore riprova.",
+    "email": "Indirizzo e-mail",
+    "email-error": "Si prega di inserire un indirizzo email valido."
   },
   "tickets": {
     "new-ticket": "Nuovo biglietto",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Confermare",
+    "title": "Conferma il tuo indirizzo email",
+    "subtitle": "Verifica il tuo indirizzo e-mail per iniziare a utilizzare IPTV-Tools.",
+    "text": "Prima di poter iniziare a utilizzare IPTV-Tools, abbiamo bisogno che tu confermi il tuo indirizzo email. Utilizzeremo questo indirizzo e-mail solo per inviare e-mail di notifica.",
+    "thank-you": "Grazie! Ora puoi accedere con le tue credenziali.",
+    "error": "Ops! Sembra che tu abbia già confermato o che tu abbia un codice sbagliato!",
+    "submit": "Confermare",
     "code": "Codice",
     "expiry": "Data di scadenza",
     "load-error": "Caricamento fallito conferma! Si prega di riprovare.",

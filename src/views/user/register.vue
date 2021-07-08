@@ -47,7 +47,7 @@
                 {{ error.password.message }}
               </div>
             </div>
-            <div class="pb-4">
+            <div class="pb-2">
               <label for="confirm">{{ $t("register.confirm") }}</label>
               <erd-input
                 id="confirm"
@@ -62,8 +62,22 @@
                 {{ error.confirm.message }}
               </div>
             </div>
+            <div class="pb-3">
+              <label for="email">{{ $t("register.email") }}</label>
+              <erd-input
+                id="email"
+                :placeholder="$t('register.email')"
+                v-model="email"
+              ></erd-input>
+              <div
+                class="pt-1 color-theme-2 text-center"
+                v-if="error.email.visible"
+              >
+                {{ error.email.message }}
+              </div>
+            </div>
             <div class="pb-5">
-              <erd-checkbox v-model="accept">{{
+              <erd-checkbox v-model="accept" class="mb-2">{{
                 $t("register.accept")
               }}</erd-checkbox>
               <erd-button
@@ -94,6 +108,7 @@ export default {
       username: "",
       password: "",
       confirm: "",
+      email: "",
       accept: false,
       error: {
         username: {
@@ -108,6 +123,10 @@ export default {
           visible: false,
           message: "",
         },
+        email: {
+          visible: false,
+          message: "",
+        }
       },
     };
   },
@@ -117,7 +136,8 @@ export default {
       return (
         this.error.username.visible === false &&
         this.error.password.visible === false &&
-        this.error.confirm.visible === false
+        this.error.confirm.visible === false &&
+        this.error.email.visible === false
       );
     },
     registerDisabled() {
@@ -125,7 +145,8 @@ export default {
         this.accept !== true ||
         this.username.length === 0 ||
         this.password.length === 0 ||
-        this.confirm.length === 0
+        this.confirm.length === 0 ||
+        this.email.length === 0
       );
     },
   },
@@ -162,10 +183,24 @@ export default {
         this.error.confirm.message = this.$t("register.confirm-error");
       }
     },
+    validateEmail() {
+      if (
+        this.email.match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        this.error.email.visible = false;
+        this.error.email.message = "";
+      } else {
+        this.error.email.visible = true;
+        this.error.email.message = this.$t("register.email-error");
+      }
+    },
     registerClick() {
       this.validateUsername();
       this.validatePassword();
       this.validateConfirm();
+      this.validateEmail();
       if (this.formIsValid) {
         this.checkUsername(this.username)
           .then((res) => {
@@ -176,6 +211,7 @@ export default {
               this.register({
                 username: this.username,
                 password: this.password,
+                email: this.email,
               })
                 .then((res) => {
                   if (res.status === true && res.data === true) {

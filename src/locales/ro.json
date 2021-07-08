@@ -173,6 +173,15 @@
     "profile-delete-success": "Ați reușit să vă eliminați contul!",
     "profile-delete-failed": "Nu ați reușit să vă eliminați contul!"
   },
+  "reset": {
+    "head": "Resetați parola",
+    "title": "Resetați parola",
+    "subtitle": "Resetați parola în cazul în care ați uitat-o.",
+    "text": "În cazul în care v-ați uitat parola, vă puteți reseta parola aici. Vă vom trimite un e-mail cu o nouă parolă temporară. Vă recomandăm să setați o nouă parolă în profilul dvs.",
+    "reset": "Resetează parola mea",
+    "thank-you": "Mulțumesc! V-am trimis o nouă parolă temporară la adresa dvs. de e-mail.",
+    "error": "Hopa! Se pare că numele dvs. de utilizator sau adresa de e-mail sunt incorecte. Vă rugăm să verificați detaliile și să încercați din nou."
+  },
   "status": {
     "0": "Enthousiast",
     "1": "Profesionist",
@@ -352,7 +361,9 @@
     "username-taken": "Ne pare rău, acest nume de utilizator este ocupat! Vă rugăm să încercați altul.",
     "success-message": "Contul dvs. a fost creat! Acum vă puteți autentifica.",
     "success-title": "Succes",
-    "error-message": "Ne pare rău că ceva a mers prost. Vă rugăm să încercați din nou."
+    "error-message": "Ne pare rău că ceva a mers prost. Vă rugăm să încercați din nou.",
+    "email": "Adresa de e-mail",
+    "email-error": "Vă rugăm să introduceți o adresă de email validă."
   },
   "tickets": {
     "new-ticket": "Bilet nou",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "A confirma",
+    "title": "Confirmați adresa dumneavoastră de email",
+    "subtitle": "Vă rugăm să verificați adresa de e-mail pentru a începe să utilizați IPTV-Tools.",
+    "text": "Înainte de a putea începe să utilizați IPTV-Tools, trebuie să vă confirmați adresa de e-mail. Vom folosi această adresă de e-mail numai pentru a trimite e-mailuri de notificare.",
+    "thank-you": "Mulțumesc! Acum vă puteți conecta cu acreditările dvs.",
+    "error": "Hopa! Se pare că ai confirmat deja sau ai un cod greșit!",
+    "submit": "A confirma",
     "code": "Cod",
     "expiry": "Data expirării",
     "load-error": "Confirmarea încărcării eșuate! Vă rugăm să încercați din nou.",

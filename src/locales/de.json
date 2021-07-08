@@ -173,6 +173,15 @@
     "profile-delete-success": "Erfolgreich Ihr Konto entfernt!",
     "profile-delete-failed": "Das Entfernen Ihres Kontos ist fehlgeschlagen!"
   },
+  "reset": {
+    "head": "Passwort zurücksetzen",
+    "title": "Passwort zurücksetzen",
+    "subtitle": "Setzen Sie Ihr Passwort zurück, falls Sie es vergessen haben.",
+    "text": "Falls Sie Ihr Passwort vergessen haben, können Sie hier Ihr Passwort zurücksetzen. Wir senden Ihnen eine E-Mail mit einem neuen temporären Passwort. Wir empfehlen Ihnen, in Ihrem Profil ein neues Passwort zu setzen.",
+    "reset": "Mein Passwort zurücksetzen",
+    "thank-you": "Danke! Wir haben Ihnen ein neues temporäres Passwort an Ihre E-Mail-Adresse geschickt.",
+    "error": "Ups! Ihr Benutzername oder Ihre E-Mail-Adresse scheint falsch zu sein. Bitte überprüfen Sie Ihre Angaben und versuchen Sie es erneut."
+  },
   "status": {
     "0": "Enthousiast",
     "1": "Professionell",
@@ -352,7 +361,9 @@
     "username-taken": "Dieser Benutzername ist leider schon vergeben! Bitte versuchen Sie einen anderen.",
     "success-message": "Ihr Konto wurde erstellt! Sie können sich jetzt anmelden.",
     "success-title": "Erfolg",
-    "error-message": "Leider ist etwas schief gegangen. Bitte versuchen Sie es erneut."
+    "error-message": "Leider ist etwas schief gegangen. Bitte versuchen Sie es erneut.",
+    "email": "E-Mail-Addresse",
+    "email-error": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
   },
   "tickets": {
     "new-ticket": "Neues Ticket",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Bestätigen",
+    "title": "Bestätigen Sie Ihre E-Mail-Adresse",
+    "subtitle": "Bitte überprüfen Sie Ihre E-Mail-Adresse, um die IPTV-Tools zu verwenden.",
+    "text": "Bevor Sie IPTV-Tools nutzen können, benötigen wir von Ihnen eine Bestätigung Ihrer email-Adresse. Wir verwenden diese E-Mail-Adresse nur zum Versenden von Benachrichtigungs-E-Mails.",
+    "thank-you": "Vielen Dank! Sie können sich nun mit Ihren Zugangsdaten anmelden.",
+    "error": "Hoppla! Anscheinend haben Sie bereits bestätigt, oder Sie haben einen falschen Code!",
+    "submit": "Bestätigen",
     "code": "Code",
     "expiry": "Verfallsdatum",
     "load-error": "Laden fehlgeschlagen bestätigt! Bitte versuchen Sie es erneut.",

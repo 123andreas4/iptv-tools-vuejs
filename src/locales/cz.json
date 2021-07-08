@@ -173,6 +173,15 @@
     "profile-delete-success": "Úspěšně odstraněn váš účet!",
     "profile-delete-failed": "Odstranění účtu se nezdařilo!"
   },
+  "reset": {
+    "head": "Obnovit heslo",
+    "title": "Obnovit heslo",
+    "subtitle": "Obnovte své heslo, pokud jste jej zapomněli.",
+    "text": "V případě, že jste zapomněli heslo, můžete si zde heslo resetovat. Zašleme vám e-mail s novým dočasným heslem. Doporučujeme, abyste si ve svém profilu nastavili nové heslo.",
+    "reset": "Obnovit heslo",
+    "thank-you": "Děkuji! Na vaši e-mailovou adresu jsme vám zaslali nové dočasné heslo.",
+    "error": "Jejda! Zdá se, že vaše uživatelské jméno nebo e-mailová adresa jsou nesprávné. Zkontrolujte prosím své údaje a zkuste to znovu."
+  },
   "status": {
     "0": "Enthousiast",
     "1": "Profesionální",
@@ -352,7 +361,9 @@
     "username-taken": "Omlouváme se, toto uživatelské jméno je obsazeno! Zkuste prosím jiné.",
     "success-message": "Váš účet byl vytvořen! Nyní se můžete přihlásit.",
     "success-title": "Úspěch",
-    "error-message": "Omlouváme se, ale něco se pokazilo. Zkuste to prosím znovu."
+    "error-message": "Omlouváme se, ale něco se pokazilo. Zkuste to prosím znovu.",
+    "email": "Emailová adresa",
+    "email-error": "Prosím zadejte platnou emailovou adresu."
   },
   "tickets": {
     "new-ticket": "Nová vstupenka",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Potvrdit",
+    "title": "Potvrďte svou emailovou adresu",
+    "subtitle": "Chcete-li začít používat nástroje IPTV, ověřte prosím svou e-mailovou adresu.",
+    "text": "Než budete moci začít používat nástroje IPTV, musíme potvrdit vaši e-mailovou adresu. Tuto e-mailovou adresu použijeme pouze k zasílání e-mailů s oznámeními.",
+    "thank-you": "Děkuju! Nyní se můžete přihlásit pomocí svých přihlašovacích údajů.",
+    "error": "Jejda! Vypadá to, že jste již potvrdili, nebo máte špatný kód!",
+    "submit": "Potvrdit",
     "code": "Kód",
     "expiry": "Datum vypršení platnosti",
     "load-error": "Neúspěšné načítání potvrzuje! Zkuste to prosím znovu.",

@@ -173,6 +173,15 @@
     "profile-delete-success": "Se ha eliminado la cuenta con éxito.",
     "profile-delete-failed": "No se ha podido eliminar la cuenta."
   },
+  "reset": {
+    "head": "Restablecer contraseña",
+    "title": "Restablecer su contraseña",
+    "subtitle": "Restablece tu contraseña en caso de que la hayas olvidado.",
+    "text": "En caso de que haya olvidado su contraseña, puede restablecer su contraseña aquí. Le enviaremos un correo electrónico con una nueva contraseña temporal. Le recomendamos que establezca una nueva contraseña en su perfil.",
+    "reset": "Restablecer mi contraseña",
+    "thank-you": "¡Gracias! Le hemos enviado una nueva contraseña temporal a su dirección de correo electrónico.",
+    "error": "¡Vaya! Parece que su nombre de usuario o dirección de correo electrónico son incorrectos. Verifique sus datos e intente nuevamente"
+  },
   "status": {
     "0": "Entusiasta",
     "1": "Profesional",
@@ -352,7 +361,9 @@
     "username-taken": "Lo sentimos, este nombre de usuario está ocupado. Por favor, intente con otro.",
     "success-message": "Su cuenta ha sido creada. Ya puede iniciar sesión.",
     "success-title": "Éxito",
-    "error-message": "Lo siento, algo ha ido mal. Por favor, inténtelo de nuevo."
+    "error-message": "Lo siento, algo ha ido mal. Por favor, inténtelo de nuevo.",
+    "email": "Dirección de correo electrónico",
+    "email-error": "Por favor, introduce una dirección de correo electrónico válida."
   },
   "tickets": {
     "new-ticket": "Nuevo billete",
@@ -535,6 +546,13 @@
     "2": "M3U8 (.hls)"
   },
   "confirm": {
+    "head": "Confirmar",
+    "title": "Confirme su dirección de correo electrónico",
+    "subtitle": "Verifique su dirección de correo electrónico para comenzar a usar IPTV-Tools.",
+    "text": "Antes de que pueda comenzar a usar IPTV-Tools, necesitamos que confirme su dirección de correo electrónico. Solo usaremos esta dirección de correo electrónico para enviar correos electrónicos de notificación.",
+    "thank-you": "¡Gracias! Ahora puede iniciar sesión con sus credenciales.",
+    "error": "¡UPS! ¡Parece que ya lo confirmó o tiene un código incorrecto!",
+    "submit": "Confirmar",
     "code": "Código",
     "expiry": "Fecha de caducidad",
     "load-error": "Error en la carga confirma! Por favor, inténtelo de nuevo.",
