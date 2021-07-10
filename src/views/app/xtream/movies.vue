@@ -162,6 +162,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      dateOptions: { day: "2-digit", month: "numeric", year: "numeric" },
       activeTab: 0,
       playlists: [],
       groups: [],

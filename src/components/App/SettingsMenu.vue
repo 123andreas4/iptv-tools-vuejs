@@ -22,13 +22,28 @@
       ></erd-select>
       <label>{{ $t("general.playlist") }}</label>
       <erd-select
-        v-if="movieSeriePlaylists.length && movieSeriePlaylists.length > 0"
         key="movie-serie-playlist"
         class="w-100 mt-1 mb-2"
         :items="movieSeriePlaylists"
         v-model="movieSeriePlaylist"
         :disabled="!userHasMoviesSeries || !routeIsMoviesSeries"
       ></erd-select>
+      <template v-if="routeIsCatchUp">
+        <label>{{ $t("xtream.group") }}</label>
+        <erd-select
+          key="catch-up-group"
+          class="w-100 mt-1 mb-2"
+          :items="catchUpGroups"
+          v-model="catchUpGroup"
+        ></erd-select>
+        <label>{{ $t("logins.datetime") }}</label>
+        <erd-select
+          key="catch-up-date"
+          class="w-100 mt-1 mb-2"
+          :items="catchUpDays"
+          v-model="catchUpDay"
+        ></erd-select>
+      </template>
       <erd-checkbox
         class="my-2"
         v-model="showTooltips"
@@ -72,8 +87,12 @@ export default {
         /app\/movies\//i.test(this.$route.path) ||
         /app\/series\//i.test(this.$route.path) ||
         /app\/xtream\/editor/i.test(this.$route.path) ||
-        /app\/m3u\/editor/i.test(this.$route.path)
+        /app\/m3u\/editor/i.test(this.$route.path) ||
+        /\/applications\/catch-up/i.test(this.$route.path)
       );
+    },
+    routeIsCatchUp() {
+      return /\/applications\/catch-up/i.test(this.$route.path);
     },
     userHasMoviesSeries() {
       return (
@@ -104,6 +123,32 @@ export default {
       },
       set: function (val) {
         this.$store.commit("setMovieSeriePlaylist", val);
+      },
+    },
+    catchUpGroups: {
+      get: function () {
+        return this.$store.state.sync.catchUpGroups;
+      }
+    },
+    catchUpGroup: {
+      get: function () {
+        return this.$store.state.sync.catchUpGroup;
+      },
+      set: function (val) {
+        this.$store.commit("setCatchUpGroup", val);
+      },
+    },
+    catchUpDays: {
+      get: function () {
+        return this.$store.state.sync.catchUpDays;
+      }
+    },
+    catchUpDay: {
+      get: function () {
+        return this.$store.state.sync.catchUpDay;
+      },
+      set: function (val) {
+        this.$store.commit("setCatchUpDay", val);
       },
     },
     showTooltips: {

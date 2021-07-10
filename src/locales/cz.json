@@ -35,7 +35,8 @@
     "no-name": "<no name>",
     "all": "Všechny",
     "show-tooltips": "Zobrazit popisky nástrojů",
-    "no-subscription": "Nemáte aktivní předplatné. Chcete-li začít, získejte předplatné."
+    "no-subscription": "Nemáte aktivní předplatné. Chcete-li začít, získejte předplatné.",
+    "today": "Dnes"
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -120,7 +121,8 @@
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Doplněk Kodi",
-    "smartiptv": "SmartIPTV"
+    "smartiptv": "SmartIPTV",
+    "catch-up": "Catch-Up"
   },
   "profile": {
     "profile": "Profil",

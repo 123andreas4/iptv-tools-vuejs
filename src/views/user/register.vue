@@ -153,7 +153,7 @@ export default {
   methods: {
     ...mapActions(["checkUsername", "register"]),
     validateUsername() {
-      if (this.username.match(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)) {
+      if (this.username.test(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)) {
         this.error.username.visible = false;
         this.error.username.message = "";
       } else {
@@ -163,7 +163,7 @@ export default {
     },
     validatePassword() {
       if (
-        this.password.match(
+        this.password.test(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{6,30}$/
         )
       ) {
@@ -185,7 +185,7 @@ export default {
     },
     validateEmail() {
       if (
-        this.email.match(
+        this.email.test(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
       ) {

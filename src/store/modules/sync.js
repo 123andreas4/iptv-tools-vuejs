@@ -7,6 +7,10 @@ const state = {
   syncPlaylist: false,
   movieSeriePlaylists: [],
   movieSeriePlaylist: null,
+  catchUpGroups: [],
+  catchUpGroup: null,
+  catchUpDays: [],
+  catchUpDay: null,
 };
 
 const getters = {
@@ -36,6 +40,18 @@ const getters = {
   movieSeriePlaylist(state) {
     return state.movieSeriePlaylist;
   },
+  catchUpGroups(state) {
+    return state.catchUpGroups;
+  },
+  catchUpGroup(state) {
+    return state.catchUpGroup;
+  },
+  catchUpDays(state) {
+    return state.catchUpDays;
+  },
+  catchUpDay(state) {
+    return state.catchUpDay;
+  }
 };
 
 const mutations = {
@@ -57,6 +73,18 @@ const mutations = {
   setMovieSeriePlaylist(state, payload) {
     state.movieSeriePlaylist = payload;
   },
+  setCatchUpGroups(state, payload) {
+    state.catchUpGroups = payload;
+  },
+  setCatchUpGroup(state, payload) {
+    state.catchUpGroup = payload;
+  },
+  setCatchUpDays(state, payload) {
+    state.catchUpDays = payload;
+  },
+  setCatchUpDay(state, payload) {
+    state.catchUpDay = payload;
+  }
 };
 
 const actions = {
@@ -112,13 +140,14 @@ const actions = {
       });
   },
   loadMovieSeriePlaylists({ commit }, payload) {
-    httpService.get("playlist/simple").then((res) => {
+    httpService.get("playlist").then((res) => {
       commit(
         "setMovieSeriePlaylists",
         res.data.map((playlist) => {
           return {
             text: playlist.name,
             value: playlist.id,
+            playlist: playlist
           };
         })
       );
@@ -132,6 +161,31 @@ const actions = {
       }
     });
   },
+  loadCatchUpGroups({ commit }, payload) {
+    httpService.get(`group/catch-up/${payload}`).then((res) => {
+      commit(
+        "setCatchUpGroups",
+        res.data.map((group) => {
+          return {
+            text: group.group_name,
+            value: group.id,
+          };
+        })
+      );
+      if (
+        res.data.length &&
+        res.data.length > 0
+      ) {
+        commit("setCatchUpGroup", res.data[0].id);
+      }
+    });
+  },
+  loadCatchUpDays({ commit }, payload) {
+    commit("setCatchUpDays", payload);
+    if (payload.length > 0) {
+      commit("setCatchUpDay", payload[0].value);
+    }
+  }
 };
 
 export default {

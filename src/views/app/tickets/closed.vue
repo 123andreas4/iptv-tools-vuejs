@@ -154,6 +154,7 @@ import { languages } from "../../../helpers";
 export default {
   data() {
     return {
+      dateOptions: { day: "2-digit", month: "numeric", year: "numeric" },
       search: null,
       isLoading: false,
       from: 0,

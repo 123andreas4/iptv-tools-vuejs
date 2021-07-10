@@ -154,6 +154,7 @@ import { httpService } from "../../../../services/http";
 export default {
   data() {
     return {
+      dateOptions: { day: "2-digit", month: "numeric", year: "numeric" },
       isLoading: false,
       handles: {
         server: null,

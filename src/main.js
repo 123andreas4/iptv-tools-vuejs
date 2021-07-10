@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -257,3 +259,33 @@ import { EventBus } from "./services/ebus";
 window.addEventListener("afterprint", () => {
   EventBus.$emit("afterprint");
 });
+
+/* 
+
+  Date constructor (IOS Fix - IOS needs ISO formatted date, this is a workaround to fix this)
+
+*/
+var bind = Function.bind;
+var unbind = bind.bind(bind);
+
+function instantiate(constructor, args) {
+  return new (unbind(constructor, null).apply(null, args));
+}
+
+Date = function (Date) {
+  return function () {
+    var date = instantiate(Date, arguments);
+    var arg = arguments[0];
+
+    if (date && Number.isNaN(date.getMonth())) {
+      date = new Date(Date.parse(arg));
+    } 
+
+    if (date && Number.isNaN(date.getMonth())) {
+      let arr = arg.split(/[- :]/);
+      date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+    }
+    
+    return date;
+  }
+}(Date);

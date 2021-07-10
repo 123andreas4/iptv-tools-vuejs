@@ -543,6 +543,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
+      dateOptions: { day: "2-digit", month: "numeric", year: "numeric" },
       languages,
       activeTab: 0,
       playlistGroups: {

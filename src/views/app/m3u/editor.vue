@@ -1770,6 +1770,7 @@ export default {
   },
   data() {
     return {
+      dateOptions: { day: "2-digit", month: "numeric", year: "numeric" },
       countries,
       activeTab: 0,
       activeGroup: -1,

@@ -389,6 +389,7 @@ const data = [
       PlaylistType.Portal,
     ],
     subscriptions: [
+      SubscriptionType.Enthusiast,
       SubscriptionType.Professional,
       SubscriptionType.Family,
       SubscriptionType.BusinessSmall,
@@ -401,6 +402,19 @@ const data = [
         icon: "las la-download",
         label: "menu.xd-pro",
         to: `${AppRoot}/applications/xd-pro`,
+        playlist: [
+          PlaylistType.All,
+          PlaylistType.M3U,
+          PlaylistType.Xtream,
+        ],
+        subscriptions: [
+          SubscriptionType.Professional,
+          SubscriptionType.Family,
+          SubscriptionType.BusinessSmall,
+          SubscriptionType.BusinessProfessional,
+          SubscriptionType.BusinessEnterprise,
+          SubscriptionType.Manager,
+        ],
       },
       {
         icon: "las la-upload",
@@ -409,6 +423,24 @@ const data = [
         playlist: [
           PlaylistType.All,
           PlaylistType.M3U,
+        ],
+      },
+      {
+        icon: "las la-calendar-day",
+        label: "menu.catch-up",
+        to: `${AppRoot}/applications/catch-up`,
+        playlist: [
+          PlaylistType.All,
+          PlaylistType.M3U,
+          PlaylistType.Xtream,
+        ],
+        subscriptions: [
+          SubscriptionType.Professional,
+          SubscriptionType.Family,
+          SubscriptionType.BusinessSmall,
+          SubscriptionType.BusinessProfessional,
+          SubscriptionType.BusinessEnterprise,
+          SubscriptionType.Manager,
         ],
       },
       /*{

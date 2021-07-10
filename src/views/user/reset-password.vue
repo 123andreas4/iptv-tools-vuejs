@@ -70,10 +70,10 @@ export default {
   computed: {
     ...mapGetters(["processing"]),
     validEmail() {
-      return this.email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      return this.email.test(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
     },
     validUsername() {
-      return this.username.match(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)
+      return this.username.test(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)
     }
   },
   methods: {

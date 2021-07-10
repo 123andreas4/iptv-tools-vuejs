@@ -35,7 +35,8 @@
       "no-name": "<Geen naam>",
       "all": "Alles",
       "show-tooltips": "Tooltips weergeven",
-      "no-subscription": "U heeft geen actief abonnement. Sluit een abonnement af om te beginnen."
+      "no-subscription": "U heeft geen actief abonnement. Sluit een abonnement af om te beginnen.",
+      "today": "Vandaag"
     },
     "menu": {
       "app": "IPTV-Tools",
@@ -110,7 +111,8 @@
       "xd-pro": "XD-Pro",
       "m3u-2-strm": "M3U 2 STRM",
       "kodi": "Kodi Addon",
-      "smartiptv": "SmartIPTV"
+      "smartiptv": "SmartIPTV",
+      "catch-up": "Catch-Up"
     },
     "profile": {
       "profile": "Profiel",

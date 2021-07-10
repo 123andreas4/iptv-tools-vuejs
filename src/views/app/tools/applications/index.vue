@@ -5,6 +5,7 @@
         class="mr-2 py-1 px-2"
         icon="las la-sync"
         @click="doRefresh"
+        v-if="!isCatchUp"
         >{{ $t("general.refresh") }}</erd-button
       >
       <span class="text-muted" v-if="isXDPro && activeTab === 1">{{
@@ -37,7 +38,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentUser"]),
+    ...mapGetters([
+      "currentUser",
+      "settings",
+      "movieSeriePlaylist",
+    ]),
     breadcrumb() {
       let res = [];
       this.$route.matched.map((item) => {
@@ -53,14 +58,17 @@ export default {
       return br[br.length - 1].text;
     },
     isXDPro() {
-      return /\/applications\/xd-pro/.test(this.$route.path);
+      return /\/applications\/xd-pro/i.test(this.$route.path);
     },
     isSmartIPTV () {
-      return /\/applications\/smartiptv/.test(this.$route.path);
-    }
+      return /\/applications\/smartiptv/i.test(this.$route.path);
+    },
+    isCatchUp () {
+      return /\/applications\/catch-up/i.test(this.$route.path);
+    },
   },
   methods: {
-    ...mapActions(["updateSoundcloudId"]),
+    ...mapActions(["updateSoundcloudId", "loadMovieSeriePlaylists", "loadCatchUpGroups"]),
     doRefresh() {
       EventBus.$emit("refresh");
     },
@@ -88,6 +96,12 @@ export default {
     activeTab: function (tab) {
       EventBus.$emit("tab-change", tab);
     },
+    movieSeriePlaylist: function (val) {
+      this.loadCatchUpGroups(val);
+    }
+  },
+  created() {
+    this.loadCatchUpGroups(this.movieSeriePlaylist);
   },
   beforeMount() {
     EventBus.$on("update-from", this.updateFrom);

@@ -690,6 +690,14 @@ export default [
                 /* webpackChunkName: "applications" */ "../views/app/tools/applications/smartiptv"
               ),
           },
+          {
+            path: "catch-up",
+            name: "catch-up",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/catch-up"
+              ),
+          },
         ],
       },
       /********************************

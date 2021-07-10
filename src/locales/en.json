@@ -36,7 +36,8 @@
     "all": "All",
     "show-tooltips": "Show tooltips",
     "mac-placeholder": "0A:1B:3C:4D:5E:6F",
-    "no-subscription": "You do not have an active Subscription. Get a subscription to get started."
+    "no-subscription": "You do not have an active Subscription. Get a subscription to get started.",
+    "today": "Today"
   },
   "menu": {
     "app": "IPTV-Tools",
@@ -121,7 +122,8 @@
     "xd-pro": "XD-Pro",
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Kodi Addon",
-    "smartiptv": "SmartIPTV"
+    "smartiptv": "SmartIPTV",
+    "catch-up": "Catch-Up"
   },
   "profile": {
     "profile": "Profile",
