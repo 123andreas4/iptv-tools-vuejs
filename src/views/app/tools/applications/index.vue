@@ -5,8 +5,15 @@
         class="mr-2 py-1 px-2"
         icon="las la-sync"
         @click="doRefresh"
-        v-if="!isCatchUp"
+        v-if="!isCatchUp && !isMac2M3U"
         >{{ $t("general.refresh") }}</erd-button
+      >
+      <erd-button
+        class="mr-2 py-1 px-2"
+        icon="las la-sync"
+        @click="doConvert"
+        v-if="isMac2M3U"
+        >{{ $t("menu.convert") }}</erd-button
       >
       <span class="text-muted" v-if="isXDPro && activeTab === 1">{{
         $t("general.from-to-total").format(
@@ -66,11 +73,17 @@ export default {
     isCatchUp () {
       return /\/applications\/catch-up/i.test(this.$route.path);
     },
+    isMac2M3U () {
+      return /\/applications\/mac-2-m3u/i.test(this.$route.path);
+    }
   },
   methods: {
     ...mapActions(["updateSoundcloudId", "loadMovieSeriePlaylists", "loadCatchUpGroups"]),
     doRefresh() {
       EventBus.$emit("refresh");
+    },
+    doConvert() {
+      EventBus.$emit("convert");
     },
     updateFrom(from) {
       this.from = from;

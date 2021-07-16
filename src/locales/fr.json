@@ -1480,6 +1480,10 @@
     "title-21": "Joueurs",
     "text-21": "Avec notre éditeur, vous pouvez continuer à utiliser vos applications préférées avec une liste de lecture personnalisée ! Choisissez si vous voulez utiliser Xtream API ou M3U ! Choisissez votre langue pour les informations sur les films et les séries, et regardez comme jamais auparavant !"
   },
+  "m3u2strm": {
+    "failed": "Échec de la conversion du MAC en URL de la liste de lecture !",
+    "success": " MAC converti avec succès en URL de liste de lecture "
+  },
   "footer": {
     "copyright": "Outils IPTV - ERDesigns"
   },

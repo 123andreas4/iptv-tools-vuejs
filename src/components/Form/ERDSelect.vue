@@ -1,5 +1,6 @@
 <template>
   <div
+   :tabindex="tabindex" @blur="isOpen = false"
     class="erd-select"
     :class="{ 'select-open': isOpen }"
     @mouseenter="isOver = true"
@@ -74,7 +75,12 @@ export default {
     openerIcon: {
       type: String,
       default: 'la-angle-down'
-    }
+    },
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   data () {
     return {
@@ -215,6 +221,11 @@ export default {
     selectLast () {
       this.selectNext(-1, this.filteredItems.length)
     },
+  },
+  beforeUpdate () {
+    this.selectedIndex = this.items.findIndex(item => {
+      return item.value == this.selected;
+    });
   },
   beforeMount () {
     this.selectedIndex = this.items.findIndex(item => {

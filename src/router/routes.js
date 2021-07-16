@@ -698,6 +698,22 @@ export default [
                 /* webpackChunkName: "applications" */ "../views/app/tools/applications/catch-up"
               ),
           },
+          {
+            path: "mac-2-m3u",
+            name: "mac-2-m3u",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/mac2m3u"
+              ),
+          },
+          {
+            path: "m3u-2-strm",
+            name: "m3u-2-strm",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/m3u2strm"
+              ),
+          },
         ],
       },
       /********************************
@@ -776,6 +792,22 @@ export default [
             name: "faq",
             component: () =>
               import(/* webpackChunkName: "user" */ "../views/app/user/faq"),
+            meta: {
+              roles: [
+                UserRole.SuperAdmin,
+                UserRole.Admin,
+                UserRole.Moderator,
+                UserRole.User,
+                UserRole.Guest,
+                UserRole.External,
+              ],
+            },
+          },
+          {
+            path: "versions",
+            name: "versions",
+            component: () =>
+              import(/* webpackChunkName: "user" */ "../views/app/user/versions"),
             meta: {
               roles: [
                 UserRole.SuperAdmin,

@@ -3,6 +3,9 @@
     <template v-if="!small">
       <h5 :class="{ header: true, open: isOpen }" @click="isOpen = !isOpen">
         {{ title }} <i class="las la-angle-down"></i>
+        <span class="float-right mr-2 mt-1 text-small text-muted text-capitalize" v-if="subtitle">
+          {{ subtitle }}
+        </span>
       </h5>
     </template>
     <template v-else>
@@ -34,6 +37,10 @@ export default {
       default: () => randomId(),
     },
     title: {
+      type: [String, Number],
+      default: "",
+    },
+    subtitle: {
       type: [String, Number],
       default: "",
     },

@@ -1480,6 +1480,10 @@
     "title-21": "Reproductores",
     "text-21": "Con nuestro editor puedes seguir utilizando tus aplicaciones favoritas con una lista de reproducción personalizada. Elige si quieres usar Xtream API o M3U! Elige tu idioma para la información de películas y series, ¡y mira como nunca antes!"
   },
+  "m3u2strm": {
+    "failed": "¡Error al convertir MAC a URL de lista de reproducción!",
+    "success": "MAC convertida correctamente a la URL de la lista de reproducción"
+  },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
   },

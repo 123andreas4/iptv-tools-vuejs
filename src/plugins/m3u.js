@@ -84,8 +84,8 @@ export const m3u = {
     return match
       ? {
           name: this.cleanName(match[1]),
-          season: match[4],
-          episode: match[6],
+          season: parseInt(match[4]),
+          episode: parseInt(match[6]),
         }
       : {
           name: name,

@@ -4,7 +4,7 @@
     "not-available": "N/A",
     "submit": "Submit",
     "cancel": "Cancel",
-    "close": "Cancel",
+    "close": "Close",
     "save": "Save",
     "save-changes": "Save changes",
     "yes": "Yes",
@@ -123,7 +123,9 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Kodi Addon",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "versions": "Versions",
+    "mac-2-m3u": "MAC 2 M3U"
   },
   "profile": {
     "profile": "Profile",
@@ -1481,6 +1483,10 @@
     "text-20": "Doesn't your provider offer an EPG? No problem at all! With the editor you can quickly assign EPG to your channels, do you use a M3U and SmartIPTV? Then you can also assign SmartIPTV epg-codes from within the editor! It doesn't get any easier than this.",
     "title-21": "Players",
     "text-21": "With our editor you can keep using your favorite apps with a personalized playlist! Choose whether you want to use Xtream API or M3U! Choose your language for movie and series information, and watch like never before!"
+  },
+  "m3u2strm": {
+    "failed": "Failed converting MAC to playlist URL!",
+    "success": "Successfully converted MAC to playlist URL"
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

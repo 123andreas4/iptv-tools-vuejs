@@ -59,6 +59,7 @@ const i18n = new VueI18n({
   fallbackLocale: "en",
   messages,
   localeDateTimeFormats,
+  silentTranslationWarn: true,
 });
 
 import wysiwyg from "vue-wysiwyg";
@@ -289,3 +290,7 @@ Date = function (Date) {
     return date;
   }
 }(Date);
+
+Date.now = function now() {
+  return new Date().getTime();
+}

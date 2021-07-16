@@ -1480,6 +1480,10 @@
     "title-21": "Spieler",
     "text-21": "Mit unserem Editor können Sie Ihre Lieblings-Apps mit einer personalisierten Playlist weiter nutzen! Wählen Sie, ob Sie Xtream API oder M3U verwenden möchten! Wählen Sie Ihre Sprache für Film- und Serieninformationen, und schauen Sie wie nie zuvor!"
   },
+  "m3u2strm": {
+    "failed": "Konvertieren von MAC in Playlist-URL fehlgeschlagen!",
+    "success": "MAC erfolgreich in Playlist-URL konvertiert"
+  },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
   },

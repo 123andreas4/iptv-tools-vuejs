@@ -112,7 +112,8 @@
       "m3u-2-strm": "M3U 2 STRM",
       "kodi": "Kodi Addon",
       "smartiptv": "SmartIPTV",
-      "catch-up": "Catch-Up"
+      "catch-up": "Catch-Up",
+      "versions": "Versies"
     },
     "profile": {
       "profile": "Profiel",
@@ -1413,6 +1414,10 @@
       "text-20": "Bied je provider geen EPG? Geen probleem! Met de editor kan je snel EPG toewijzen aan je zenders, gebruik je een M3U en SmartIPTV? Dan kan je ook vanuit de editor SmartIPTV epg-codes toewijzen! Makkelijker kan niet.",
       "title-21": "Spelers",
       "text-21": "Met onze editor kan jij je favoriete apps blijven gebruiken met een gepersonaliseerde playlist! Kies zelf of je Xtream-API of M3U wilt gebruiken! Kies zelf in welke taal je de film en serie informatie wilt, en kijk zoals nooit tevoren!"
+    },
+    "m3u2strm": {
+      "failed": "Converteren van MAC naar playlist-URL is mislukt!",
+      "success": "MAC succesvol geconverteerd naar playlist-URL"
     },
     "footer": {
       "copyright": "IPTV-Tools - ERDesigns"

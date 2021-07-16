@@ -1480,6 +1480,10 @@
     "title-21": "Jucători",
     "text-21": "Cu editorul nostru puteți continua să folosiți aplicațiile preferate cu o listă de redare personalizată! Alegeți dacă doriți să folosiți Xtream API sau M3U! Alegeți limba pentru informațiile despre filme și seriale și vizionați ca niciodată înainte!"
   },
+  "m3u2strm": {
+    "failed": "Nu s-a reușit conversia MAC la adresa URL a listei de redare!",
+    "success": "MAC a convertit cu succes la adresa URL a listei de redare"
+  },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
   },

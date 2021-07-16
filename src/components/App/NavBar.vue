@@ -173,6 +173,11 @@ export default {
           icon: "la-question-circle",
         },
         {
+          text: this.$t("menu.versions"),
+          to: "/app/user/versions",
+          icon: "la-info-circle",
+        },
+        {
           text: this.$t("navbar.tickets"),
           to: "/app/user/tickets",
           icon: "la-headset",

@@ -443,11 +443,17 @@ const data = [
           SubscriptionType.Manager,
         ],
       },
-      /*{
+      {
         icon: "las la-photo-video",
         label: "menu.m3u-2-strm",
         to: `${AppRoot}/applications/m3u-2-strm`,
       },
+      {
+        icon: "las la-bolt",
+        label: "menu.mac-2-m3u",
+        to: `${AppRoot}/applications/mac-2-m3u`,
+      },
+      /*
       {
         icon: "las la-tv",
         label: "menu.kodi",

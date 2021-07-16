@@ -1481,6 +1481,10 @@
     "title-21": "Přehrávače",
     "text-21": "S naším editorem můžete i nadále používat své oblíbené aplikace s personalizovaným seznamem skladeb! Vyberte si, zda chcete používat rozhraní Xtream API nebo M3U! Zvolte si jazyk pro informace o filmech a seriálech a sledujte jako nikdy předtím!"
   },
+  "m3u2strm": {
+    "failed": "Nepodařilo se převést MAC na URL seznamu skladeb!",
+    "success": "Úspěšně převeden MAC na URL seznamu skladeb"
+  },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
   },

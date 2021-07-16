@@ -85,13 +85,13 @@
     <erd-spinner v-if="isLoading" size="lg" overlay absolute></erd-spinner>
     <div class="catch-up-grid my-0 pb-0 pt-2">
       <perfect-scrollbar>
-        <div class="catch-up-stations-grid" :style="`width: calc(calc(100vh / 4) * ${stations.length}`">
+        <div class="catch-up-stations-grid" :style="`width: calc(calc(100vh / 4) * ${searchFiltered.length}`">
           <erd-context-menu
             :items="programmeContext"
             depth="1"
             ref="programme-context"
           ></erd-context-menu>
-          <div v-for="(station, index) in stations" :key="`station-${index}-${station.stream_tvg_name}`" class="catch-up-station">
+          <div v-for="(station, index) in searchFiltered" :key="`station-${index}-${station.stream_tvg_name}`" class="catch-up-station">
             <div class="station-head">
               <img :src="station.stream_tvg_logo" class="station-icon">
               <div class="station-title">{{ station.stream_tvg_name }}</div>
@@ -156,16 +156,12 @@ export default {
     },
     searchFiltered() {
       if (this.search === null) {
-        return this.streams;
+        return this.stations;
       } else {
         var re = new RegExp(this.search, "i");
-        return this.streams.filter((stream) => {
+        return this.stations.filter((station) => {
           return (
-            String(stream.stream_tvg_name).match(re) ||
-            String(stream.stream_tvg_id).match(re) ||
-            String(stream.stream_tvg_logo).match(re) ||
-            String(stream.playlist).match(re) ||
-            String(stream.group).match(re)
+            String(station.stream_tvg_name).match(re)
           );
         });
       }
