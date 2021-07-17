@@ -328,7 +328,17 @@
             </erd-card>
           </erd-col>
         </erd-row>
-
+        <erd-row>
+          <erd-col xl="12" class="iptv-tools-trailer">
+            <vue-plyr>
+              <div
+                data-plyr-provider="youtube"
+                data-plyr-embed-id="NAi-3gvNics"
+                data-poster="../assets/hero/hero-1.png"
+              ></div>
+            </vue-plyr>
+          </erd-col>
+        </erd-row>
         <div class="mt-5 px-4">
           <h2 class="text-center hero-content-title">
             {{ $t("hero.pricing-title") }}
@@ -962,5 +972,23 @@ $gray-gradient: -webkit-linear-gradient(top, #fff 0, #f6f5f9 74%, #f6f5f9 100%);
 
 .language-select {
   min-width: 200px;
+}
+
+.iptv-tools-trailer {
+  .plyr--video,
+  .plyr__video-wrapper,
+  .plyr__poster {
+    background: $background-color;
+  }
+
+  .plyr__poster {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: auto auto;
+  }
+
+  .plyr__controls {
+    background: linear-gradient(#{rgba($background-color, 1)}, #{rgba($theme-color-1, .25)});
+  }
 }
 </style>

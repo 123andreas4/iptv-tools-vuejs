@@ -330,7 +330,7 @@
               >
             </li>
             <li class="nav-item">
-              <a href="#" @click.prevent
+              <a href="https://iptv-tools.com/downloads/xdpro-php.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-php") }}</a
               >
