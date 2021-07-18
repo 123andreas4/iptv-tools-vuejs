@@ -1481,8 +1481,30 @@
     "text-21": "Con il nostro editor puoi continuare a usare le tue applicazioni preferite con una playlist personalizzata! Scegli se vuoi usare Xtream API o M3U! Scegli la tua lingua per le informazioni su film e serie, e guarda come mai prima d'ora!"
   },
   "m3u2strm": {
+    "description": "Con M3U 2 STRM puoi convertire film e serie in file STRM, puoi utilizzare questi file nel tuo Media Center/Server come Kodi, Plex o Emby.",
+    "download-m3u2strm": "Scarica M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Aggiungi istanza M3U 2 STRM",
+    "name": "Nome",
+    "movies-folder": "Cartella film",
+    "series-folder": "Cartella serie",
+    "movies": "Film",
+    "series": "serie",
+    "file-naming-movies": "Film file name",
+    "file-naming-series": "Nome file serie",
+    "file-naming-movies-1": "Cartella Film/Nome gruppo/Nome film (anno)/Nome film (anno).strm",
+    "file-naming-movies-2": "Cartella Film/Nome film (anno)/Nome film (anno).strm",
+    "file-naming-movies-3": "Cartella film/Nome film (anno).strm",
+    "file-naming-series-1": "Cartella serie/Nome gruppo/Nome serie/Stagione/Nome serie (anno) S0XE0X.strm",
+    "file-naming-series-2": "Cartella serie/Nome serie/Stagione/Nome serie (anno) S0XE0X.strm",
+    "file-naming-series-3": "Cartella serie/Nome serie/Nome serie (anno) S0XE0X.strm",
+    "create-nfo": "Crea file NFO (XML)",
     "failed": "Impossibile convertire MAC in URL playlist!",
-    "success": "MAC convertito con successo nell'URL della playlist"
+    "success": "MAC convertito con successo nell'URL della playlist",
+    "delete-success": "Istanza M3U 2 STRM rimossa con successo.",
+    "delete-error": "Rimozione dell'istanza M3U 2 STRM non riuscita! Riprova.",
+    "save-success": "Istanza M3U 2 STRM salvata con successo.",
+    "save-error": "Salvataggio dell'istanza M3U 2 STRM non riuscito! Riprova."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

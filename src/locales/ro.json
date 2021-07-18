@@ -1481,8 +1481,30 @@
     "text-21": "Cu editorul nostru puteți continua să folosiți aplicațiile preferate cu o listă de redare personalizată! Alegeți dacă doriți să folosiți Xtream API sau M3U! Alegeți limba pentru informațiile despre filme și seriale și vizionați ca niciodată înainte!"
   },
   "m3u2strm": {
-    "failed": "Nu s-a reușit conversia MAC la adresa URL a listei de redare!",
-    "success": "MAC a convertit cu succes la adresa URL a listei de redare"
+    "description": "Cu M3U 2 STRM puteți converti filme și serii în fișiere STRM, puteți utiliza aceste fișiere în Media Center / Server, cum ar fi Kodi, Plex sau Emby.",
+    "download-m3u2strm": "Descărcați M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Adăugați o instanță M3U 2 STRM",
+    "nume": "Nume",
+    "movies-folder": "Dosar filme",
+    "series-folder": "Folder seria",
+    "movies": "Filme",
+    "series": "Seria",
+    "file-naming-movies": "Denumirea fișierelor filme",
+    "file-naming-series": "Denumirea fișierelor în serie",
+    "file-naming-movies-1": "Dosar filme / nume grup / nume film (An) / nume film (An) .strm",
+    "file-naming-movies-2": "Dosar filme / Nume film (An) / Nume film (An) .strm",
+    "file-naming-movies-3": "Dosar filme / numele filmului (An) .strm",
+    "file-naming-series-1": "Dosarul / numele grupului / numele seriei / sezonul / numele seriei (An) S0XE0X.strm",
+    "file-naming-series-2": "Dosarul Seriei / Numele Seriei / Sezonul / Numele Seriei (An) S0XE0X.strm",
+    "file-naming-series-3": "Folderul Seriei / Numele Seriei / Numele Seriei (An) S0XE0X.strm",
+    "create-nfo": "Creați fișiere NFO (XML)",
+    "failed": "Nu s-a reușit conversia MAC în lista de redare URL!",
+    "success": "MAC a convertit cu succes la URL-ul listei de redare",
+    "delete-success": "Instanța M3U 2 STRM eliminată cu succes.",
+    "delete-error": "Eliminarea instanței M3U 2 STRM nu a reușit! Încercați din nou.",
+    "save-success": "Instanța M3U 2 STRM salvată cu succes.",
+    "save-error": "Salvarea instanței M3U 2 STRM nu a reușit! Încercați din nou."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

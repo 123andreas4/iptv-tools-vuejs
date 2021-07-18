@@ -1482,8 +1482,30 @@
     "text-21": "S naším editorem můžete i nadále používat své oblíbené aplikace s personalizovaným seznamem skladeb! Vyberte si, zda chcete používat rozhraní Xtream API nebo M3U! Zvolte si jazyk pro informace o filmech a seriálech a sledujte jako nikdy předtím!"
   },
   "m3u2strm": {
+    "description": "S M3U 2 STRM můžete převádět filmy a seriály na soubory STRM, tyto soubory můžete použít ve svém Media Center / Serveru, například Kodi, Plex nebo Emby.",
+    "download-m3u2strm": "Stáhnout M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Přidat instanci M3U 2 STRM",
+    "name": "Jméno",
+    "movies-folder": "Movies Folder",
+    "series-folder": "Series Folder",
+    "movies": "Movies",
+    "series": "Series",
+    "file-naming-movies": "Pojmenování souborů filmů",
+    "file-naming-series": "Series file naming",
+    "file-naming-movies-1": "Filmy Složka / Název skupiny / Název filmu (rok) / Název filmu (rok) .strm",
+    "file-naming-movies-2": "Složka filmů / Název filmu (rok) / Název filmu (rok) .strm",
+    "file-naming-movies-3": "Movies Folder / Movie Name (Year) .strm",
+    "file-naming-series-1": "Složka série / Název skupiny / Název série / Sezóna / Název série (rok) S0XE0X.strm",
+    "file-naming-series-2": "Složka série / Název série / Sezóna / Název série (rok) S0XE0X.strm",
+    "file-naming-series-3": "Folder Series / Series Name / Series Name (Year) S0XE0X.strm",
+    "create-nfo": "Vytvořit soubory NFO (XML)",
     "failed": "Nepodařilo se převést MAC na URL seznamu skladeb!",
-    "success": "Úspěšně převeden MAC na URL seznamu skladeb"
+    "success": "Úspěšně převeden MAC na URL seznamu skladeb",
+    "delete-success": "Úspěšně odstraněna instance M3U 2 STRM.",
+    "delete-error": "Selhalo odebrání instance M3U 2 STRM! Zkuste to prosím znovu.",
+    "save-success": "Úspěšně uložena instance M3U 2 STRM.",
+    "save-error": "Nepodařilo se uložit instanci M3U 2 STRM! Zkuste to prosím znovu."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

@@ -19,19 +19,19 @@
           class="mt-1 mb-2 w-100"
           v-model="xdPro.instance.name"
         ></erd-input>
-        <label class="w-100">{{ $t("xd-pro.speed-limit") }}</label>
-        <erd-select
-          key="speed-limit"
-          class="w-100 mt-1 mb-2"
-          :items="speedLimits"
-          v-model="xdPro.instance.speed_limit"
-        ></erd-select>
         <label class="w-100">{{ $t("xd-pro.useragent") }}</label>
         <erd-select
           key="useragent"
           class="w-100 mt-1 mb-2"
           :items="useragents"
           v-model="xdPro.instance.useragent"
+        ></erd-select>
+        <label class="w-100">{{ $t("xd-pro.speed-limit") }}</label>
+        <erd-select
+          key="speed-limit"
+          class="w-100 mt-1 mb-2"
+          :items="speedLimits"
+          v-model="xdPro.instance.speed_limit"
         ></erd-select>
         <label class="w-100">{{ $t("xd-pro.download-folder") }}</label>
         <erd-input
@@ -384,7 +384,7 @@
         </div>
       </div>
     </erd-app-menu>
-  </erd-row>
+  </erd-row> 
 </template>
 
 <script>
@@ -399,7 +399,7 @@ export default {
     return {
       useragents: [
         { text: this.$t("xd-pro.iptv-tools"), value: "IPTV-Tools/1.0" },
-        { text: this.$t("xd-pro.browser-default"), value: navigator.userAgent },
+        { text: this.$t("xd-pro.browser-default"), value: navigator.userAgent }, 
       ],
       speedLimits: [
         { text: this.$t("xd-pro.no-limit"), value: 0 },
@@ -869,8 +869,21 @@ export default {
           this.loadDownloads();
         });
     },
+    loadUserAgents() {
+      httpService
+        .get("xd-pro/useragents")
+        .then((res) => {
+          if (res.status === true) {
+            this.useragents = [...this.useragents, ...res.data];
+          }
+        })
+        .catch(() => {
+          //
+        });
+    },
   },
   beforeMount() {
+    this.loadUserAgents();
     this.loadInstances();
     this.loadDownloads();
     this.downloads.handle = setInterval(this.loadDownloads, 1000);

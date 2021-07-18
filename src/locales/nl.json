@@ -1416,8 +1416,30 @@
       "text-21": "Met onze editor kan jij je favoriete apps blijven gebruiken met een gepersonaliseerde playlist! Kies zelf of je Xtream-API of M3U wilt gebruiken! Kies zelf in welke taal je de film en serie informatie wilt, en kijk zoals nooit tevoren!"
     },
     "m3u2strm": {
+      "description": "Met M3U 2 STRM kunt u films en series omzetten naar STRM bestanden, deze bestanden kan u dan gebruiken in uw Media Center/Server zoals Kodi, Plex of Emby.",
+      "download-m3u2strm": "Download M3U 2 STRM",
+      "m3u-2-strm": "M3U 2 STRM",
+      "add-instance": "M3U 2 STRM instantie toevoegen",
+      "name": "Naam",
+      "movies-folder": "Films Map",
+      "series-folder": "Series Map",
+      "movies": "Films",
+      "series": "Series",
+      "file-naming-movies": "Films bestandsnaamgeving",
+      "file-naming-series": "Series bestandsnaamgeving",
+      "file-naming-movies-1": "Films Map/Groep Naam/Film Naam (Jaar)/Film Naam (Jaar).strm",
+      "file-naming-movies-2": "Films Map/Film Naam (Jaar)/Film Naam (Jaar).strm",
+      "file-naming-movies-3": "Films Map/Film Naam (Jaar).strm",
+      "file-naming-series-1": "Series Map/Groep Naam/Serie Naam/Seizoen/Serie Naam (Jaar) S0XE0X.strm",
+      "file-naming-series-2": "Series Map/Serie Naam/Seizoen/Serie Naam (Jaar) S0XE0X.strm",
+      "file-naming-series-3": "Series Map/Serie Naam/Serie Naam (Jaar) S0XE0X.strm",
+      "create-nfo": "NFO bestanden maken (XML)",
       "failed": "Converteren van MAC naar playlist-URL is mislukt!",
-      "success": "MAC succesvol geconverteerd naar playlist-URL"
+      "success": "MAC succesvol geconverteerd naar playlist-URL",
+      "delete-success": "De M3U 2 STRM instantie is verwijderd.",
+      "delete-error": "Er is iets fout gegaan bij het verwijderen van de M3U 2 STRM instantie! Probeer het nogmaals aub.",
+      "save-success": "De M3U 2 STRM instantie is opgeslagen.",
+      "save-error": "Er is iets fout gegaan bij het opslaan van de M3U 2 STRM instantie! Probeer het nogmaals aub."
     },
     "footer": {
       "copyright": "IPTV-Tools - ERDesigns"

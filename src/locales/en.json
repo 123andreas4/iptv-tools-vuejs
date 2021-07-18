@@ -1485,8 +1485,30 @@
     "text-21": "With our editor you can keep using your favorite apps with a personalized playlist! Choose whether you want to use Xtream API or M3U! Choose your language for movie and series information, and watch like never before!"
   },
   "m3u2strm": {
+    "description": "With M3U 2 STRM you can convert movies and series to STRM files, you can use these files in your Media Center/Server such as Kodi, Plex or Emby.",
+    "download-m3u2strm": "Download M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Add M3U 2 STRM Instance",
+    "name": "Name",
+    "movies-folder": "Movies Folder",
+    "series-folder": "Series Folder",
+    "movies": "Movies",
+    "series": "Series",
+    "file-naming-movies": "Movies file naming",
+    "file-naming-series": "Series file naming",
+    "file-naming-movies-1": "Movies Folder/Group Name/Movie Name (Year)/Movie Name (Year).strm",
+    "file-naming-movies-2": "Movies Folder/Movie Name (Year)/Movie Name (Year).strm",
+    "file-naming-movies-3": "Movies Folder/Movie Name (Year).strm",
+    "file-naming-series-1": "Series Folder/Group Name/Series Name/Season/Series Name (Year) S0XE0X.strm",
+    "file-naming-series-2": "Series Folder/Series Name/Season/Series Name (Year) S0XE0X.strm",
+    "file-naming-series-3": "Series Folder/Series Name/Series Name (Year) S0XE0X.strm",
+    "create-nfo": "Create NFO files (XML)",
     "failed": "Failed converting MAC to playlist URL!",
-    "success": "Successfully converted MAC to playlist URL"
+    "success": "Successfully converted MAC to playlist URL",
+    "delete-success": "Succesfully removed M3U 2 STRM instance.",
+    "delete-error": "Failed removing M3U 2 STRM instance! Please try again.",
+    "save-success": "Succesfully saved M3U 2 STRM instance.",
+    "save-error": "Failed saving M3U 2 STRM instance! Please try again."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

@@ -1481,8 +1481,30 @@
     "text-21": "Con nuestro editor puedes seguir utilizando tus aplicaciones favoritas con una lista de reproducción personalizada. Elige si quieres usar Xtream API o M3U! Elige tu idioma para la información de películas y series, ¡y mira como nunca antes!"
   },
   "m3u2strm": {
+    "description": "Con M3U 2 STRM puedes convertir películas y series a archivos STRM, puedes usar estos archivos en tu Media Center / Server como Kodi, Plex o Emby.",
+    "download-m3u2strm": "Descargar M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Agregar instancia M3U 2 STRM",
+    "name": "nombre",
+    "movies-folder": "Carpeta de películas",
+    "series-folder": "Carpeta de series",
+    "movies": "Películas",
+    "series": "Serie",
+    "file-naming-movies": "Nombres de archivos de películas",
+    "file-naming-series": "Nombres de archivos de serie",
+    "file-naming-movies-1": "Carpeta de películas / Nombre de grupo / Nombre de película (año) / Nombre de película (año) .strm",
+    "file-naming-movies-2": "Carpeta de películas / Nombre de película (año) / Nombre de película (año) .strm",
+    "file-naming-movies-3": "Carpeta de películas / Nombre de película (año) .strm",
+    "file-naming-series-1": "Carpeta de la serie / Nombre del grupo / Nombre de la serie / Temporada / Nombre de la serie (año) S0XE0X.strm",
+    "file-naming-series-2": "Carpeta de la serie / Nombre de la serie / Temporada / Nombre de la serie (año) S0XE0X.strm",
+    "file-naming-series-3": "Carpeta de la serie / Nombre de la serie / Nombre de la serie (año) S0XE0X.strm",
+    "create-nfo": "Crear archivos NFO (XML)",
     "failed": "¡Error al convertir MAC a URL de lista de reproducción!",
-    "success": "MAC convertida correctamente a la URL de la lista de reproducción"
+    "success": "MAC convertida correctamente a la URL de la lista de reproducción",
+    "delete-success": "Se eliminó correctamente la instancia de STRM M3U 2.",
+    "delete-error": "No se pudo eliminar la instancia de STRM M3U 2. Vuelva a intentarlo.",
+    "save-success": "Instancia STRM M3U 2 guardada con éxito.",
+    "save-error": "No se pudo guardar la instancia de STRM de M3U 2. Vuelva a intentarlo"
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

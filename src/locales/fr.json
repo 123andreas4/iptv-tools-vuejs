@@ -1481,8 +1481,30 @@
     "text-21": "Avec notre éditeur, vous pouvez continuer à utiliser vos applications préférées avec une liste de lecture personnalisée ! Choisissez si vous voulez utiliser Xtream API ou M3U ! Choisissez votre langue pour les informations sur les films et les séries, et regardez comme jamais auparavant !"
   },
   "m3u2strm": {
+    "description": "Avec M3U 2 STRM, vous pouvez convertir des films et des séries en fichiers STRM, vous pouvez utiliser ces fichiers dans votre Media Center/Server comme Kodi, Plex ou Emby.",
+    "download-m3u2strm": "Télécharger M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "Ajouter une instance M3U 2 STRM",
+    "name": "nom",
+    "movies-folder": "Dossier Films",
+    "series-folder": "Dossier de la série",
+    "movies": "Films",
+    "series": "Série",
+    "file-naming-movies": "Nom des fichiers de films",
+    "file-naming-series": "Nom de fichier de série",
+    "file-naming-movies-1": "Dossier de films/Nom de groupe/Nom de film (Année)/Nom de film (Année).strm",
+    "file-naming-movies-2": "Dossier de films/Nom du film (Année)/Nom du film (Année).strm",
+    "file-naming-movies-3": "Dossier Films/Nom du film (Année).strm",
+    "file-naming-series-1": "Dossier de la série/Nom du groupe/Nom de la série/Saison/Nom de la série (Année) S0XE0X.strm",
+    "file-naming-series-2": "Dossier de la série/Nom de la série/Saison/Nom de la série (Année) S0XE0X.strm",
+    "file-naming-series-3": "Dossier de la série/Nom de la série/Nom de la série (Année) S0XE0X.strm",
+    "create-nfo": "Créer des fichiers NFO (XML)",
     "failed": "Échec de la conversion du MAC en URL de la liste de lecture !",
-    "success": " MAC converti avec succès en URL de liste de lecture "
+    "success": " MAC converti avec succès en URL de liste de lecture ",
+    "delete-success": "Instance M3U 2 STRM supprimée avec succès.",
+    "delete-error": "Échec de la suppression de l'instance M3U 2 STRM ! Veuillez réessayer.",
+    "save-success": "Instance M3U 2 STRM enregistrée avec succès.",
+    "save-error": "Échec de l'enregistrement de l'instance M3U 2 STRM ! Veuillez réessayer."
   },
   "footer": {
     "copyright": "Outils IPTV - ERDesigns"

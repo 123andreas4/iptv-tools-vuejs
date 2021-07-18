@@ -1,5 +1,5 @@
 <template>
-  <erd-row :class="{ 'app-row': isXDPro || isSmartIPTV }">
+  <erd-row :class="{ 'app-row': isXDPro || isSmartIPTV || isM3U2Strm }">
     <erd-breadcrumb :items="breadcrumb" :heading="heading">
       <erd-button
         class="mr-2 py-1 px-2"
@@ -75,6 +75,9 @@ export default {
     },
     isMac2M3U () {
       return /\/applications\/mac-2-m3u/i.test(this.$route.path);
+    },
+    isM3U2Strm () {
+      return /\/applications\/m3u-2-strm/i.test(this.$route.path);
     }
   },
   methods: {

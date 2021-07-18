@@ -1481,8 +1481,30 @@
     "text-21": "Mit unserem Editor können Sie Ihre Lieblings-Apps mit einer personalisierten Playlist weiter nutzen! Wählen Sie, ob Sie Xtream API oder M3U verwenden möchten! Wählen Sie Ihre Sprache für Film- und Serieninformationen, und schauen Sie wie nie zuvor!"
   },
   "m3u2strm": {
+    "description": "Mit M3U 2 STRM können Sie Filme und Serien in STRM-Dateien konvertieren, Sie können diese Dateien in Ihrem Media Center/Server wie Kodi, Plex oder Emby verwenden.",
+    "download-m3u2strm": "Download M3U 2 STRM",
+    "m3u-2-strm": "M3U 2 STRM",
+    "add-instance": "M3U 2 STRM-Instanz hinzufügen",
+    "name": "Name",
+    "movies-folder": "Filmordner",
+    "Serienordner": "Serienordner",
+    "Filme": "Filme",
+    "Serie": "Serie",
+    "file-naming-movies": "Dateibenennung für Filme",
+    "file-naming-series": "Serien-Dateibenennung",
+    "file-naming-movies-1": "Filmordner/Gruppenname/Filmname (Jahr)/Filmname (Jahr).strm",
+    "file-naming-movies-2": "Filmordner/Filmname (Jahr)/Filmname (Jahr).strm",
+    "file-naming-movies-3": "Filmordner/Filmname (Jahr).strm",
+    "file-naming-series-1": "Serienordner/Gruppenname/Serienname/Saison/Serienname (Jahr) S0XE0X.strm",
+    "file-naming-series-2": "Serienordner/Serienname/Saison/Serienname (Jahr) S0XE0X.strm",
+    "file-naming-series-3": "Serienordner/Serienname/Serienname (Jahr) S0XE0X.strm",
+    "create-nfo": "Erstelle NFO-Dateien (XML)",
     "failed": "Konvertieren von MAC in Playlist-URL fehlgeschlagen!",
-    "success": "MAC erfolgreich in Playlist-URL konvertiert"
+    "success": "MAC erfolgreich in Playlist-URL konvertiert",
+    "delete-success": "M3U 2 STRM-Instanz erfolgreich entfernt.",
+    "delete-error": "Fehler beim Entfernen der M3U 2 STRM-Instanz! Bitte versuchen Sie es erneut.",
+    "save-success": "Erfolgreich gespeicherte M3U 2 STRM-Instanz.",
+    "save-error": "Fehler beim Speichern der M3U 2 STRM-Instanz! Bitte versuchen Sie es erneut."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
