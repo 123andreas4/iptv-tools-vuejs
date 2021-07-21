@@ -806,7 +806,9 @@ export default {
         .then((res) => {
           this.isLoading = false;
           if (res.status === true) {
-            this.playlistGroups = res.data;
+            if (Array.isArray(res.data.live) && Array.isArray(res.data.movies) && Array.isArray(res.data.series)) {
+              this.playlistGroups = res.data;
+            }
           }
         });
     },

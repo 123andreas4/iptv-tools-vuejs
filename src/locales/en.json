@@ -1503,6 +1503,8 @@
     "file-naming-series-2": "Series Folder/Series Name/Season/Series Name (Year) S0XE0X.strm",
     "file-naming-series-3": "Series Folder/Series Name/Series Name (Year) S0XE0X.strm",
     "create-nfo": "Create NFO files (XML)",
+    "overwrite-files": "Overwrite files (Changes file date)",
+    "delete-removed": "Delete removed Movies and Series",
     "failed": "Failed converting MAC to playlist URL!",
     "success": "Successfully converted MAC to playlist URL",
     "delete-success": "Succesfully removed M3U 2 STRM instance.",

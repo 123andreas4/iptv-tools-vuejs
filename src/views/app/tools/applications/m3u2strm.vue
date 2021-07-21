@@ -19,6 +19,13 @@
           class="mt-1 mb-2 w-100"
           v-model="instance.name"
         ></erd-input>
+         <label class="w-100">{{ $t("general.playlist") }}</label>
+        <erd-select
+          key="playlist"
+          class="w-100 mt-1 mb-2"
+          :items="playlists"
+          v-model="instance.playlist_id"
+        ></erd-select>
         <label class="w-100">{{ $t("m3u2strm.file-naming-movies") }}</label>
         <erd-select
           key="file-naming-movies"
@@ -44,11 +51,25 @@
           v-model="instance.series_folder"
         ></erd-input>
         <erd-checkbox
-          class="mb-3 mt-1"
+          class="mb-1 mt-1"
           v-model="instance.create_nfo"
           :true-value="1"
           :false-value="0"
           >{{ $t("m3u2strm.create-nfo") }}</erd-checkbox
+        >
+        <erd-checkbox
+          class="mb-1 mt-1"
+          v-model="instance.overwrite_files"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("m3u2strm.overwrite-files") }}</erd-checkbox
+        >
+        <erd-checkbox
+          class="mb-3 mt-1"
+          v-model="instance.delete_removed"
+          :true-value="1"
+          :false-value="0"
+          >{{ $t("m3u2strm.delete-removed") }}</erd-checkbox
         >
       </div>
       <template v-slot:footer>
@@ -106,7 +127,7 @@
                 >{{ $t("xd-pro.download-linux") }}</a
               >
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a href="https://iptv-tools.com/downloads/m3u2strm-macos.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-macos") }}</a
@@ -117,7 +138,7 @@
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-php") }}</a
               >
-            </li>
+            </li>-->
           </ul>
         </erd-collapse>
         <div class="px-2 m3u-2-strm-description">
@@ -198,6 +219,7 @@ export default {
       modal: false,
       instance: null,
       instances: [],
+      playlists: [],
       from: 0,
       to: 0,
       total: 0,
@@ -314,6 +336,10 @@ export default {
             series_folder: "",
             file_naming_movies: 1,
             file_naming_series: 1,
+            create_nfo: 0,
+            overwrite_files: 0,
+            delete_removed: 1,
+            playlist_id: 0,
           };
           this.modal = true;
         }
@@ -403,9 +429,24 @@ export default {
           this.isLoading = false;
         });
     },
+    loadPlaylists() {
+      httpService
+        .get("playlist")
+        .then((res) => {
+          if (res.status === true) {
+            this.playlists = res.data.map(p => {
+              return {
+                text: p.name,
+                value: p.id
+              }
+            });
+          }  
+        });
+    }
   },
   beforeMount() {
     this.loadInstances();
+    this.loadPlaylists();
     document.body.classList.add("right-menu");
     EventBus.$on("search", this.searchStream);
     EventBus.$on("print", this.printStreams);

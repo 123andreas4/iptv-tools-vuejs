@@ -1434,6 +1434,8 @@
       "file-naming-series-2": "Series Map/Serie Naam/Seizoen/Serie Naam (Jaar) S0XE0X.strm",
       "file-naming-series-3": "Series Map/Serie Naam/Serie Naam (Jaar) S0XE0X.strm",
       "create-nfo": "NFO bestanden maken (XML)",
+      "overwrite-files": "Bestanden overschrijven (Wijzigt de bestandsdatum)",
+      "delete-removed": "Verwijder STRM's van verwijderde Films en Series",
       "failed": "Converteren van MAC naar playlist-URL is mislukt!",
       "success": "MAC succesvol geconverteerd naar playlist-URL",
       "delete-success": "De M3U 2 STRM instantie is verwijderd.",
