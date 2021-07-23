@@ -714,6 +714,14 @@ export default [
                 /* webpackChunkName: "applications" */ "../views/app/tools/applications/m3u2strm"
               ),
           },
+          {
+            path: "kodi",
+            name: "kodi",
+            component: () =>
+              import(
+                /* webpackChunkName: "applications" */ "../views/app/tools/applications/kodi"
+              ),
+          },
         ],
       },
       /********************************

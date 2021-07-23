@@ -453,12 +453,11 @@ const data = [
         label: "menu.mac-2-m3u",
         to: `${AppRoot}/applications/mac-2-m3u`,
       },
-      /*
       {
-        icon: "las la-tv",
+        icon: "las la-plug",
         label: "menu.kodi",
         to: `${AppRoot}/applications/kodi`,
-      },*/
+      },
     ],
   },
 ];

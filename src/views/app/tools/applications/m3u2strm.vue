@@ -127,13 +127,13 @@
                 >{{ $t("xd-pro.download-linux") }}</a
               >
             </li>
-            <!--<li class="nav-item">
+            <li class="nav-item">
               <a href="https://iptv-tools.com/downloads/m3u2strm-macos.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-macos") }}</a
               >
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <a href="https://iptv-tools.com/downloads/m3u2strm-php.zip"
                 ><i class="las la-download mr-1"></i
                 >{{ $t("xd-pro.download-php") }}</a

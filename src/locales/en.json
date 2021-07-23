@@ -1512,6 +1512,23 @@
     "save-success": "Succesfully saved M3U 2 STRM instance.",
     "save-error": "Failed saving M3U 2 STRM instance! Please try again."
   },
+  "kodi": {
+    "description": "With our Kodi Addon you have a nice overview of the Movies and Series that are available in your playlists.",
+    "download-addon": "Download Kodi Addon",
+    "kodi": "Kodi Addon",
+    "add-instance": "Add Kodi Addon Instance",
+    "name": "Name",
+    "code": "Code",
+    "groups": "Groups",
+    "movies": "Movies",
+    "series": "Series",
+    "download-zip": "Download Addon ZIP",
+    "add-source": "You can add http://kodi.iptv-tools.com as a source to Kodi, and install directly from our server.",
+    "delete-success": "Succesfully removed Kodi Addon instance.",
+    "delete-error": "Failed removing Kodi Addon instance! Please try again.",
+    "save-success": "Succesfully saved Kodi Addon instance.",
+    "save-error": "Failed saving Kodi Addon instance! Please try again."
+  },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"
   },

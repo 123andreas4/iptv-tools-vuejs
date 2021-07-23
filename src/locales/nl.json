@@ -1443,6 +1443,23 @@
       "save-success": "De M3U 2 STRM instantie is opgeslagen.",
       "save-error": "Er is iets fout gegaan bij het opslaan van de M3U 2 STRM instantie! Probeer het nogmaals aub."
     },
+    "kodi": {
+      "description": "Met onze Kodi Addon heb je een mooi overzicht van de Films en Series die in je playlists beschikbaar zijn.",
+      "download-addon": "Download Kodi Addon",
+      "kodi": "Kodi Addon",
+      "add-instance": "Kodi Addon instantie toevoegen",
+      "name": "Naam",
+      "code": "Code",
+      "groups": "Groepen",
+      "movies": "Films",
+      "series": "Series",
+      "download-zip": "Download Addon ZIP",
+      "add-source": "Je kan http://kodi.iptv-tools.com als bron toevoegen aan Kodi, en installeer de Addon direct vanaf onze server.",
+      "delete-success": "De Kodi Addon instantie is verwijderd.",
+      "delete-error": "Er is iets fout gegaan bij het verwijderen van de Kodi Addon instantie! Probeer het nogmaals aub.",
+      "save-success": "De Kodi Addon instantie is opgeslagen.",
+      "save-error": "Er is iets fout gegaan bij het opslaan van de Kodi Addon instantie! Probeer het nogmaals aub."
+    },
     "footer": {
       "copyright": "IPTV-Tools - ERDesigns"
     },
