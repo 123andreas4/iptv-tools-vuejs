@@ -160,6 +160,7 @@
           {{ fnSeries(row.item.file_naming_series) }}
         </template>
         <template v-slot:cell(actions)="row">
+          <span style="white-space: nowrap;">
           <erd-tooltip :tooltip="$t('xd-pro.tooltip-edit-instance')" :enabled="showTooltips">
             <erd-button
               variant="info"
@@ -176,6 +177,7 @@
               ><i class="las la-trash"></i
             ></erd-button>
           </erd-tooltip>
+          </span>
         </template>
       </b-table>
       <b-pagination

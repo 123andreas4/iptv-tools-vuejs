@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Kodi-Erweiterung",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Dokumentation"
   },
   "profile": {
     "profile": "Profil",
@@ -1505,6 +1506,23 @@
     "delete-error": "Fehler beim Entfernen der M3U 2 STRM-Instanz! Bitte versuchen Sie es erneut.",
     "save-success": "Erfolgreich gespeicherte M3U 2 STRM-Instanz.",
     "save-error": "Fehler beim Speichern der M3U 2 STRM-Instanz! Bitte versuchen Sie es erneut."
+  },
+  "kodi": {
+    "description": "Mit unserem Kodi Add-on hast du einen schönen Überblick über die Filme und Serien, die in deinen Playlists verfügbar sind.",
+    "download-addon": "Kodi-Add-On herunterladen",
+    "kodi": "Kodi-Addon",
+    "add-instance": "Add-on-Instanz von Kodi hinzufügen",
+    "name": "Name",
+    "code": "code",
+    "groups": "Gruppen",
+    "movies": "Filme",
+    "series": "Serie",
+    "download-zip": "Add-on ZIP herunterladen",
+    "add-source": "Sie können http://kodi.iptv-tools.com als Quelle zu Kodi hinzufügen und direkt von unserem Server installieren.",
+    "delete-success": "Die Kodi Addon-Instanz wurde gelöscht.",
+    "delete-error": "Fehler beim Löschen der Kodi Add-on-Instanz! Bitte versuchen Sie es erneut.",
+    "save-success": "Kodi Addon Instanz erfolgreich gespeichert.",
+    "save-error": "Kodi Addon-Instanz konnte nicht gespeichert werden! Versuchen Sie es erneut."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

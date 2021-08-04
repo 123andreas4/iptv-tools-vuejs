@@ -282,7 +282,7 @@ Date = function (Date) {
       date = new Date(Date.parse(arg));
     } 
 
-    if (date && Number.isNaN(date.getMonth())) {
+    if (date && Number.isNaN(date.getMonth()) && arg && arg !== undefined) {
       let arr = arg.split(/[- :]/);
       date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
     }

@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Addon Kodi",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Documentație"
   },
   "profile": {
     "profile": "Profil",
@@ -1505,6 +1506,23 @@
     "delete-error": "Eliminarea instanței M3U 2 STRM nu a reușit! Încercați din nou.",
     "save-success": "Instanța M3U 2 STRM salvată cu succes.",
     "save-error": "Salvarea instanței M3U 2 STRM nu a reușit! Încercați din nou."
+  },
+  "kodi": {
+    "description": "Cu programul nostru de completare Kodi aveți o imagine de ansamblu frumoasă a filmelor și seriilor disponibile în playlisturile dvs.",
+    "download-addon": "Descarcă addon kodi",
+    "kodi": "Kodi addon",
+    "add-instance": "Adăugați o instanță de completare Kodi",
+    "name": "Nume",
+    "code": "Cod",
+    "groups": "Grupuri",
+    "movies": "Filme",
+    "series": "Series",
+    "download-zip": "Descarcă ZIP suplimentar",
+    "add-source": "Puteți adăuga http://kodi.iptv-tools.com ca sursă la Kodi și îl puteți instala direct de pe serverul nostru.",
+    "delete-success": "Instanța Kodi Addon a fost ștearsă.",
+    "delete-error": "Nu s-a putut șterge instanța Kodi Add-on! Încercați din nou.",
+    "save-success": "Instanța Kodi Addon salvată cu succes.",
+    "save-error": "Nu s-a putut salva instanța Kodi Addon! Încercați din nou."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

@@ -283,6 +283,7 @@
                     dense
                     outline
                     :disabled="!canUpdatePassword"
+                    @click="updateNewPassword"
                     >{{ $t("profile.update-password") }}</erd-button
                   >
                 </div>
@@ -292,7 +293,8 @@
                   <label for="password">{{ $t("profile.password") }}</label>
                   <erd-input
                     id="password"
-                    class="w-100 mt-1 mb-2 danger"
+                    class="w-100 mt-1 mb-2"
+                    :class="{danger: password.hasError}"
                     type="password"
                     v-model="password.current"
                   ></erd-input>
@@ -303,7 +305,8 @@
                   }}</label>
                   <erd-input
                     id="new-password"
-                    class="w-100 mt-1 mb-2 danger"
+                    class="w-100 mt-1 mb-2"
+                    :class="{danger: password.hasError}"
                     type="password"
                     v-model="password.new"
                   ></erd-input>
@@ -314,7 +317,8 @@
                   }}</label>
                   <erd-input
                     id="confirm-password"
-                    class="w-100 mt-1 mb-2 danger"
+                    class="w-100 mt-1 mb-2"
+                    :class="{danger: password.hasError}"
                     type="password"
                     v-model="password.confirm"
                   ></erd-input>
@@ -346,6 +350,7 @@ export default {
         current: "",
         new: "",
         confirm: "",
+        hasError: false,
       },
       profile: {
         user_id: "",
@@ -701,6 +706,49 @@ export default {
           );
         });
     },
+    updateNewPassword () {
+      this.password.hasError = !this.canUpdatePassword;
+      if (this.password.hasError) {
+        return;
+      }
+      httpService
+        .post("users/update-password", {
+          username: this.currentUser.user.username,
+          password: this.password.current,
+          new_password: this.password.new
+        })
+        .then((res) => {
+          if (res.data == true) {
+            this.password.current = "";
+            this.password.new = "";
+            this.password.confirm = "";
+            this.$notify(
+              "primary",
+              this.$t("profile.success"),
+              this.$t("profile.profile-success"),
+              "la-user-shield",
+              { duration: 5000, permanent: false }
+            );
+          } else {
+            this.$notify(
+              "error",
+              this.$t("profile.failed"),
+              this.$t("profile.profile-failed"),
+              "la-user-shield",
+              { duration: 5000, permanent: false }
+            );
+          }
+        })
+        .catch(() => {
+          this.$notify(
+            "error",
+            this.$t("profile.failed"),
+            this.$t("profile.profile-failed"),
+            "la-user-shield",
+            { duration: 5000, permanent: false }
+          );
+        });
+    },
     pagePrint() {
       document.getElementById("profile").print();
     },
@@ -769,6 +817,7 @@ export default {
     ...mapGetters(["currentUser"]),
   },
   mounted() {
+    console.log(this.currentUser)
     this.isLoading = true;
     this.loadProfile()
       .then((res) => {

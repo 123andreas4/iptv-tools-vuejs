@@ -465,7 +465,7 @@ export default {
       httpService.get(`movies/total/${this.movieSeriePlaylist}`).then((res) => {
         if (res.status === true) {
           let requests = [];
-          let amount = 200;
+          let amount = 300;
           for (var i = 0; i < res.data; i += amount) {
             requests.push(
               httpService.get(

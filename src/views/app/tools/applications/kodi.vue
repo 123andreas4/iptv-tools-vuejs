@@ -26,13 +26,23 @@
           readonly
         ></erd-input>
         <label class="w-100">{{ $t("kodi.movies") }}</label>
-        <div class="kodi-movies form-control mt-1 mb-2">
+        <div class="kodi-movies form-control mt-1 mb-2" @contextmenu.prevent="openContext('context-movies')">
+          <erd-context-menu
+            :items="movieContext"
+            depth="1"
+            ref="context-movies"
+          ></erd-context-menu>
           <perfect-scrollbar>
             <erd-checkbox v-for="(movie, index) in movies" :key="`movie-${index}`" class="mx-2" :class="{'mt-2': index === 0}" v-model="instance.groups" :value="movie.id">{{ movie.group_name }}</erd-checkbox>
           </perfect-scrollbar>
         </div>
         <label class="w-100">{{ $t("kodi.series") }}</label>
-        <div class="kodi-series form-control mt-1 mb-2">
+        <div class="kodi-series form-control mt-1 mb-2" @contextmenu.prevent="openContext('context-series')">
+          <erd-context-menu
+            :items="serieContext"
+            depth="1"
+            ref="context-series"
+          ></erd-context-menu>
           <perfect-scrollbar>
             <erd-checkbox v-for="(serie, index) in series" :key="`serie-${index}`" class="mx-2" :class="{'mt-2': index === 0}" v-model="instance.groups" :value="serie.id">{{ serie.group_name }}</erd-checkbox>
           </perfect-scrollbar>
@@ -106,6 +116,9 @@
     -->
     <erd-col xl="12" sm="12">
       <b-table :items="pagedInstances" :fields="fields" striped small>
+        <template v-slot:cell(name)="row">
+          <span style="white-space: nowrap;">{{ row.item.name }}</span>
+        </template>
         <template v-slot:cell(groups)="row">
           <erd-badge v-for="group in row.item.groups" :key="`group-${group}`" :variant="groupVariant(group)" class="mr-1 mt-1 d-inline-block">{{ groupName(group) }}</erd-badge>
         </template>
@@ -113,22 +126,24 @@
           <erd-badge variant="success"><i class="las la-key"></i> {{ row.item.code }}</erd-badge>
         </template>
         <template v-slot:cell(actions)="row">
-          <erd-tooltip :tooltip="$t('xd-pro.tooltip-edit-instance')" :enabled="showTooltips">
-            <erd-button
-              variant="info"
-              class="btn-table"
-              @click="editInstance(row.item)"
-              ><i class="las la-pen"></i
-            ></erd-button>
-          </erd-tooltip>
-          <erd-tooltip :tooltip="$t('xd-pro.tooltip-delete-instance')" :enabled="showTooltips">
-            <erd-button
-              variant="danger"
-              class="btn-table"
-              @click="deleteInstance(row.item.id)"
-              ><i class="las la-trash"></i
-            ></erd-button>
-          </erd-tooltip>
+          <span style="white-space: nowrap;">
+            <erd-tooltip :tooltip="$t('xd-pro.tooltip-edit-instance')" :enabled="showTooltips">
+              <erd-button
+                variant="info"
+                class="btn-table"
+                @click="editInstance(row.item)"
+                ><i class="las la-pen"></i
+              ></erd-button>
+            </erd-tooltip>
+            <erd-tooltip :tooltip="$t('xd-pro.tooltip-delete-instance')" :enabled="showTooltips">
+              <erd-button
+                variant="danger"
+                class="btn-table"
+                @click="deleteInstance(row.item.id)"
+                ><i class="las la-trash"></i
+              ></erd-button>
+            </erd-tooltip>
+          </span>
         </template>
       </b-table>
       <b-pagination
@@ -231,8 +246,63 @@ export default {
           : this.from + this.perPage;
       return this.searchFilteredInstances.slice(this.from, this.to);
     },
+    movieContext() {
+      let vm = this;
+      return [
+        {
+          text: vm.$t("general.select-all"),
+          onClick: function () {
+            vm.movies.forEach(movie => {
+              if (!vm.instance.groups.includes(movie.id)) {
+                vm.instance.groups.push(movie.id);
+              }
+            });
+          },
+        },
+        {
+          text: vm.$t("general.select-none"),
+          onClick: function () {
+            vm.movies.forEach(movie => {
+              let index = vm.instance.groups.indexOf(movie.id);
+              if (index > -1) {
+                vm.instance.groups.splice(index, 1);
+              }
+            });
+          },
+        },
+      ];
+    },
+    serieContext() {
+      let vm = this;
+      return [
+        {
+          text: vm.$t("general.select-all"),
+          onClick: function () {
+            vm.series.forEach(serie => {
+              if (!vm.instance.groups.includes(serie.id)) {
+                vm.instance.groups.push(serie.id);
+              }
+            });
+          },
+        },
+        {
+          text: vm.$t("general.select-none"),
+          onClick: function () {
+            vm.series.forEach(serie => {
+              let index = vm.instance.groups.indexOf(serie.id);
+              if (index > -1) {
+                vm.instance.groups.splice(index, 1);
+              }
+            });
+          },
+        },
+      ];
+    },
   },
   methods: {
+    openContext(context) {
+      this.$refs[context].open();
+    },
     searchStream(search) {
       if (search.length === 0) {
         this.search = null;
@@ -266,7 +336,7 @@ export default {
       });
     },
     editInstance(instance) {
-      this.instance = Object.assign({}, instance);
+      this.instance = JSON.parse(JSON.stringify(instance));
       this.modal = true;
     },
     deleteInstance(id) {

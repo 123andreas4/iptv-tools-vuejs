@@ -122,7 +122,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Doplněk Kodi",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Dokumentace"
   },
   "profile": {
     "profile": "Profil",
@@ -1506,6 +1507,23 @@
     "delete-error": "Selhalo odebrání instance M3U 2 STRM! Zkuste to prosím znovu.",
     "save-success": "Úspěšně uložena instance M3U 2 STRM.",
     "save-error": "Nepodařilo se uložit instanci M3U 2 STRM! Zkuste to prosím znovu."
+  },
+  "kodi": {
+    "description": "S naším doplňkem Kodi máte pěkný přehled o filmech a seriálech, které jsou k dispozici ve vašich seznamech skladeb.",
+    "download-addon": "Stáhnout doplněk kodi",
+    "kodi": "Kodi addon",
+    "add-instance": "Přidat instanci doplňku Kodi",
+    "name": "Jméno",
+    "code": "Code",
+    "groups": "Skupiny",
+    "films": "Movies",
+    "series": "series",
+    "download-zip": "Stáhnout doplněk ZIP",
+    "add-source": "Do Kodi můžete přidat http://kodi.iptv-tools.com jako zdroj a nainstalovat jej přímo z našeho serveru.",
+    "delete-success": "Instance Kodi Addon byla odstraněna.",
+    "delete-error": "Nepodařilo se odstranit instanci doplňku Kodi! Zkuste to prosím znovu.",
+    "save-success": "Úspěšně uložena instance Kodi Addon.",
+    "save-error": "Nepodařilo se uložit instanci Kodi Addon! Zkuste to znovu."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

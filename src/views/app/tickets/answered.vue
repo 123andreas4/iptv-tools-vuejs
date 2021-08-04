@@ -472,17 +472,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ticket-body > img {
+  max-width: 100% !important;
+  height: auto;
+}
+
 .ticket-conversation {
   background-color: $background-color;
   border-radius: 10px;
   padding: 1rem 1rem;
   border: 1px solid $separator-color;
   margin-bottom: 0.5rem;
-
-  img {
-    max-width: 50%;
-    max-height: 50%;
-  }
 
   .ticket-title {
     display: flex;
@@ -492,6 +492,11 @@ export default {
 
   .ticket-body {
     margin-top: 1rem;
+
+    img {
+      max-width: 100% !important;
+      height: auto;
+    }
   }
 
   &.reader {

@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Аддон Kodi",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Документация"
   },
   "profile": {
     "profile": "Профиль",
@@ -1505,6 +1506,23 @@
     "delete-error": "Не удалось удалить экземпляр M3U 2 STRM! Повторите попытку.",
     "save-success": "Успешно сохранен экземпляр M3U 2 STRM.",
     "save-error": "Не удалось сохранить экземпляр M3U 2 STRM! Повторите попытку."
+  },
+  "kodi": {
+    "description": "С нашим дополнением Kodi у вас есть хороший обзор фильмов и сериалов, доступных в ваших плейлистах.",
+    "download-addon": "Скачать аддон kodi",
+    "kodi": "Аддон Kodi",
+    "add-instance": "Добавить экземпляр надстройки Kodi",
+    "name": "Имя",
+    "code": "код",
+    "groups": "Группы",
+    "movies": "Фильмы",
+    "series": "series",
+    "download-zip": "Загрузить ZIP-архив надстройки",
+    "add-source": "Вы можете добавить http://kodi.iptv-tools.com в качестве источника в Kodi и установить его прямо с нашего сервера.",
+    "delete-success": "Экземпляр Kodi Addon удален.",
+    "delete-error": "Не удалось удалить экземпляр надстройки Kodi! Повторите попытку.",
+    "save-success": "Успешно сохранен экземпляр Kodi Addon.",
+    "save-error": "Не удалось сохранить экземпляр Kodi Addon! Повторите попытку."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

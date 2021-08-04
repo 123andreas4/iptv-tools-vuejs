@@ -125,7 +125,8 @@
     "smartiptv": "SmartIPTV",
     "catch-up": "Catch-Up",
     "versions": "Versions",
-    "mac-2-m3u": "MAC 2 M3U"
+    "mac-2-m3u": "MAC 2 M3U",
+    "documentation": "Documentation"
   },
   "profile": {
     "profile": "Profile",

@@ -166,6 +166,11 @@ const data = [
         label: "menu.dashboard",
         to: `${AppRoot}/start/dashboard`,
       },
+      {
+        icon: "las la-life-ring",
+        label: "menu.documentation",
+        to: `${AppRoot}/start/documentation`,
+      },
     ],
   },
   {
@@ -457,6 +462,19 @@ const data = [
         icon: "las la-plug",
         label: "menu.kodi",
         to: `${AppRoot}/applications/kodi`,
+        playlist: [
+          PlaylistType.All,
+          PlaylistType.M3U,
+          PlaylistType.Xtream,
+        ],
+        subscriptions: [
+          SubscriptionType.Professional,
+          SubscriptionType.Family,
+          SubscriptionType.BusinessSmall,
+          SubscriptionType.BusinessProfessional,
+          SubscriptionType.BusinessEnterprise,
+          SubscriptionType.Manager,
+        ],
       },
     ],
   },

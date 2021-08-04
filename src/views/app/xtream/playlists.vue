@@ -331,7 +331,7 @@
           >
             <erd-checkbox
               v-for="(group, index) in playlistGroups.live"
-              :key="`group-1-${index}`"
+              :key="`group-1-${index}-${group.category_id}`"
               :value="group.category_id"
               v-model="playlist.sync_live"
               >{{ group.category_name }}</erd-checkbox
@@ -355,7 +355,7 @@
           >
             <erd-checkbox
               v-for="(group, index) in playlistGroups.movies"
-              :key="`group-2-${index}`"
+              :key="`group-2-${index}-${group.category_id}`"
               :value="group.category_id"
               v-model="playlist.sync_movies"
               :disabled="!canUseMoviesSeries"
@@ -380,7 +380,7 @@
           >
             <erd-checkbox
               v-for="(group, index) in playlistGroups.series"
-              :key="`group-3-${index}`"
+              :key="`group-3-${index}-${group.category_id}`"
               :value="group.category_id"
               v-model="playlist.sync_series"
               :disabled="!canUseMoviesSeries"
@@ -1007,8 +1007,8 @@ export default {
         : max;
     },
     doTabChange(tab) {
-      if (tab == 1) {
-        //this.loadGroups();
+      if (tab == 2) {
+        this.loadGroups();
       }
       this.activeTab = tab;
     },

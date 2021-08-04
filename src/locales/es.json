@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Kodi Addon",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Documentación"
   },
   "profile": {
     "profile": "Perfil",
@@ -1505,6 +1506,23 @@
     "delete-error": "No se pudo eliminar la instancia de STRM M3U 2. Vuelva a intentarlo.",
     "save-success": "Instancia STRM M3U 2 guardada con éxito.",
     "save-error": "No se pudo guardar la instancia de STRM de M3U 2. Vuelva a intentarlo"
+  },
+  "kodi": {
+    "description": "Con nuestro complemento de Kodi, tienes una buena descripción general de las películas y series que están disponibles en tus listas de reproducción.",
+    "download-addon": "Descargar complemento kodi",
+    "kodi": "Complemento de Kodi",
+    "add-instance": "Agregar instancia de complemento de Kodi",
+    "name": "Nombre",
+    "code": "código",
+    "groups": "Grupos",
+    "movies": "Películas",
+    "series": "serie",
+    "download-zip": "Descargar ZIP del complemento",
+    "add-source": "Puede agregar http://kodi.iptv-tools.com como fuente a Kodi e instalarlo directamente desde nuestro servidor.",
+    "delete-success": "La instancia de Kodi Addon ha sido eliminada.",
+    "delete-error": "No se pudo eliminar la instancia del complemento de Kodi. Vuelva a intentarlo.",
+    "save-success": "Instancia de complemento de Kodi guardada con éxito.",
+    "save-error": "¡No se pudo guardar la instancia del complemento Kodi! Vuelve a intentarlo"
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

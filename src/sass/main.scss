@@ -8248,3 +8248,10 @@ ul.erd-genre-select li h6 {
     padding-right: 0;
   }
 }
+
+.ticket-body {
+  img {
+    max-width: 100% !important;
+    height: auto;
+  }
+}

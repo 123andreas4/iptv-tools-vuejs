@@ -44,8 +44,8 @@
                 :disabled="!validEmail || !validUsername"
                 >{{ $t("reset.reset") }}</erd-button
               >
-              <p class="mt-5 font-weight-bold" v-if="reset">{{ $t("reset.thank-you") }}</p>
-              <p class="mt-5 font-weight-bold text-danger" v-if="error">{{ $t("reset.error") }}</p>
+              <p class="mt-5 font-weight-bold" v-if="reset === true">{{ $t("reset.thank-you") }}</p>
+              <p class="mt-5 font-weight-bold text-danger" v-if="error === true">{{ $t("reset.error") }}</p>
             </div>
           </div>
         </div>
@@ -70,10 +70,10 @@ export default {
   computed: {
     ...mapGetters(["processing"]),
     validEmail() {
-      return this.email.test(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.email);
     },
     validUsername() {
-      return this.username.test(/^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/)
+      return /^[a-zA-Z0-9_]{5,20}[a-zA-Z]+[0-9]*$/.test(this.username);
     }
   },
   methods: {

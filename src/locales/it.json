@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Kodi Addon",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Documentazione"
   },
   "profile": {
     "profile": "Profilo",
@@ -1505,6 +1506,23 @@
     "delete-error": "Rimozione dell'istanza M3U 2 STRM non riuscita! Riprova.",
     "save-success": "Istanza M3U 2 STRM salvata con successo.",
     "save-error": "Salvataggio dell'istanza M3U 2 STRM non riuscito! Riprova."
+  },
+  "kodi": {
+    "description": "Con il nostro componente aggiuntivo Kodi hai una bella panoramica dei film e delle serie disponibili nelle tue playlist.",
+    "download-addon": "Scarica il componente aggiuntivo di Kodi",
+    "kodi": "Addon Kodi",
+    "add-instance": "Aggiungi istanza del componente aggiuntivo Kodi",
+    "name": "Nome",
+    "codice": "Codice",
+    "groups": "Gruppi",
+    "movies": "Film",
+    "series": "Serie",
+    "download-zip": "Scarica add-on ZIP",
+    "add-source": "Puoi aggiungere http://kodi.iptv-tools.com come sorgente a Kodi e installarlo direttamente dal nostro server.",
+    "delete-success": "L'istanza di Kodi Addon è stata eliminata.",
+    "delete-error": "Impossibile eliminare l'istanza del componente aggiuntivo Kodi! Riprova.",
+    "save-success": "Istanza del componente aggiuntivo Kodi salvata con successo.",
+    "save-error": "Impossibile salvare l'istanza di Kodi Addon! Riprova."
   },
   "footer": {
     "copyright": "IPTV-Tools - ERDesigns"

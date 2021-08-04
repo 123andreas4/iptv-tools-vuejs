@@ -354,6 +354,15 @@ export default [
                 /* webpackChunkName: "start" */ "../views/app/start/dashboard"
               ),
           },
+          { 
+            path: "documentation", 
+            beforeEnter() {
+              window.open(
+                "https://doc.iptv-tools.com",
+                "_blank" 
+              );
+            },
+          }
         ],
       },
       /********************************
@@ -665,6 +674,7 @@ export default [
         meta: {
           roles: [UserRole.User, UserRole.External, UserRole.Guest],
           subscriptions: [
+            SubscriptionType.Enthusiast,
             SubscriptionType.Professional,
             SubscriptionType.Family,
             SubscriptionType.BusinessSmall,

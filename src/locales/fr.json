@@ -121,7 +121,8 @@
     "m3u-2-strm": "M3U 2 STRM",
     "kodi": "Addon Kodi",
     "smartiptv": "SmartIPTV",
-    "catch-up": "Catch-Up"
+    "catch-up": "Catch-Up",
+    "documentation": "Documentation"
   },
   "profile": {
     "profile": "Profil",
@@ -1505,6 +1506,23 @@
     "delete-error": "Échec de la suppression de l'instance M3U 2 STRM ! Veuillez réessayer.",
     "save-success": "Instance M3U 2 STRM enregistrée avec succès.",
     "save-error": "Échec de l'enregistrement de l'instance M3U 2 STRM ! Veuillez réessayer."
+  },
+  "kodi": {
+    "description": "Avec notre module complémentaire Kodi, vous avez un bon aperçu des films et séries disponibles dans vos listes de lecture.",
+    "download-addon": "Télécharger l'addon kodi",
+    "kodi": "Module complémentaire Kodi",
+    "add-instance": "Ajouter une instance complémentaire Kodi",
+    "name": "Nom",
+    "code": "code",
+    "groups": "Groupes",
+    "movies": "Films",
+    "series": "Série",
+    "download-zip": "Télécharger le module complémentaire ZIP",
+    "add-source": "Vous pouvez ajouter http://kodi.iptv-tools.com en tant que source à Kodi et l'installer directement depuis notre serveur.",
+    "delete-success": "L'instance du module complémentaire Kodi a été supprimée.",
+    "delete-error": "Impossible de supprimer l'instance du module complémentaire Kodi ! Veuillez réessayer.",
+    "save-success": " Instance Kodi Addon enregistrée avec succès.",
+    "save-error": "Impossible d'enregistrer l'instance du module complémentaire Kodi ! Réessayez."
   },
   "footer": {
     "copyright": "Outils IPTV - ERDesigns"
