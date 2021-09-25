@@ -147,7 +147,7 @@ export default {
         {
           title: this.$t("subscriptions.enthusiast"),
           icon: "la-compass",
-          price: "2,50",
+          price: "1,00",
           list: [
             this.$t("subscriptions.2-playlists"),
             this.$t("subscriptions.unlimited-channels"),
@@ -162,7 +162,7 @@ export default {
         {
           title: this.$t("subscriptions.professional"),
           icon: "la-user-tie",
-          price: "5,00",
+          price: "2,50",
           list: [
             this.$t("subscriptions.2-playlists"),
             this.$t("subscriptions.unlimited-channels"),
@@ -177,7 +177,7 @@ export default {
         {
           title: this.$t("subscriptions.pro-plus"),
           icon: "la-users",
-          price: "10,00",
+          price: "5,00",
           list: [
             this.$t("subscriptions.5-playlists"),
             this.$t("subscriptions.unlimited-channels"),
